@@ -7,26 +7,26 @@ class ValidatorBuilder implements ValidatorInterface {
     throw new Error("Method not implemented.");
   }
 
-  public addRequiredField(fieldName: string): void {
+  public required(fieldName: string): void {
     this.requiredFields.push(fieldName);
   }
 }
 
 describe("ValidatorBuilder", () => {
-  it("Should add new required field names by calling addRequiredField", () => {
+  it("Should add new required field names by calling required", () => {
     const sut = new ValidatorBuilder();
-    const addRequiredFieldSpy = jest.spyOn(sut, "addRequiredField");
-    sut.addRequiredField("required_field");
+    const addRequiredFieldSpy = jest.spyOn(sut, "required");
+    sut.required("required_field");
 
     expect((sut as any).requiredFields).toContain("required_field");
     expect(addRequiredFieldSpy).toBeCalledTimes(1);
   });
 
-  it("Should add multiple field names by calling addRequiredField multiple times", () => {
+  it("Should add multiple field names by calling required multiple times", () => {
     const sut = new ValidatorBuilder();
-    const addRequiredFieldSpy = jest.spyOn(sut, "addRequiredField");
-    sut.addRequiredField("required_field_1");
-    sut.addRequiredField("required_field_2");
+    const addRequiredFieldSpy = jest.spyOn(sut, "required");
+    sut.required("required_field_1");
+    sut.required("required_field_2");
 
     expect((sut as any).requiredFields).toContain("required_field_1");
     expect((sut as any).requiredFields).toContain("required_field_2");
