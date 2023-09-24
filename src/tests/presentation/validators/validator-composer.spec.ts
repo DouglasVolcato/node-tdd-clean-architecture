@@ -56,4 +56,11 @@ describe("ValidatorComposer", () => {
     expect(validatorStubSpy2).toHaveBeenCalledTimes(1);
     expect(validatorStubSpy2).toHaveBeenCalledWith(makeRequest());
   });
+
+  it('Should return undefined', () => {
+    const { sut} = makeSut();
+    const output = sut.validate(makeRequest());
+
+    expect(output).toBeUndefined();
+  })
 });
