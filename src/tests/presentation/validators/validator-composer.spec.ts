@@ -1,21 +1,6 @@
 import { ValidatorInterface } from "@/presentation/abstract";
+import { ValidatorComposer } from "@/presentation/validators/validator-composer";
 import { makeUserDto } from "@/tests/test-helpers";
-
-class ValidatorComposer implements ValidatorInterface {
-  private readonly validators: ValidatorInterface[];
-
-  public constructor(validators: ValidatorInterface[]) {
-    this.validators = validators;
-  }
-
-  public validate(request: any): Error | undefined {
-    for (const validator of this.validators) {
-      const error = validator.validate(request);
-      if (error) return error;
-    }
-    return;
-  }
-}
 
 const makeRequest = () => makeUserDto();
 
@@ -68,7 +53,7 @@ describe("ValidatorComposer", () => {
     expect(error).toEqual(new Error("any_error"));
   });
 
-  it("Should return undefined", () => {
+  it("Validate should return undefined", () => {
     const { sut } = makeSut();
     const output = sut.validate(makeRequest());
 
