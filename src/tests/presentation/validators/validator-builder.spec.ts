@@ -1,11 +1,18 @@
 import { ValidatorInterface } from "@/presentation/abstract";
+import { RequiredFieldError } from "@/presentation/errors";
 
 class ValidatorBuilder implements ValidatorInterface {
   private requiredFields: string[] = [];
   private emailFields: string[] = [];
 
   public validate(request: any): Error | undefined {
-    throw new Error("Method not implemented.");
+    for (const field of this.requiredFields) {
+      if (!(field in request)) {
+        return new RequiredFieldError(field);
+      }
+    }
+
+    return;
   }
 
   public isRequired(fieldName: string): void {
@@ -38,5 +45,15 @@ describe("ValidatorBuilder", () => {
     expect((sut as any).emailFields).toContain("email_field_1");
     expect((sut as any).emailFields).toContain("email_field_2");
     expect(isEmailSpy).toBeCalledTimes(2);
+  });
+
+  it("Should return an error if required field is missing", () => {
+    const sut = new ValidatorBuilder();
+    sut.isRequired("requiredField");
+    const error = sut.validate({
+      notRequiredField1: "any_value"
+    });
+
+    expect(error).toEqual(new RequiredFieldError("requiredField"));
   });
 });
