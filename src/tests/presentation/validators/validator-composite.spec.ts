@@ -1,5 +1,5 @@
 import { ValidatorInterface } from "@/presentation/abstract";
-import { ValidatorComposer } from "@/presentation/validators/validator-composer";
+import { ValidatorComposite } from "@/presentation/validators/validator-compite";
 import { makeUserDto } from "@/tests/test-helpers";
 
 const makeRequest = () => makeUserDto();
@@ -17,7 +17,7 @@ class ValidatorStub2 implements ValidatorInterface {
 }
 
 type SutTypes = {
-  sut: ValidatorComposer;
+  sut: ValidatorComposite;
   validatorStub1: ValidatorStub1;
   validatorStub2: ValidatorStub2;
 };
@@ -26,11 +26,11 @@ const makeSut = (): SutTypes => {
   const validatorStub1 = new ValidatorStub1();
   const validatorStub2 = new ValidatorStub2();
   const validatorStubs = [validatorStub1, validatorStub2];
-  const sut = new ValidatorComposer(validatorStubs);
+  const sut = new ValidatorComposite(validatorStubs);
   return { validatorStub1, validatorStub2, sut };
 };
 
-describe("ValidatorComposer", () => {
+describe("ValidatorComposite", () => {
   it("Validate should call validators with correct values", () => {
     const { sut, validatorStub1, validatorStub2 } = makeSut();
     const validatorStubSpy1 = jest.spyOn(validatorStub1, "validate");

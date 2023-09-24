@@ -1,6 +1,6 @@
 import { ValidatorInterface } from "@/presentation/abstract";
 
-export class ValidatorComposer implements ValidatorInterface {
+export class ValidatorComposite implements ValidatorInterface {
   private readonly validators: ValidatorInterface[];
 
   public constructor(validators: ValidatorInterface[]) {
