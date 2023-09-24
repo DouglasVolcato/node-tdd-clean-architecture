@@ -66,7 +66,7 @@ describe("CreateUserController", () => {
     expect(response.data).toBeInstanceOf(ServerError);
   });
 
-  it("Should call create user service once with correct values", async () => {
+  it("Should call create user service with correct values", async () => {
     const { sut, createUserServiceStub } = makeSut();
     const serviceSpy = jest.spyOn(createUserServiceStub, "execute");
     await sut.execute(makeUserDto());
@@ -75,7 +75,7 @@ describe("CreateUserController", () => {
     expect(serviceSpy).toBeCalledTimes(1);
   });
 
-  it("Should return ok with the new user created", async () => {
+  it("Should return the new user created", async () => {
     const { sut, createUserServiceStub } = makeSut();
     jest
       .spyOn(createUserServiceStub, "execute")
@@ -92,7 +92,6 @@ describe("CreateUserController", () => {
     jest
       .spyOn(createUserServiceStub, "execute")
       .mockImplementationOnce(() => throwError());
-
     const response = await sut.execute(makeUserDto());
 
     expect(response.statusCode).toBe(500);
