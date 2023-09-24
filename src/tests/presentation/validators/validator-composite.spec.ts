@@ -1,5 +1,5 @@
 import { ValidatorInterface } from "@/presentation/abstract";
-import { ValidatorComposite } from "@/presentation/validators/validator-compite";
+import { ValidatorComposite } from "@/presentation/validators/validator-composite";
 import { makeUserDto } from "@/tests/test-helpers";
 
 const makeRequest = () => makeUserDto();
@@ -59,4 +59,5 @@ describe("ValidatorComposite", () => {
 
     expect(output).toBeUndefined();
   });
+  
 });
