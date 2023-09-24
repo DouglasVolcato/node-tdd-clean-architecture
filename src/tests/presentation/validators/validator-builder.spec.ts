@@ -1,8 +1,10 @@
-import { EmailValidatorInterface, ValidatorBuilderInterface } from "@/presentation/abstract";
+import {
+  EmailValidatorInterface,
+  ValidatorBuilderInterface,
+} from "@/presentation/abstract";
 import { InvalidFieldError, RequiredFieldError } from "@/presentation/errors";
 import { ValidatorBuilder } from "@/presentation/validators";
 import { throwError } from "@/tests/test-helpers";
-
 
 class EmailValidatorStub implements EmailValidatorInterface {
   public isEmail(value: string): boolean {
@@ -23,63 +25,88 @@ const makeSut = (): SutTypes => {
 };
 
 describe("ValidatorBuilder", () => {
-  it("IsRequired should add multiple field names", () => {
+  it("Of should return a validator", () => {
     const { sut } = makeSut();
-    const isRequiredSpy = jest.spyOn(sut, "isRequired");
-    const output = sut.isEmail("requiredField");
+    const output = sut.of("requiredField");
 
     expect(output).toBeInstanceOf(ValidatorBuilder);
-    expect(isRequiredSpy).toBeCalledTimes(1);
   });
 
-  it("IsRequired should add multiple field names", () => {
+  it("Of should set the field name", () => {
     const { sut } = makeSut();
-    const isRequiredSpy = jest.spyOn(sut, "isRequired");
-    sut.isRequired("required_field_1");
-    sut.isRequired("required_field_2");
+    sut.of("requiredField");
 
-    expect((sut as any).requiredFields).toContain("required_field_1");
-    expect((sut as any).requiredFields).toContain("required_field_2");
-    expect(isRequiredSpy).toBeCalledTimes(2);
+    expect((sut as any).fieldName).toContain("requiredField");
   });
 
-  it("IsEmail should return an instance of the class", () => {
+  it("Of should reset the object", () => {
     const { sut } = makeSut();
-    const isEmailSpy = jest.spyOn(sut, "isEmail");
-    const output = sut.isEmail("emailField");
+    (sut as any).fieldName = "any_field";
+    (sut as any).validateRequired = true;
+    (sut as any).validateEmail = true;
+
+    sut.of("requiredField");
+
+    expect((sut as any).fieldName).toBe("requiredField");
+    expect((sut as any).validateRequired).toBeFalsy();
+    expect((sut as any).validateEmail).toBeFalsy();
+  });
+
+  it("IsRequired should return a validator", () => {
+    const { sut } = makeSut();
+    const output = sut.of("requiredField").isRequired();
 
     expect(output).toBeInstanceOf(ValidatorBuilder);
-    expect(isEmailSpy).toBeCalledTimes(1);
   });
 
-  it("IsEmail should add multiple field names", () => {
+  it("IsRequired should set the validateRequired to true", () => {
     const { sut } = makeSut();
-    const isRequiredSpy = jest.spyOn(sut, "isRequired");
-    sut.isEmail("emailField1");
-    sut.isEmail("emailField2");
+    sut.of("requiredField").isRequired();
 
-    expect((sut as any).requiredFields).toContain("emailField1");
-    expect((sut as any).requiredFields).toContain("emailField2");
-    expect(isRequiredSpy).toBeCalledTimes(2);
+    expect((sut as any).validateRequired).toBeTruthy();
   });
 
-  it("IsEmail should add multiple email field names", () => {
+  it("IsEmail should return a validator", () => {
     const { sut } = makeSut();
-    const isEmailSpy = jest.spyOn(sut, "isEmail");
-    sut.isEmail("emailField1");
-    sut.isEmail("emailField2");
+    const output = sut.of("requiredField").isEmail();
 
-    expect((sut as any).emailFields).toContain("emailField1");
-    expect((sut as any).emailFields).toContain("emailField2");
-    expect(isEmailSpy).toBeCalledTimes(2);
+    expect(output).toBeInstanceOf(ValidatorBuilder);
   });
 
-  it("Should return undefined", () => {
+  it("IsEmail should set the validateEmail to true", () => {
     const { sut } = makeSut();
-    sut.isRequired("requiredField1");
-    sut.isRequired("requiredField2");
-    sut.isEmail("requiredField1");
-    sut.isEmail("requiredField2");
+    sut.of("requiredField").isEmail();
+
+    expect((sut as any).validateEmail).toBeTruthy();
+  });
+
+  it("Validate should return undefined", () => {
+    const { sut } = makeSut();
+    sut.of("requiredField1").isRequired();
+    const output = sut.validate({
+      requiredField1: "any_value",
+      requiredField2: "any_value",
+    });
+
+    expect(output).toBeUndefined();
+  });
+
+  it("Validate should return undefined if name is empty", () => {
+    const { sut } = makeSut();
+    sut.of("").isRequired();
+    const output = sut.validate({
+      requiredField1: "any_value",
+      requiredField2: "any_value",
+    });
+
+    expect(output).toBeUndefined();
+  });
+
+  it("Validate should return undefined if it is not validating anything", () => {
+    const { sut } = makeSut();
+    sut.of("any_field").isRequired();
+    (sut as any).validateRequired = false;
+    (sut as any).validateEmail = false;
     const output = sut.validate({
       requiredField1: "any_value",
       requiredField2: "any_value",
@@ -90,7 +117,7 @@ describe("ValidatorBuilder", () => {
 
   it("Validate should return an error if required field is missing", () => {
     const { sut } = makeSut();
-    sut.isRequired("requiredField");
+    sut.of("requiredField").isRequired();
     const error = sut.validate({
       notRequiredField1: "any_value",
     });
@@ -98,41 +125,50 @@ describe("ValidatorBuilder", () => {
     expect(error).toEqual(new RequiredFieldError("requiredField"));
   });
 
+  it("Validate should not call email validator if validateEmail is false", () => {
+    const { emailValidatorStub, sut } = makeSut();
+    const emailValidatorSpy = jest.spyOn(emailValidatorStub, "isEmail");
+    sut.of("emailField").isRequired();
+    sut.validate({
+      requiredField1: "any_value",
+      requiredField2: "any_value",
+      emailField: "any_email@email.com",
+    });
+
+    expect((sut as any).validateEmail).toBeFalsy();
+    expect(emailValidatorSpy).toHaveBeenCalledTimes(0);
+  });
+
   it("Validate should call email validator with correct value", () => {
     const { emailValidatorStub, sut } = makeSut();
     const emailValidatorSpy = jest.spyOn(emailValidatorStub, "isEmail");
-    sut.isRequired("requiredField1");
-    sut.isRequired("requiredField2");
-    sut.isEmail("emailField1");
-    sut.isEmail("emailField2");
+    sut.of("emailField").isEmail();
     sut.validate({
-      requiredField1: "any_valud",
-      requiredField2: "any_valud",
-      emailField1: "any_email@email.com",
-      emailField2: "any_email@email.com",
+      requiredField1: "any_value",
+      requiredField2: "any_value",
+      emailField: "any_email@email.com",
     });
 
     expect(emailValidatorSpy).not.toHaveBeenCalledWith("requiredField1");
     expect(emailValidatorSpy).not.toHaveBeenCalledWith("requiredField2");
-    expect(emailValidatorSpy).toHaveBeenCalledWith("emailField1");
-    expect(emailValidatorSpy).toHaveBeenCalledWith("emailField2");
-    expect(emailValidatorSpy).toHaveBeenCalledTimes(2);
+    expect(emailValidatorSpy).toHaveBeenCalledWith("emailField");
+    expect((sut as any).validateEmail).toBeTruthy();
+    expect(emailValidatorSpy).toHaveBeenCalledTimes(1);
   });
 
   it("Validate should return an error if email validation fails", () => {
     const { emailValidatorStub, sut } = makeSut();
     jest
       .spyOn(emailValidatorStub, "isEmail")
-      .mockImplementationOnce(() => true)
       .mockImplementationOnce(() => false);
-    sut.isEmail("emailField1");
-    sut.isEmail("emailField2");
+    sut.of("emailField").isEmail();
     const error = sut.validate({
-      emailField1: "any_email@email.com",
-      emailField2: "invalid_email",
+      requiredField1: "any_value",
+      requiredField2: "any_value",
+      emailField: "invalid_email",
     });
 
-    expect(error).toEqual(new InvalidFieldError("emailField2"));
+    expect(error).toEqual(new InvalidFieldError("emailField"));
   });
 
   it("Validate should throw if email validator throws", () => {
@@ -140,10 +176,12 @@ describe("ValidatorBuilder", () => {
     jest
       .spyOn(emailValidatorStub, "isEmail")
       .mockImplementationOnce(() => throwError());
-    sut.isEmail("emailField");
+    sut.of("emailField").isEmail();
 
     expect(() =>
       sut.validate({
+        requiredField1: "any_value",
+        requiredField2: "any_value",
         emailField: "any_email@email.com",
       })
     ).toThrow();
