@@ -34,20 +34,23 @@ export class ValidatorBuilder implements ValidatorBuilderInterface {
   }
 
   public validate(request: any): Error | undefined {
-    if (this.fieldName.trim() !== "") {
-      if (this.validateRequired) {
-        if (!(this.fieldName in request)) {
-          return new RequiredFieldError(this.fieldName);
-        }
-      }
+    if (this.fieldName.trim() === "") {
+      return;
+    }
 
-      if (this.validateEmail) {
-        const error = this.emailValidator.isEmail(this.fieldName);
-        if (!error) {
-          return new InvalidFieldError(this.fieldName);
-        }
+    if (this.validateRequired || this.validateEmail) {
+      if (!(this.fieldName in request)) {
+        return new RequiredFieldError(this.fieldName);
       }
     }
+
+    if (this.validateEmail) {
+      const error = this.emailValidator.isEmail(this.fieldName);
+      if (!error) {
+        return new InvalidFieldError(this.fieldName);
+      }
+    }
+
     return;
   }
 

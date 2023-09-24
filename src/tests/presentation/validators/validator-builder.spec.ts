@@ -171,6 +171,17 @@ describe("ValidatorBuilder", () => {
     expect(error).toEqual(new InvalidFieldError("emailField"));
   });
 
+  it("Validate should return an error if email field is missing", () => {
+    const { emailValidatorStub, sut } = makeSut();
+    jest
+      .spyOn(emailValidatorStub, "isEmail")
+      .mockImplementationOnce(() => false);
+    sut.of("emailField").isEmail();
+    const error = sut.validate({});
+
+    expect(error).toEqual(new RequiredFieldError("emailField"));
+  });
+
   it("Validate should throw if email validator throws", () => {
     const { emailValidatorStub, sut } = makeSut();
     jest
