@@ -10,7 +10,8 @@ class ValidatorComposer implements ValidatorInterface {
 
   public validate(request: any): Error | undefined {
     for (const validator of this.validators) {
-      validator.validate(request);
+      const error = validator.validate(request);
+      if (error) return error;
     }
     return;
   }
@@ -57,10 +58,20 @@ describe("ValidatorComposer", () => {
     expect(validatorStubSpy2).toHaveBeenCalledWith(makeRequest());
   });
 
-  it('Should return undefined', () => {
-    const { sut} = makeSut();
+  it("Validate should return an error if a validator returns an error", () => {
+    const { sut, validatorStub1 } = makeSut();
+    jest
+      .spyOn(validatorStub1, "validate")
+      .mockReturnValueOnce(new Error("any_error"));
+    const error = sut.validate(makeRequest());
+
+    expect(error).toEqual(new Error("any_error"));
+  });
+
+  it("Should return undefined", () => {
+    const { sut } = makeSut();
     const output = sut.validate(makeRequest());
 
     expect(output).toBeUndefined();
-  })
+  });
 });
