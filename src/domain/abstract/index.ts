@@ -1,3 +1,6 @@
 export * from './dtos/user-dto-type'
 export * from './entities/user-entity-type'
 export * from './services/create-user-service-interface'
+export * from './helpers/id-generator-interface'
+export * from './helpers/hasher-interface'
+export * from './repositories/create-user-repository-interface'
