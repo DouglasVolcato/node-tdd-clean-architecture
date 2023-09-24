@@ -4,7 +4,11 @@ import {
   ControllerOutputType,
   ValidatorInterface,
 } from "../abstract";
-import { CreateUserServiceInterface, UserDtoType, UserEntityType } from "@/domain/abstract";
+import {
+  CreateUserServiceInterface,
+  UserDtoType,
+  UserEntityType,
+} from "@/domain/abstract";
 import { badRequest, ok, serverError } from "../helpers";
 
 export class CreateUserController implements ControllerInterface {
@@ -24,9 +28,7 @@ export class CreateUserController implements ControllerInterface {
   ): Promise<ControllerOutputType<UserEntityType | Error>> {
     try {
       const error = this.validator.validate(request);
-      if (error) {
-        return badRequest(error);
-      }
+      if (error) return badRequest(error);
       const user = await this.createUserService.execute(request);
       return ok(user);
     } catch (error) {
