@@ -26,7 +26,8 @@ const makeSut = (): SutTypes => {
   const validatorStub1 = new ValidatorStub1();
   const validatorStub2 = new ValidatorStub2();
   const validatorStubs = [validatorStub1, validatorStub2];
-  const sut = new ValidatorComposite(validatorStubs);
+  const sut = new ValidatorComposite();
+  sut.setValidators(validatorStubs);
   return { validatorStub1, validatorStub2, sut };
 };
 
@@ -59,5 +60,11 @@ describe("ValidatorComposite", () => {
 
     expect(output).toBeUndefined();
   });
-  
+
+  it("SetValidators should set the validators property", () => {
+    const { sut } = makeSut();
+    sut.setValidators([new ValidatorStub1()])
+
+    expect((sut as any).validators).toEqual([new ValidatorStub1()])
+  });
 });
