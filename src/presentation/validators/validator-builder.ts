@@ -1,3 +1,4 @@
+import { EmailValidatorAdapter } from "@/infra/adapters";
 import {
   EmailValidatorInterface,
   ValidatorBuilderInterface,
@@ -10,8 +11,8 @@ export class ValidatorBuilder implements ValidatorBuilderInterface {
   private validateRequired: boolean;
   private validateEmail: boolean;
 
-  public constructor(emailValidator: EmailValidatorInterface) {
-    this.emailValidator = emailValidator;
+  public constructor(emailValidator?: EmailValidatorInterface) {
+    this.emailValidator = emailValidator ?? new EmailValidatorAdapter();
     this.fieldName = "";
     this.validateRequired = false;
     this.validateEmail = false;
