@@ -11,8 +11,8 @@ export class ValidatorBuilder implements ValidatorBuilderInterface {
   private validateRequired: boolean;
   private validateEmail: boolean;
 
-  public constructor(emailValidator?: EmailValidatorInterface) {
-    this.emailValidator = emailValidator ?? new EmailValidatorAdapter();
+  public constructor() {
+    this.emailValidator = new EmailValidatorAdapter();
     this.fieldName = "";
     this.validateRequired = false;
     this.validateEmail = false;

@@ -19,7 +19,8 @@ type SutTypes = {
 
 const makeSut = (): SutTypes => {
   const emailValidatorStub = new EmailValidatorStub();
-  const sut = new ValidatorBuilder(emailValidatorStub);
+  const sut = new ValidatorBuilder();
+  (sut as any ).emailValidator = emailValidatorStub;
 
   return { emailValidatorStub, sut };
 };
