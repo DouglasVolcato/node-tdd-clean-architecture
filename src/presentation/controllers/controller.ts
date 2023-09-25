@@ -18,9 +18,7 @@ export abstract class Controller implements ControllerInterface {
     request: ControllerInputType<any>
   ): Promise<ControllerOutputType<any | Error>>;
 
-  protected buildValidators(): ValidatorInterface[] {
-    return [];
-  }
+  protected abstract buildValidators(): ValidatorInterface[]
 
   public async execute(
     request: ControllerInputType<any>
