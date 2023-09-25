@@ -9,7 +9,14 @@
   "keywords": [],
   "author": "Douglas Volcato",
   "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "email-validator": "^2.0.4",
+    "uuid": "^9.0.1"
+  },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/email-validator": "^1.0.6",
     "@types/jest": "28.1.8",
     "@types/node": "^18.11.0",
     "@types/uuid": "^9.0.4",
@@ -41,10 +48,5 @@
   },
   "compilerOptions": {
     "moduleResolution": "node"
-  },
-  "dependencies": {
-    "@types/bcrypt": "^5.0.0",
-    "bcrypt": "^5.1.1",
-    "uuid": "^9.0.1"
   }
 }
