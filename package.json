@@ -11,12 +11,13 @@
   "author": "Douglas Volcato",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^18.11.0",
     "@types/jest": "28.1.8",
-    "typescript": "^4.7.4",
+    "@types/node": "^18.11.0",
+    "@types/uuid": "^9.0.4",
+    "jest": "28.1.3",
     "ts-jest": "28.0.8",
     "ts-node": "^10.0.0",
-    "jest": "28.1.3"
+    "typescript": "^4.7.4"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -40,5 +41,9 @@
   },
   "compilerOptions": {
     "moduleResolution": "node"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "uuid": "^9.0.1"
   }
 }
