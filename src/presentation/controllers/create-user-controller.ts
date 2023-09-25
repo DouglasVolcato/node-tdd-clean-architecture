@@ -2,37 +2,31 @@ import {
   ControllerInputType,
   ControllerInterface,
   ControllerOutputType,
-  ValidatorInterface,
+  ValidatorCompositeInterface,
 } from "../abstract";
 import {
   CreateUserServiceInterface,
   UserDtoType,
   UserEntityType,
 } from "@/domain/abstract";
-import { badRequest, ok, serverError } from "../helpers";
+import { ok } from "../helpers";
+import { Controller } from "./controller";
 
-export class CreateUserController implements ControllerInterface {
-  private readonly validator: ValidatorInterface;
+export class CreateUserController
+  extends Controller
+  implements ControllerInterface
+{
   private readonly createUserService: CreateUserServiceInterface;
 
-  public constructor(
-    validator: ValidatorInterface,
-    createUserService: CreateUserServiceInterface
-  ) {
-    this.validator = validator;
+  public constructor(createUserService: CreateUserServiceInterface,validatorComposite: ValidatorCompositeInterface) {
+    super(validatorComposite);
     this.createUserService = createUserService;
   }
 
-  public async execute(
+  public async perform(
     request: ControllerInputType<UserDtoType>
   ): Promise<ControllerOutputType<UserEntityType | Error>> {
-    try {
-      const error = this.validator.validate(request);
-      if (error) return badRequest(error);
-      const user = await this.createUserService.execute(request);
-      return ok(user);
-    } catch (error) {
-      return serverError();
-    }
+    const user = await this.createUserService.execute(request);
+    return ok(user);
   }
 }

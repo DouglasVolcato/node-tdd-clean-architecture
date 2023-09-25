@@ -4,3 +4,4 @@ export * from "./controller/output-type";
 export * from "./controller/controller-interface";
 export * from "./validator/validator-builder-interface";
 export * from "./validator/email-validator-interface ";
+export * from "./validator/validator-composite-interface";
