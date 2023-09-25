@@ -1,8 +1,9 @@
 import { IdGeneratorAdapter } from "@/infra/adapters";
+import { throwError } from "@/tests/test-helpers";
 import { v4 } from "uuid";
 
 jest.mock("uuid", () => ({
-    v4: jest.fn()
+  v4: jest.fn(),
 }));
 
 type SutTypes = {
@@ -29,5 +30,11 @@ describe("IdGeneratorAdapter", () => {
 
     expect(generatedUuid).toBe("generated_id");
   });
-});
 
+  it("Should throw if uuid throws", () => {
+    const { sut } = makeSut();
+    (v4 as jest.Mock).mockImplementationOnce(() => throwError());
+
+    expect(() => sut.generateId()).toThrow();
+  });
+});
