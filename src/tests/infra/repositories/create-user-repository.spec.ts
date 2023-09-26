@@ -3,7 +3,7 @@ import {
   CreateUserRepositoryInterface,
   UserEntityType,
 } from "@/domain/abstract";
-import { makeUserEntity } from "@/tests/test-helpers";
+import { makeUserEntity, throwError } from "@/tests/test-helpers";
 
 mongoose.Promise = global.Promise;
 
@@ -65,5 +65,10 @@ describe("CreateUserRepository", () => {
     expect(createdUser.password).toBe(userEntity.password);
   });
 
-  it("Should throw if mongoose throws", async () => {});
+  it("Should throw if mongoose throws", async () => {
+    const { sut } = makeSut();
+    UserModel.prototype.save = () => throwError();
+
+    await expect(() => sut.execute(makeUserEntity())).rejects.toThrow();
+  });
 });
