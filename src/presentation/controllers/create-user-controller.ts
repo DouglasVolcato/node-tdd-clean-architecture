@@ -39,6 +39,7 @@ export class CreateUserController
     return [
       new ValidatorBuilder().of("name").isRequired(),
       new ValidatorBuilder().of("email").isRequired(),
+      new ValidatorBuilder().of("email").isEmail(),
       new ValidatorBuilder().of("password").isRequired(),
     ];
   }
