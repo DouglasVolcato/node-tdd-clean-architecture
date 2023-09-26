@@ -11,12 +11,14 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "dotenv": "^16.3.1",
     "email-validator": "^2.0.4",
     "mongoose": "5.13.20",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/dotenv": "^8.2.0",
     "@types/email-validator": "^1.0.6",
     "@types/jest": "28.1.8",
     "@types/mongoose": "^5.11.97",
