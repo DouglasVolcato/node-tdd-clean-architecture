@@ -4,7 +4,7 @@ import {
 } from "@/domain/abstract";
 import { Env } from "@/main/config";
 import { UserModel } from "../models/user-model";
-import { DatabaseConnector } from "../connector";
+import { DatabaseConnector } from "../connection/connector";
 
 export class UserRepository implements CreateUserRepositoryInterface {
   public async create(userEntity: UserEntityType): Promise<UserEntityType> {
