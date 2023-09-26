@@ -31,7 +31,7 @@ describe("UserRepository", () => {
   it("Should create a new user", async () => {
     const { sut } = makeSut();
     const userEntity = makeUserEntity();
-    const createdUser = await sut.execute(makeUserEntity());
+    const createdUser = await sut.create(makeUserEntity());
 
     expect(createdUser.id).toBeDefined();
     expect(createdUser.name).toBe(userEntity.name);
@@ -43,6 +43,6 @@ describe("UserRepository", () => {
     const { sut } = makeSut();
     UserModel.prototype.save = () => throwError();
 
-    await expect(() => sut.execute(makeUserEntity())).rejects.toThrow();
+    await expect(() => sut.create(makeUserEntity())).rejects.toThrow();
   });
 });

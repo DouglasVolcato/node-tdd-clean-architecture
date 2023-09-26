@@ -28,7 +28,7 @@ export class CreateUserService implements CreateUserServiceInterface {
     const id = this.idGenerator.generateId();
     const hashedPassword = this.hasher.hash(userDto.password);
 
-    const newUser = await this.createUserRepository.execute({
+    const newUser = await this.createUserRepository.create({
       ...userDto,
       id: id,
       password: hashedPassword,

@@ -12,7 +12,7 @@ import { CreateUserService } from "@/domain/services";
 import { makeUserDto, makeUserEntity, throwError } from "@/tests/test-helpers";
 
 class CreateUserRepositoryStub implements CreateUserRepositoryInterface {
-  public async execute(userDto: UserDtoType): Promise<UserEntityType> {
+  public async create(userDto: UserDtoType): Promise<UserEntityType> {
     return Promise.resolve(makeUserEntity());
   }
 }
@@ -70,7 +70,7 @@ describe("CreateUserService", () => {
   it("Should call repository with correct values", async () => {
     const { sut, createUserRepositoryStub, hasherStub, idGeneratorStub } =
       makeSut();
-    const repositorySpy = jest.spyOn(createUserRepositoryStub, "execute");
+    const repositorySpy = jest.spyOn(createUserRepositoryStub, "create");
     const userEntity = makeUserEntity();
     const userDto: UserDtoType = {
       name: userEntity.name,
@@ -96,7 +96,7 @@ describe("CreateUserService", () => {
       password: "hashed_password",
     };
     jest
-      .spyOn(createUserRepositoryStub, "execute")
+      .spyOn(createUserRepositoryStub, "create")
       .mockReturnValueOnce(Promise.resolve(userData));
 
     expect(await sut.execute(makeUserDto())).toEqual(userData);
@@ -121,7 +121,7 @@ describe("CreateUserService", () => {
   it("Should throw if repository throws", async () => {
     const { sut, createUserRepositoryStub } = makeSut();
     jest
-      .spyOn(createUserRepositoryStub, "execute")
+      .spyOn(createUserRepositoryStub, "create")
       .mockImplementationOnce(() => throwError());
 
     await expect(() => sut.execute(makeUserDto())).rejects.toThrow();
