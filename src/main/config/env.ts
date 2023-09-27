@@ -1,8 +1,9 @@
-import * as dotenv from 'dotenv'
+import * as dotenv from "dotenv";
 
 dotenv.config();
 
 export const Env = {
-  MONGO_TEST_URL: process.env.MONGO_TEST_URL ?? '',
-  MONGO_URL: process.env.MONGO_URL ?? '',
+  PORT: Number(process.env.PORT ?? 7777),
+  MONGO_URL: process.env.MONGO_URL ?? "",
+  MONGO_TEST_URL: process.env.MONGO_TEST_URL ?? "",
 };
