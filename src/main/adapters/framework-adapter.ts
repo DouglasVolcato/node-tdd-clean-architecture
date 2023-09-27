@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import { RouteDtoType } from "../abstract";
+import { RouteDtoType, RouteEnumType } from "../abstract";
 
 export class FrameWorkAdapter {
   private readonly routes: RouteDtoType[];
@@ -29,10 +29,40 @@ export class FrameWorkAdapter {
 
   private setupRoutes(): void {
     for (const route of this.routes) {
-      this.app.use(route.url, async (req: Request, res: Response) => {
-        const response = await route.controller.execute(req.body);
-        res.status(response.statusCode).json(response.data);
-      });
+      switch (route.type) {
+        case RouteEnumType.GET:
+          this.app.get(route.url, async (req: Request, res: Response) => {
+            const response = await route.controller.execute(req.body);
+            res.status(response.statusCode).json(response.data);
+          });
+          break;
+        case RouteEnumType.POST:
+          this.app.post(route.url, async (req: Request, res: Response) => {
+            const response = await route.controller.execute(req.body);
+            res.status(response.statusCode).json(response.data);
+          });
+          break;
+        case RouteEnumType.PUT:
+          this.app.put(route.url, async (req: Request, res: Response) => {
+            const response = await route.controller.execute(req.body);
+            res.status(response.statusCode).json(response.data);
+          });
+          break;
+        case RouteEnumType.DELETE:
+          this.app.delete(route.url, async (req: Request, res: Response) => {
+            const response = await route.controller.execute(req.body);
+            res.status(response.statusCode).json(response.data);
+          });
+          break;
+        case RouteEnumType.PATCH:
+          this.app.patch(route.url, async (req: Request, res: Response) => {
+            const response = await route.controller.execute(req.body);
+            res.status(response.statusCode).json(response.data);
+          });
+          break;
+        default:
+          break;
+      }
     }
   }
 }
