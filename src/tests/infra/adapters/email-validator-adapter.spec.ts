@@ -1,5 +1,5 @@
-import { EmailValidatorAdapter } from "@/infra/adapters";
-import { throwError } from "@/tests/test-helpers";
+import { EmailValidatorAdapter } from "../../../infra/adapters";
+import { throwError } from "../../../tests/test-helpers";
 import { validate } from "email-validator";
 
 jest.mock("email-validator", () => ({

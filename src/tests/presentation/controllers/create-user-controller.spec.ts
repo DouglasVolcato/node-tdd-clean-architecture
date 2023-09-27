@@ -2,14 +2,14 @@ import {
   CreateUserServiceInterface,
   UserDtoType,
   UserEntityType,
-} from "@/domain/abstract";
+} from "../../../domain/abstract";
 import {
   ValidatorCompositeInterface,
   ValidatorInterface,
-} from "@/presentation/abstract";
-import { CreateUserController } from "@/presentation/controllers";
-import { ServerError } from "@/presentation/errors";
-import { makeUserDto, makeUserEntity, throwError } from "@/tests/test-helpers";
+} from "../../../presentation/abstract";
+import { CreateUserController } from "../../../presentation/controllers";
+import { ServerError } from "../../../presentation/errors";
+import { makeUserDto, makeUserEntity, throwError } from "../../../tests/test-helpers";
 
 class CreateUserServiceStub implements CreateUserServiceInterface {
   public async execute(userDto: UserDtoType): Promise<UserEntityType> {

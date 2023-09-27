@@ -9,7 +9,7 @@ import {
   CreateUserServiceInterface,
   UserDtoType,
   UserEntityType,
-} from "@/domain/abstract";
+} from "../../domain/abstract";
 import { ok } from "../helpers";
 import { Controller } from "./controller";
 import { ValidatorBuilder } from "../validators";

@@ -1,4 +1,4 @@
-import { UserEntityType } from "@/domain/abstract";
+import { UserEntityType } from "../../domain/abstract";
 
 export const makeUserEntity = (): UserEntityType => ({
   id: "any_id",

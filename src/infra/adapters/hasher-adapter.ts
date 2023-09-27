@@ -1,4 +1,4 @@
-import { HasherInterface } from "@/domain/abstract";
+import { HasherInterface } from "../../domain/abstract";
 import { hashSync } from "bcrypt";
 
 export class HasherAdapter implements HasherInterface {

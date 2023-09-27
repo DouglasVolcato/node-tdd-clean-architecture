@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { makeUserEntity, throwError } from "@/tests/test-helpers";
-import { Env } from "@/main/config";
-import { DatabaseConnector, UserModel, UserRepository } from "@/infra/database";
+import { makeUserEntity, throwError } from "../../../tests/test-helpers";
+import { Env } from "../../../main/config";
+import { DatabaseConnector, UserModel, UserRepository } from "../../../infra/database";
 
 mongoose.Promise = global.Promise;
 

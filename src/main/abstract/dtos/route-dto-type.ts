@@ -1,4 +1,4 @@
-import { Controller } from "@/presentation/controllers";
+import { Controller } from "../../../presentation/controllers";
 
 export type RouteDtoType = {
   url: string;

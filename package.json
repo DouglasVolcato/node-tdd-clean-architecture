@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "tsc && node dist/main/index.js",
-    "test": "jest --passWithNoTests",
+    "test": "jest",
     "test-watch": "jest --passWithNoTests --watch",
     "test-coverage": "jest --passWithNoTests --coverage"
   },
@@ -17,7 +17,7 @@
     "dotenv": "^16.3.1",
     "email-validator": "^2.0.4",
     "express": "^4.18.2",
-    "mongoose": "5.13.20",
+    "mongoose": "^7.5.3",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
@@ -52,10 +52,7 @@
       "!**/*index.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node",
-    "moduleNameMapper": {
-      "@/(.+)": "<rootDir>/$1"
-    }
+    "testEnvironment": "node"
   },
   "compilerOptions": {
     "moduleResolution": "node"

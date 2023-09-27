@@ -2,14 +2,14 @@ import {
   CreateUserServiceInterface,
   UserDtoType,
   UserEntityType,
-} from "@/domain/abstract";
+} from "../../../domain/abstract";
 import {
   HasherInterface,
   IdGeneratorInterface,
   CreateUserRepositoryInterface,
-} from "@/domain/abstract";
-import { CreateUserService } from "@/domain/services";
-import { makeUserDto, makeUserEntity, throwError } from "@/tests/test-helpers";
+} from "../../../domain/abstract";
+import { CreateUserService } from "../../../domain/services";
+import { makeUserDto, makeUserEntity, throwError } from "../../../tests/test-helpers";
 
 class CreateUserRepositoryStub implements CreateUserRepositoryInterface {
   public async create(userDto: UserDtoType): Promise<UserEntityType> {

@@ -4,11 +4,11 @@ import {
   ControllerOutputType,
   ValidatorCompositeInterface,
   ValidatorInterface,
-} from "@/presentation/abstract";
-import { Controller } from "@/presentation/controllers/controller";
-import { RequiredFieldError, ServerError } from "@/presentation/errors";
-import { ok } from "@/presentation/helpers";
-import { makeUserDto, throwError } from "@/tests/test-helpers";
+} from "../../../presentation/abstract";
+import { Controller } from "../../../presentation/controllers/controller";
+import { RequiredFieldError, ServerError } from "../../../presentation/errors";
+import { ok } from "../../../presentation/helpers";
+import { makeUserDto, throwError } from "../../../tests/test-helpers";
 
 class ValidatorStub implements ValidatorInterface {
   public validate(request: any): Error | undefined {

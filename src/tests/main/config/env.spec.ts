@@ -1,5 +1,5 @@
 import { config } from "dotenv";
-import { Env } from "@/main/config";
+import { Env } from "../../../main/config";
 
 jest.mock("dotenv", () => ({
   config: jest.fn(),

@@ -1,4 +1,4 @@
-import { EmailValidatorAdapter } from "@/infra/adapters";
+import { EmailValidatorAdapter } from "../../infra/adapters";
 import {
   EmailValidatorInterface,
   ValidatorBuilderInterface,

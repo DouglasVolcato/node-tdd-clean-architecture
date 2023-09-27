@@ -1,5 +1,5 @@
-import { ControllerOutputType } from "@/presentation/abstract";
-import { ServerError } from "@/presentation/errors";
+import { ControllerOutputType } from "../../../presentation/abstract";
+import { ServerError } from "../../../presentation/errors";
 
 export const serverError = (): ControllerOutputType<Error> => ({
   statusCode: 500,

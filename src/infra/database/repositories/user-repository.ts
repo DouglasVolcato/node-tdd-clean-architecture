@@ -1,8 +1,8 @@
 import {
   CreateUserRepositoryInterface,
   UserEntityType,
-} from "@/domain/abstract";
-import { Env } from "@/main/config";
+} from "../../../domain/abstract";
+import { Env } from "../../../main/config";
 import { UserModel } from "../models/user-model";
 import { DatabaseConnector } from "../connection/connector";
 

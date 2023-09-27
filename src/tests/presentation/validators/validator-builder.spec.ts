@@ -1,10 +1,10 @@
 import {
   EmailValidatorInterface,
   ValidatorBuilderInterface,
-} from "@/presentation/abstract";
-import { InvalidFieldError, RequiredFieldError } from "@/presentation/errors";
-import { ValidatorBuilder } from "@/presentation/validators";
-import { throwError } from "@/tests/test-helpers";
+} from "../../../presentation/abstract";
+import { InvalidFieldError, RequiredFieldError } from "../../../presentation/errors";
+import { ValidatorBuilder } from "../../../presentation/validators";
+import { throwError } from "../../../tests/test-helpers";
 
 class EmailValidatorStub implements EmailValidatorInterface {
   public isEmail(value: string): boolean {

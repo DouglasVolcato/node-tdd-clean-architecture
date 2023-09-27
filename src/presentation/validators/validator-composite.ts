@@ -1,7 +1,7 @@
 import {
   ValidatorCompositeInterface,
   ValidatorInterface,
-} from "@/presentation/abstract";
+} from "../../presentation/abstract";
 
 export class ValidatorComposite
   implements ValidatorInterface, ValidatorCompositeInterface

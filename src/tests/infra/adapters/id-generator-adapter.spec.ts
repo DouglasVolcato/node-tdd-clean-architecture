@@ -1,5 +1,5 @@
-import { IdGeneratorAdapter } from "@/infra/adapters";
-import { throwError } from "@/tests/test-helpers";
+import { IdGeneratorAdapter } from "../../../infra/adapters";
+import { throwError } from "../../../tests/test-helpers";
 import { v4 } from "uuid";
 
 jest.mock("uuid", () => ({
