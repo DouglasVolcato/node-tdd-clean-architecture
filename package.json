@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "start": "tsc && node dist/main/index.js",
-    "test": "jest",
-    "test-watch": "jest --passWithNoTests --watch",
-    "test-coverage": "jest --passWithNoTests --coverage"
+    "test-unit": "jest -c jest-unit-config.json",
+    "test-integration": "jest -c jest-integration-config.json",
+    "test-watch": "jest --passWithNoTests --watch jest-unit-config.json",
+    "test-coverage": "jest --passWithNoTests --coverage jest-unit-config.json"
   },
   "keywords": [],
   "author": "Douglas Volcato",
@@ -37,24 +38,6 @@
     "ts-jest": "28.0.8",
     "ts-node": "^10.0.0",
     "typescript": "^4.7.4"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "collectCoverageFrom": [
-      "**/*.(t|j)s",
-      "!**/*index.(t|j)s"
-    ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
   },
   "compilerOptions": {
     "moduleResolution": "node"
