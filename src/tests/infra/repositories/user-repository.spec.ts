@@ -1,16 +1,21 @@
 import mongoose from "mongoose";
 import { makeUserEntity, throwError } from "../../../tests/test-helpers";
 import { Env } from "../../../main/config";
-import { DatabaseConnector, UserModel, UserRepository } from "../../../infra/database";
+import {
+  DatabaseConnector,
+  UserModel,
+  UserRepository,
+} from "../../../infra/database";
 
 mongoose.Promise = global.Promise;
+const databaseConnector = new DatabaseConnector();
 
 beforeAll(async () => {
-  await DatabaseConnector.connect(Env.MONGO_TEST_URL)
+  await databaseConnector.connect(Env.MONGO_TEST_URL);
 });
 
 afterAll(async () => {
-  await DatabaseConnector.disconnect()
+  await databaseConnector.disconnect();
 });
 
 type SutTypes = {
