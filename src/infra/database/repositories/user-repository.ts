@@ -8,7 +8,7 @@ import { DatabaseConnector } from "../connection/connector";
 
 export class UserRepository implements CreateUserRepositoryInterface {
   public async create(userEntity: UserEntityType): Promise<UserEntityType> {
-    await DatabaseConnector.connect(Env.MONGO_URL);
+    await new DatabaseConnector().connect(Env.MONGO_URL);
     const newUser = new UserModel(userEntity);
     await newUser.save();
     return newUser.toObject();
