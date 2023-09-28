@@ -1,7 +1,7 @@
 import { RouteDtoType, RouteEnumType } from "../abstract";
 import { makeCreateUserControllerFactory } from "../factories";
 
-export const routes: RouteDtoType[] = [
+export const userRoutes: RouteDtoType[] = [
   {
     type: RouteEnumType.POST,
     url: "/user/create",

@@ -1,2 +1,2 @@
 export * from "./env";
-export * from "./routes";
+export * from "../routes/user-routes";
