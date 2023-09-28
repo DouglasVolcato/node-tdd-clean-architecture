@@ -1,4 +1,4 @@
-import { DatabaseConnector } from "infra/database";
+import { DatabaseConnector } from "../infra/database";
 import { FrameWorkAdapter } from "./adapters";
 import { Env, userRoutes } from "./config";
 
