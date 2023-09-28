@@ -5,7 +5,7 @@
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
   },
-  "preset":"ts-jest",
+  "preset": "ts-jest",
   "collectCoverageFrom": ["**/*.(t|j)s", "!**/*index.(t|j)s"],
   "coverageDirectory": "../coverage",
   "testEnvironment": "node"
