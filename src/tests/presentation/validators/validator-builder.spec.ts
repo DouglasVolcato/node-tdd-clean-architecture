@@ -152,7 +152,7 @@ describe("ValidatorBuilder", () => {
 
     expect(emailValidatorSpy).not.toHaveBeenCalledWith("requiredField1");
     expect(emailValidatorSpy).not.toHaveBeenCalledWith("requiredField2");
-    expect(emailValidatorSpy).toHaveBeenCalledWith("emailField");
+    expect(emailValidatorSpy).toHaveBeenCalledWith("any_email@email.com");
     expect((sut as any).validateEmail).toBeTruthy();
     expect(emailValidatorSpy).toHaveBeenCalledTimes(1);
   });

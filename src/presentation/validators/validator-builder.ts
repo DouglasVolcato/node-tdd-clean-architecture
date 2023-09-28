@@ -43,7 +43,7 @@ export class ValidatorBuilder implements ValidatorBuilderInterface {
         return new RequiredFieldError(this.fieldName);
     }
     if (this.validateEmail) {
-      const error = this.emailValidator.isEmail(this.fieldName);
+      const error = this.emailValidator.isEmail(request[this.fieldName]);
       if (!error) return new InvalidFieldError(this.fieldName);
     }
 
