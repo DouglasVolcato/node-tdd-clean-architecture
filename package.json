@@ -5,8 +5,8 @@
     "start": "tsc && node dist/main/index.js",
     "test-unit": "jest -c jest-unit-config.json",
     "test-integration": "jest -c jest-integration-config.json",
-    "test-watch": "jest --passWithNoTests --watch jest-unit-config.json",
-    "test-coverage": "jest --passWithNoTests --coverage jest-unit-config.json"
+    "test-watch": "jest --passWithNoTests --watch -c jest-unit-config.json",
+    "test-coverage": "jest --passWithNoTests --coverage -c jest-unit-config.json"
   },
   "keywords": [],
   "author": "Douglas Volcato",
