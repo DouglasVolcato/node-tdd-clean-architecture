@@ -1,11 +1,11 @@
 import { Controller } from "../../../presentation/controllers";
 
 export enum RouteEnumType {
-  GET = "GET",
-  POST = "POST",
-  DELETE = "DELETE",
-  PUT = "PUT",
-  PATCH = "PATCH",
+  GET = "get",
+  POST = "post",
+  DELETE = "delete",
+  PUT = "put",
+  PATCH = "patch",
 }
 
 export type RouteDtoType = {
