@@ -20,7 +20,7 @@ describe("Create user routes", () => {
   beforeAll(async () => {
     frameworkAdapter = new FrameWorkAdapter(userRoutes, Env.PORT);
     app = (frameworkAdapter as any).app;
-    await databaseConnector.connect(Env.MONGO_TEST_URL);
+    await databaseConnector.connect(process.env.MONGO_URL);
     await frameworkAdapter.start();
   });
 

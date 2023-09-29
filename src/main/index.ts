@@ -5,6 +5,6 @@ import { Env, userRoutes } from "./config";
 const framework = new FrameWorkAdapter([...userRoutes], Env.PORT);
 const databaseConnector = new DatabaseConnector();
 
-databaseConnector.connect(Env.MONGO_URL).then(() => {
+databaseConnector.connect(Env.DB_URL).then(() => {
   framework.start();
 });

@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { makeUserEntity, throwError } from "../../../tests/test-helpers";
-import { Env } from "../../../src/main/config";
 import {
   DatabaseConnector,
   UserModel,
@@ -11,7 +10,7 @@ mongoose.Promise = global.Promise;
 const databaseConnector = new DatabaseConnector();
 
 beforeAll(async () => {
-  await databaseConnector.connect(Env.MONGO_TEST_URL);
+  await databaseConnector.connect(process.env.MONGO_URL);
 });
 
 afterAll(async () => {

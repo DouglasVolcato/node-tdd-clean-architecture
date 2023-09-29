@@ -10,7 +10,7 @@ describe("Environment Variables", () => {
     (config as jest.Mock).mockReturnValueOnce({ parsed: {} });
 
     expect(config).toHaveBeenCalledTimes(1);
-    expect(Env.MONGO_TEST_URL).toBe("");
-    expect(Env.MONGO_URL).toBe("");
+    expect(Env.DB_URL).toBe("");
+    expect(Env.PORT).toBe(7777);
   });
 });
