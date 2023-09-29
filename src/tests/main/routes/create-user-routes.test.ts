@@ -31,36 +31,42 @@ describe("Create user routes", () => {
   describe(`POST ${route}`, () => {
     test("Should return 200 with the created user", async () => {
       const requestBody = makeValidUserDto();
-      
-      await request(app).post(route).send(requestBody).expect(200);
+    
+       const response = await request(app).post(route).send(requestBody);
+
+       expect(response.statusCode).toBe(200);
     });
 
     test("Should return 400 if does not receive name", async () => {
       const requestBody = makeValidUserDto();
       delete requestBody.name;
+      const response = await request(app).post(route).send(requestBody);
 
-      await request(app).post(route).send(requestBody).expect(400);
+      expect(response.statusCode).toBe(400);
     });
 
     test("Should return 400 if does not receive password", async () => {
       const requestBody = makeValidUserDto();
       delete requestBody.password;
+      const response = await request(app).post(route).send(requestBody);
 
-      await request(app).post(route).send(requestBody).expect(400);
+      expect(response.statusCode).toBe(400);
     });
 
     test("Should return 400 if does not receive email", async () => {
       const requestBody = makeValidUserDto();
       delete requestBody.email;
+      const response = await request(app).post(route).send(requestBody);
 
-      await request(app).post(route).send(requestBody).expect(400);
+      expect(response.statusCode).toBe(400);
     });
 
     test("Should return 400 if email is not valid", async () => {
       const requestBody = makeValidUserDto();
       requestBody.email = "invalid_email";
+      const response = await request(app).post(route).send(requestBody);
 
-      await request(app).post(route).send(requestBody).expect(400);
+      expect(response.statusCode).toBe(400);
     });
   });
 });
