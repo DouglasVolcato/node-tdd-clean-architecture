@@ -1,7 +1,7 @@
-import { FrameWorkAdapter } from "../../../main/adapters";
-import { Env, userRoutes } from "../../../main/config";
-import { UserDtoType } from "../../../domain/abstract";
-import { DatabaseConnector } from "../../../infra/database";
+import { FrameWorkAdapter } from "../../../src/main/adapters";
+import { Env, userRoutes } from "../../../src/main/config";
+import { UserDtoType } from "../../../src/domain/abstract";
+import { DatabaseConnector } from "../../../src/infra/database";
 import { Express } from "express";
 import request from "supertest";
 

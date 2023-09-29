@@ -1,4 +1,4 @@
-import { UserDtoType } from "../../domain/abstract";
+import { UserDtoType } from "../../src/domain/abstract";
 
 export const makeUserDto = (): UserDtoType => ({
   name: "any_name",

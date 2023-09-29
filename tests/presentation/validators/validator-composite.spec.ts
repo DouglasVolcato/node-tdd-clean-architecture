@@ -1,5 +1,5 @@
-import { ValidatorInterface } from "../../../presentation/abstract";
-import { ValidatorComposite } from "../../../presentation/validators/validator-composite";
+import { ValidatorInterface } from "../../../src/presentation/abstract";
+import { ValidatorComposite } from "../../../src/presentation/validators/validator-composite";
 import { makeUserDto } from "../../../tests/test-helpers";
 
 const makeRequest = () => makeUserDto();
@@ -63,8 +63,8 @@ describe("ValidatorComposite", () => {
 
   it("SetValidators should set the validators property", () => {
     const { sut } = makeSut();
-    sut.setValidators([new ValidatorStub1()])
+    sut.setValidators([new ValidatorStub1()]);
 
-    expect((sut as any).validators).toEqual([new ValidatorStub1()])
+    expect((sut as any).validators).toEqual([new ValidatorStub1()]);
   });
 });

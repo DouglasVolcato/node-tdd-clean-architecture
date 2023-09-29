@@ -1,4 +1,4 @@
-import { HasherAdapter } from "../../../infra/adapters";
+import { HasherAdapter } from "../../../src/infra/adapters";
 import { throwError } from "../../../tests/test-helpers";
 import { hashSync } from "bcrypt";
 

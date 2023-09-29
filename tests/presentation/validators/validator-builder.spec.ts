@@ -1,9 +1,12 @@
 import {
   EmailValidatorInterface,
   ValidatorBuilderInterface,
-} from "../../../presentation/abstract";
-import { InvalidFieldError, RequiredFieldError } from "../../../presentation/errors";
-import { ValidatorBuilder } from "../../../presentation/validators";
+} from "../../../src/presentation/abstract";
+import {
+  InvalidFieldError,
+  RequiredFieldError,
+} from "../../../src/presentation/errors";
+import { ValidatorBuilder } from "../../../src/presentation/validators";
 import { throwError } from "../../../tests/test-helpers";
 
 class EmailValidatorStub implements EmailValidatorInterface {
@@ -20,7 +23,7 @@ type SutTypes = {
 const makeSut = (): SutTypes => {
   const emailValidatorStub = new EmailValidatorStub();
   const sut = new ValidatorBuilder();
-  (sut as any ).emailValidator = emailValidatorStub;
+  (sut as any).emailValidator = emailValidatorStub;
 
   return { emailValidatorStub, sut };
 };

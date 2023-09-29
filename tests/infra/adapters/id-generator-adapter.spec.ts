@@ -1,4 +1,4 @@
-import { IdGeneratorAdapter } from "../../../infra/adapters";
+import { IdGeneratorAdapter } from "../../../src/infra/adapters";
 import { throwError } from "../../../tests/test-helpers";
 import { v4 } from "uuid";
 

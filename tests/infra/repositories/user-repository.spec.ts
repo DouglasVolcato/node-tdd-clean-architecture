@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 import { makeUserEntity, throwError } from "../../../tests/test-helpers";
-import { Env } from "../../../main/config";
+import { Env } from "../../../src/main/config";
 import {
   DatabaseConnector,
   UserModel,
   UserRepository,
-} from "../../../infra/database";
+} from "../../../src/infra/database";
 
 mongoose.Promise = global.Promise;
 const databaseConnector = new DatabaseConnector();

@@ -1,4 +1,4 @@
-import { EmailValidatorAdapter } from "../../../infra/adapters";
+import { EmailValidatorAdapter } from "../../../src/infra/adapters";
 import { throwError } from "../../../tests/test-helpers";
 import { validate } from "email-validator";
 
