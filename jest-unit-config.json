@@ -6,11 +6,12 @@
     "^.+\\.(t|j)s$": "ts-jest"
   },
   "collectCoverageFrom": [
-    "**/*.(t|j)s",
+    "**/src/**",
     "!**/*index.(t|j)s",
-    "!**/*test.(t|j)s"
+    "!**/*test.(t|j)s",
+    "!**/dist/**"
   ],
-  "coverageDirectory": "../coverage",
+  "coverageDirectory": "coverage",
   "testEnvironment": "node",
   "preset": "@shelf/jest-mongodb"
 }

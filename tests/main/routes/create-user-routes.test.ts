@@ -18,7 +18,8 @@ const makeValidUserDto = (): UserDtoType => ({
 
 describe("Create user routes", () => {
   beforeAll(async () => {
-    frameworkAdapter = new FrameWorkAdapter(userRoutes, Env.PORT);
+    const vars = new Env().getVaiables();
+    frameworkAdapter = new FrameWorkAdapter(userRoutes, vars.PORT);
     app = (frameworkAdapter as any).app;
     await databaseConnector.connect(process.env.MONGO_URL);
     await frameworkAdapter.start();
@@ -31,10 +32,10 @@ describe("Create user routes", () => {
   describe(`POST ${route}`, () => {
     test("Should return 200 with the created user", async () => {
       const requestBody = makeValidUserDto();
-    
-       const response = await request(app).post(route).send(requestBody);
 
-       expect(response.statusCode).toBe(200);
+      const response = await request(app).post(route).send(requestBody);
+
+      expect(response.statusCode).toBe(200);
     });
 
     test("Should return 400 if does not receive name", async () => {
