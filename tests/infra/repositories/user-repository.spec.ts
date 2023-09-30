@@ -32,21 +32,55 @@ describe("UserRepository", () => {
     await UserModel.deleteMany({});
   });
 
-  it("Should create a new user", async () => {
-    const { sut } = makeSut();
-    const userEntity = makeUserEntity();
-    const createdUser = await sut.create(makeUserEntity());
+  describe("Create", () => {
+    it("Should create a new user", async () => {
+      const { sut } = makeSut();
+      const userEntity = makeUserEntity();
+      const createdUser = await sut.create(userEntity);
 
-    expect(createdUser.id).toBeDefined();
-    expect(createdUser.name).toBe(userEntity.name);
-    expect(createdUser.email).toBe(userEntity.email);
-    expect(createdUser.password).toBe(userEntity.password);
+      expect(createdUser.id).toBeDefined();
+      expect(createdUser.name).toBe(userEntity.name);
+      expect(createdUser.email).toBe(userEntity.email);
+      expect(createdUser.password).toBe(userEntity.password);
+    });
+
+    it("Should throw if mongoose throws", async () => {
+      const { sut } = makeSut();
+      jest
+        .spyOn(UserModel.prototype, "save")
+        .mockImplementationOnce(() => throwError());
+
+      await expect(() => sut.create(makeUserEntity())).rejects.toThrow();
+    });
   });
 
-  it("Should throw if mongoose throws", async () => {
-    const { sut } = makeSut();
-    UserModel.prototype.save = () => throwError();
+  describe("GetByEmail", () => {
+    it("Should return a user", async () => {
+      const { sut } = makeSut();
+      const userEntity = makeUserEntity();
+      await sut.create(userEntity);
+      const foundUser = await sut.getByEmail(userEntity.email);
 
-    await expect(() => sut.create(makeUserEntity())).rejects.toThrow();
+      expect(foundUser.id).toBeDefined();
+      expect(foundUser.name).toBe(userEntity.name);
+      expect(foundUser.email).toBe(userEntity.email);
+      expect(foundUser.password).toBe(userEntity.password);
+    });
+
+    it("Should return undefined if user was not found", async () => {
+      const { sut } = makeSut();
+      const foundUser = await sut.getByEmail(makeUserEntity().email);
+
+      expect(foundUser).toBeUndefined();
+    });
+
+    it("Should throw if mongoose throws", async () => {
+      const { sut } = makeSut();
+      jest
+        .spyOn(UserModel.prototype, "save")
+        .mockImplementationOnce(() => throwError());
+
+      await expect(() => sut.create(makeUserEntity())).rejects.toThrow();
+    });
   });
 });
