@@ -1,7 +1,7 @@
-import { HasherInterface } from "../../domain/abstract";
-import { hashSync } from "bcrypt";
+import { HashValidatorInterface, HasherInterface } from "../../domain/abstract";
+import { hashSync, compareSync } from "bcrypt";
 
-export class HasherAdapter implements HasherInterface {
+export class HasherAdapter implements HasherInterface, HashValidatorInterface {
   private readonly hashSalt: number;
 
   public constructor(hashSalt: number) {
@@ -10,5 +10,9 @@ export class HasherAdapter implements HasherInterface {
 
   public hash(value: string): string {
     return hashSync(value, this.hashSalt);
+  }
+
+  public validate(value: string, hashedValue: string): boolean {
+    return compareSync(value, hashedValue);
   }
 }
