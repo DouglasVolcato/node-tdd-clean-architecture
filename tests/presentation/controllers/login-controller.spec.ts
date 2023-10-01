@@ -9,6 +9,13 @@ import {
   InvalidFieldError,
   ServerError,
 } from "../../../src/presentation/errors";
+import { ValidatorInterface } from "../../../src/presentation/abstract";
+
+class ValidatorStub implements ValidatorInterface {
+  public validate(request: any): Error | undefined {
+    return;
+  }
+}
 
 class LoginServiceStub implements LoginServiceInterface {
   public async execute(login: LoginDtoType): Promise<string | Error> {
@@ -23,7 +30,7 @@ type SutTypes = {
 
 const makeSut = (): SutTypes => {
   const loginServiceStub = new LoginServiceStub();
-  const sut = new LoginController(loginServiceStub);
+  const sut = new LoginController(new ValidatorStub(), loginServiceStub);
   return { sut, loginServiceStub };
 };
 

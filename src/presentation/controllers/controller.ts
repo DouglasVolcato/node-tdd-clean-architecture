@@ -1,4 +1,3 @@
-import { ValidatorComposite } from "../../presentation/validators";
 import {
   ControllerInterface,
   ControllerInputType,
@@ -8,17 +7,15 @@ import {
 import { badRequest, serverError } from "../helpers";
 
 export abstract class Controller implements ControllerInterface {
-  private readonly validatorComposite: ValidatorInterface;
+  private readonly validator: ValidatorInterface;
 
-  public constructor() {
-    this.validatorComposite = new ValidatorComposite(this.buildValidators());
+  public constructor(validator: ValidatorInterface) {
+    this.validator = validator;
   }
 
   protected abstract perform(
     request: ControllerInputType<any>
   ): Promise<ControllerOutputType<any | Error>>;
-
-  protected abstract buildValidators(): ValidatorInterface[];
 
   public async execute(
     request: ControllerInputType<any>
@@ -33,6 +30,6 @@ export abstract class Controller implements ControllerInterface {
   }
 
   private validate(request: ControllerInputType<any>): Error | undefined {
-    return this.validatorComposite.validate(request);
+    return this.validator.validate(request);
   }
 }

@@ -1,3 +1,4 @@
+import { ValidatorInterface } from "../../../src/presentation/abstract";
 import {
   CreateUserServiceInterface,
   UserDtoType,
@@ -10,6 +11,12 @@ import {
   makeUserEntity,
   throwError,
 } from "../../../tests/test-helpers";
+
+class ValidatorStub implements ValidatorInterface {
+  public validate(request: any): Error | undefined {
+    return;
+  }
+}
 
 class CreateUserServiceStub implements CreateUserServiceInterface {
   public async execute(userDto: UserDtoType): Promise<UserEntityType> {
@@ -24,7 +31,10 @@ type SutTypes = {
 
 const makeSut = (): SutTypes => {
   const createUserServiceStub = new CreateUserServiceStub();
-  const sut = new CreateUserController(createUserServiceStub);
+  const sut = new CreateUserController(
+    new ValidatorStub(),
+    createUserServiceStub
+  );
 
   return { createUserServiceStub, sut };
 };

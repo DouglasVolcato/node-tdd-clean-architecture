@@ -1,4 +1,3 @@
-import { ValidatorComposite } from "../../../src/presentation/validators";
 import {
   ControllerInputType,
   ControllerInterface,
@@ -19,11 +18,9 @@ class ValidatorStub implements ValidatorInterface {
   }
 }
 
-class ValidatorCompositeStub extends ValidatorComposite {}
-
 class ControllerStub extends Controller implements ControllerInterface {
   public constructor() {
-    super();
+    super(new ValidatorStub());
   }
 
   public async perform(
@@ -31,28 +28,24 @@ class ControllerStub extends Controller implements ControllerInterface {
   ): Promise<ControllerOutputType<any | Error>> {
     return ok("any_data");
   }
-
-  override buildValidators(): ValidatorInterface[] {
-    return [new ValidatorStub()];
-  }
 }
 
 type SutTypes = {
   sut: ControllerStub;
-  validatorCompositeStub: ValidatorCompositeStub;
+  validatorStub: ValidatorStub;
 };
 
 const makeSut = (): SutTypes => {
-  const validatorCompositeStub = new ValidatorCompositeStub([]);
+  const validatorStub = new ValidatorStub();
   const sut = new ControllerStub();
-  (sut as any).validatorComposite = validatorCompositeStub;
-  return { sut, validatorCompositeStub };
+  (sut as any).validator = validatorStub;
+  return { sut, validatorStub };
 };
 
 describe("Controller", () => {
-  it("Should call validatorComposite validation with correct values", async () => {
-    const { sut, validatorCompositeStub } = makeSut();
-    const compositeSpy = jest.spyOn(validatorCompositeStub, "validate");
+  it("Should call validator validation with correct values", async () => {
+    const { sut, validatorStub } = makeSut();
+    const compositeSpy = jest.spyOn(validatorStub, "validate");
     sut.execute(makeUserDto());
 
     expect(compositeSpy).toHaveBeenCalledTimes(1);
@@ -60,9 +53,9 @@ describe("Controller", () => {
   });
 
   it("Should return a bad request if validator returns an error", async () => {
-    const { sut, validatorCompositeStub } = makeSut();
+    const { sut, validatorStub } = makeSut();
     jest
-      .spyOn(validatorCompositeStub, "validate")
+      .spyOn(validatorStub, "validate")
       .mockReturnValueOnce(new RequiredFieldError("any_field"));
     const response = await sut.execute(makeUserDto());
 
@@ -71,9 +64,9 @@ describe("Controller", () => {
   });
 
   it("Should return a server error if validator throws", async () => {
-    const { sut, validatorCompositeStub } = makeSut();
+    const { sut, validatorStub } = makeSut();
     jest
-      .spyOn(validatorCompositeStub, "validate")
+      .spyOn(validatorStub, "validate")
       .mockImplementationOnce(() => throwError());
 
     const response = await sut.execute(makeUserDto());

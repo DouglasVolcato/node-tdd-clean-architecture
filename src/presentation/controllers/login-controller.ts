@@ -9,14 +9,16 @@ import {
   ControllerOutputType,
   ValidatorInterface,
 } from "../../presentation/abstract";
-import { ValidatorBuilder } from "../../presentation/validators";
 import { badRequest, ok } from "../../presentation/helpers";
 
 export class LoginController extends Controller implements ControllerInterface {
   private readonly loginService: LoginServiceInterface;
 
-  public constructor(loginService: LoginServiceInterface) {
-    super();
+  public constructor(
+    validator: ValidatorInterface,
+    loginService: LoginServiceInterface
+  ) {
+    super(validator);
     this.loginService = loginService;
   }
 
@@ -26,12 +28,5 @@ export class LoginController extends Controller implements ControllerInterface {
     const token = await this.loginService.execute(request);
     if (token instanceof Error) return badRequest(token);
     return ok({ token });
-  }
-
-  protected buildValidators(): ValidatorInterface[] {
-    return [
-      new ValidatorBuilder().of("email").isEmail(),
-      new ValidatorBuilder().of("password").isRequired(),
-    ];
   }
 }
