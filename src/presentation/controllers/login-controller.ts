@@ -5,6 +5,7 @@ import {
 } from "../../domain/abstract";
 import { Controller } from "./controller";
 import {
+  ControllerInterface,
   ControllerOutputType,
   ValidatorCompositeInterface,
   ValidatorInterface,
@@ -12,7 +13,7 @@ import {
 import { ValidatorBuilder } from "../../presentation/validators";
 import { ok } from "../../presentation/helpers";
 
-export class LoginController extends Controller {
+export class LoginController extends Controller implements ControllerInterface {
   private readonly loginService: LoginServiceInterface;
 
   public constructor(
