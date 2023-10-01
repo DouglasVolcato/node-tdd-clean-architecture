@@ -1,5 +1,6 @@
 export * from "./dtos/user-dto-type";
 export * from "./dtos/login-dto-type";
+export * from "./dtos/token-dto-type";
 export * from "./entities/user-entity-type";
 export * from "./services/create-user-service-interface";
 export * from "./services/login-service-interface";
