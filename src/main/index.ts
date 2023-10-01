@@ -2,7 +2,7 @@ import { DatabaseConnector } from "../infra/database";
 import { FrameWorkAdapter } from "./adapters";
 import { Env, userRoutes } from "./config";
 
-const vars = new Env().getVaiables();
+const vars = new Env().getVariables();
 const framework = new FrameWorkAdapter([...userRoutes], vars.PORT);
 const databaseConnector = new DatabaseConnector();
 
