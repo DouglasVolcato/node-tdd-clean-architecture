@@ -18,7 +18,7 @@ const makeValidUserDto = (): UserDtoType => ({
 
 describe("Create user routes", () => {
   beforeAll(async () => {
-    const vars = new Env().getVaiables();
+    const vars = new Env().getVariables();
     frameworkAdapter = new FrameWorkAdapter(userRoutes, vars.PORT);
     app = (frameworkAdapter as any).app;
     await databaseConnector.connect(process.env.MONGO_URL);
