@@ -17,7 +17,7 @@ const makeValidLoginDto = (): LoginDtoType => ({
   email: "douglasvolcato@gmail.com",
 });
 
-const makeValidUserDto = (): UserEntityType => ({
+const makeValidUserEntity = (): UserEntityType => ({
   id: "23h9f82hf892h8",
   name: "Douglas",
   password: new HasherAdapter(10).hash("Test123"),
@@ -51,7 +51,7 @@ describe("Login routes", () => {
     });
 
     test("Should return 200 with the generated token", async () => {
-      const newUser = new UserModel(makeValidUserDto());
+      const newUser = new UserModel(makeValidUserEntity());
       await newUser.save();
       const response = await request(app).post(route).send(makeValidLoginDto());
 
@@ -60,7 +60,7 @@ describe("Login routes", () => {
     });
 
     test("Should return 400 if password is invalid", async () => {
-      const newUser = new UserModel(makeValidUserDto());
+      const newUser = new UserModel(makeValidUserEntity());
       await newUser.save();
       const response = await request(app)
         .post(route)

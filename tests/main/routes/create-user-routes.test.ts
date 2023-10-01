@@ -1,10 +1,11 @@
 import { FrameWorkAdapter } from "../../../src/main/adapters";
 import { Env } from "../../../src/main/config";
-import { UserDtoType } from "../../../src/domain/abstract";
-import { DatabaseConnector } from "../../../src/infra/database";
+import { UserDtoType, UserEntityType } from "../../../src/domain/abstract";
+import { DatabaseConnector, UserModel } from "../../../src/infra/database";
 import { Express } from "express";
 import request from "supertest";
 import { userRoutes } from "../../../src/main/routes";
+import { HasherAdapter } from "../../../src/infra/adapters";
 
 const route = "/user/create";
 const databaseConnector = new DatabaseConnector();
@@ -14,6 +15,13 @@ let app: Express;
 const makeValidUserDto = (): UserDtoType => ({
   name: "Douglas",
   password: "Test123",
+  email: "douglasvolcato@gmail.com",
+});
+
+const makeValidUserEntity = (): UserEntityType => ({
+  id: "23h9f82hf892h8",
+  name: "Douglas",
+  password: new HasherAdapter(10).hash("Test123"),
   email: "douglasvolcato@gmail.com",
 });
 
@@ -30,6 +38,10 @@ describe("Create user routes", () => {
     await frameworkAdapter.stop();
     await databaseConnector.disconnect();
     jest.setTimeout(30000)
+  });
+  
+  beforeEach(async () => {
+    await UserModel.deleteMany({});
   });
 
   describe(`POST ${route}`, () => {
@@ -72,6 +84,14 @@ describe("Create user routes", () => {
       const requestBody = makeValidUserDto();
       requestBody.email = "invalid_email";
       const response = await request(app).post(route).send(requestBody);
+
+      expect(response.statusCode).toBe(400);
+    });
+
+    test("Should return 400 email is already registered", async () => {
+      const newUser = new UserModel(makeValidUserEntity());
+      await newUser.save();
+      const response = await request(app).post(route).send(makeValidUserDto());
 
       expect(response.statusCode).toBe(400);
     });

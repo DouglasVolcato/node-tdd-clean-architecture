@@ -5,7 +5,10 @@ import {
   UserEntityType,
 } from "../../../src/domain/abstract";
 import { CreateUserController } from "../../../src/presentation/controllers";
-import { ServerError } from "../../../src/presentation/errors";
+import {
+  InvalidFieldError,
+  ServerError,
+} from "../../../src/presentation/errors";
 import {
   makeUserDto,
   makeUserEntity,
@@ -60,6 +63,17 @@ describe("CreateUserController", () => {
 
     expect(response.statusCode).toBe(200);
     expect(response.data).toEqual(makeUserEntity());
+  });
+
+  it("Should return an error if CreateUserService returns an error", async () => {
+    const { sut, createUserServiceStub } = makeSut();
+    jest
+      .spyOn(createUserServiceStub, "execute")
+      .mockReturnValueOnce(Promise.resolve(new InvalidFieldError("email")));
+    const response = await sut.execute(makeUserDto());
+
+    expect(response.statusCode).toBe(400);
+    expect(response.data).toBeInstanceOf(InvalidFieldError);
   });
 
   it("Should return a server error if CreateUserService throws", async () => {
