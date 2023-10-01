@@ -1,4 +1,4 @@
-import { GetUserRepositoryInterface } from "domain/abstract/repositories/get-user-repository-interface";
+import { GetUserByEmailRepositoryInterface } from "../../../domain/abstract/repositories/get-user-repository-interface";
 import {
   CreateUserRepositoryInterface,
   UserEntityType,
@@ -6,7 +6,7 @@ import {
 import { UserModel } from "../models/user-model";
 
 export class UserRepository
-  implements CreateUserRepositoryInterface, GetUserRepositoryInterface
+  implements CreateUserRepositoryInterface, GetUserByEmailRepositoryInterface
 {
   public async create(userEntity: UserEntityType): Promise<UserEntityType> {
     const newUser = new UserModel(userEntity);
