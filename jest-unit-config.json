@@ -10,7 +10,7 @@
     "!**/*index.(t|j)s",
     "!**/*test.(t|j)s",
     "!**/dist/**",
-    "!**/*framework-adapter.ts"
+    "!**/main/**"
   ],
   "coverageDirectory": "coverage",
   "testEnvironment": "node",
