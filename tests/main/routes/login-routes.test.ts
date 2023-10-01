@@ -19,14 +19,16 @@ const makeValidLoginDto = (): LoginDtoType => ({
 describe("Login routes", () => {
   beforeAll(async () => {
     const vars = new Env().getVariables();
-    frameworkAdapter = new FrameWorkAdapter(loginRoutes, 1);
+    frameworkAdapter = new FrameWorkAdapter(loginRoutes, vars.PORT);
     app = (frameworkAdapter as any).app;
     await databaseConnector.connect(process.env.MONGO_URL);
     await frameworkAdapter.start();
   });
 
   afterAll(async () => {
+    await frameworkAdapter.stop();
     await databaseConnector.disconnect();
+    jest.setTimeout(30000)
   });
 
   describe(`POST ${route}`, () => {
