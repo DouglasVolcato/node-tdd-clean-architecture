@@ -9,7 +9,7 @@ import {
   UserDtoType,
   UserEntityType,
 } from "../../domain/abstract";
-import { ok } from "../helpers";
+import { badRequest, ok } from "../helpers";
 import { Controller } from "./controller";
 
 export class CreateUserController
@@ -30,6 +30,7 @@ export class CreateUserController
     request: ControllerInputType<UserDtoType>
   ): Promise<ControllerOutputType<UserEntityType | Error>> {
     const user = await this.createUserService.execute(request);
+    if (user instanceof Error) return badRequest(user);
     return ok(user);
   }
 }
