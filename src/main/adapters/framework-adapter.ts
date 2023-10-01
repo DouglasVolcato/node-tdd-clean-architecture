@@ -19,16 +19,20 @@ export class FrameWorkAdapter {
   }
 
   public async start(): Promise<void> {
-    this.server = this.app.listen(this.port, () => {
-      console.log(`Server is running on port ${this.port}`);
-    });
+    Promise.resolve(
+      (this.server = this.app.listen(this.port, () => {
+        console.log(`Server is running on port ${this.port}`);
+      }))
+    );
   }
 
-  public stop(): void {
+  public async stop(): Promise<void> {
     if (this.server) {
-      this.server.close(() => {
-        console.log(`Server stopped`);
-      });
+      Promise.resolve(
+        this.server.close(() => {
+          console.log(`Server stopped`);
+        })
+      );
       this.server = null;
     }
   }
