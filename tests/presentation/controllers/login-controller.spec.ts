@@ -6,7 +6,7 @@ import { LoginController } from "../../../src/presentation/controllers";
 import { ValidatorComposite } from "../../../src/presentation/validators";
 import { makeLoginDto } from "../../test-helpers/login-dto-helper";
 import { throwError } from "../../test-helpers";
-import { ServerError } from "../../../src/presentation/errors";
+import { InvalidFieldError, ServerError } from "../../../src/presentation/errors";
 
 class LoginServiceStub implements LoginServiceInterface {
   public async execute(login: LoginDtoType): Promise<string | Error> {
@@ -43,6 +43,18 @@ describe("LoginController", () => {
 
     expect(response.statusCode).toEqual(200);
     expect(response.data).toEqual({ token: "valid_token" });
+  });
+
+  it("Should return an error if LoginService returns an error", async () => {
+    const { sut, loginServiceStub } = makeSut();
+    const loginDto = makeLoginDto();
+    jest
+      .spyOn(loginServiceStub, "execute")
+      .mockReturnValueOnce(Promise.resolve(new InvalidFieldError('email')));
+    const response = await sut.execute(loginDto);
+
+    expect(response.statusCode).toBe(400);
+    expect(response.data).toBeInstanceOf(InvalidFieldError);
   });
 
   it("Should return a server error if LoginService throws", async () => {

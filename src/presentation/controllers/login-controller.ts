@@ -11,7 +11,7 @@ import {
   ValidatorInterface,
 } from "../../presentation/abstract";
 import { ValidatorBuilder } from "../../presentation/validators";
-import { ok } from "../../presentation/helpers";
+import { badRequest, ok } from "../../presentation/helpers";
 
 export class LoginController extends Controller implements ControllerInterface {
   private readonly loginService: LoginServiceInterface;
@@ -26,9 +26,10 @@ export class LoginController extends Controller implements ControllerInterface {
 
   protected async perform(
     request: LoginDtoType
-  ): Promise<ControllerOutputType<TokenDtoType>> {
+  ): Promise<ControllerOutputType<TokenDtoType | Error>> {
     const token = await this.loginService.execute(request);
-    return Promise.resolve(ok({ token }));
+    if (token instanceof Error) return badRequest(token);
+    return ok({ token });
   }
 
   protected buildValidators(): ValidatorInterface[] {
