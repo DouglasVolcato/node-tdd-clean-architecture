@@ -44,12 +44,13 @@ const makeSut = (): SutTypes => {
 };
 
 describe("CreateUserController", () => {
-  it("Should call create user service with correct values", async () => {
+  it("Should call CreateUserService with correct values", async () => {
     const { sut, createUserServiceStub } = makeSut();
+    const userDto = makeUserDto();
     const serviceSpy = jest.spyOn(createUserServiceStub, "execute");
-    await sut.execute(makeUserDto());
+    await sut.execute(userDto);
 
-    expect(serviceSpy).toHaveBeenCalledWith(makeUserDto());
+    expect(serviceSpy).toHaveBeenCalledWith(userDto);
     expect(serviceSpy).toBeCalledTimes(1);
   });
 
@@ -65,7 +66,7 @@ describe("CreateUserController", () => {
     expect(response.data).toEqual(makeUserEntity());
   });
 
-  it("Should return a server error if create user service throws", async () => {
+  it("Should return a server error if CreateUserService throws", async () => {
     const { sut, createUserServiceStub } = makeSut();
     jest
       .spyOn(createUserServiceStub, "execute")
