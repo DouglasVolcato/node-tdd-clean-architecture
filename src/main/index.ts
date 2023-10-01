@@ -8,6 +8,6 @@ const routes = [...userRoutes, ...loginRoutes];
 const framework = new FrameWorkAdapter(routes, vars.PORT);
 const databaseConnector = new DatabaseConnector();
 
-databaseConnector.connect(vars.DB_URL).then(() => {
-  framework.start();
+databaseConnector.connect(vars.DB_URL).then(async () => {
+  await framework.start();
 });
