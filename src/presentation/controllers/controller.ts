@@ -1,24 +1,24 @@
+import { ValidatorComposite } from "../../presentation/validators";
 import {
   ControllerInterface,
   ControllerInputType,
   ControllerOutputType,
   ValidatorInterface,
-  ValidatorCompositeInterface,
 } from "../abstract";
 import { badRequest, serverError } from "../helpers";
 
 export abstract class Controller implements ControllerInterface {
-  private readonly validatorComposite: ValidatorCompositeInterface;
+  private readonly validatorComposite: ValidatorInterface;
 
-  public constructor(validatorComposite: ValidatorCompositeInterface) {
-    this.validatorComposite = validatorComposite;
+  public constructor() {
+    this.validatorComposite = new ValidatorComposite(this.buildValidators());
   }
 
   protected abstract perform(
     request: ControllerInputType<any>
   ): Promise<ControllerOutputType<any | Error>>;
 
-  protected abstract buildValidators(): ValidatorInterface[]
+  protected abstract buildValidators(): ValidatorInterface[];
 
   public async execute(
     request: ControllerInputType<any>
@@ -33,7 +33,6 @@ export abstract class Controller implements ControllerInterface {
   }
 
   private validate(request: ControllerInputType<any>): Error | undefined {
-    this.validatorComposite.setValidators(this.buildValidators());
     return this.validatorComposite.validate(request);
   }
 }

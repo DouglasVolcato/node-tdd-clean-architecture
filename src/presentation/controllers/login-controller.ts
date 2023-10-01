@@ -7,7 +7,6 @@ import { Controller } from "./controller";
 import {
   ControllerInterface,
   ControllerOutputType,
-  ValidatorCompositeInterface,
   ValidatorInterface,
 } from "../../presentation/abstract";
 import { ValidatorBuilder } from "../../presentation/validators";
@@ -16,11 +15,8 @@ import { badRequest, ok } from "../../presentation/helpers";
 export class LoginController extends Controller implements ControllerInterface {
   private readonly loginService: LoginServiceInterface;
 
-  public constructor(
-    validatorComposite: ValidatorCompositeInterface,
-    loginService: LoginServiceInterface
-  ) {
-    super(validatorComposite);
+  public constructor(loginService: LoginServiceInterface) {
+    super();
     this.loginService = loginService;
   }
 

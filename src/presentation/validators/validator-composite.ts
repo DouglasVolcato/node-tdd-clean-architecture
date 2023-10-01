@@ -1,14 +1,9 @@
-import {
-  ValidatorCompositeInterface,
-  ValidatorInterface,
-} from "../../presentation/abstract";
+import { ValidatorInterface } from "../../presentation/abstract";
 
-export class ValidatorComposite
-  implements ValidatorInterface, ValidatorCompositeInterface
-{
+export class ValidatorComposite implements ValidatorInterface {
   private validators!: ValidatorInterface[];
 
-  public setValidators(validators: ValidatorInterface[]): void {
+  public constructor(validators: ValidatorInterface[]) {
     this.validators = validators;
   }
 

@@ -1,12 +1,15 @@
+import { ValidatorComposite } from "../../../src/presentation/validators";
 import {
   ControllerInputType,
   ControllerInterface,
   ControllerOutputType,
-  ValidatorCompositeInterface,
   ValidatorInterface,
 } from "../../../src/presentation/abstract";
 import { Controller } from "../../../src/presentation/controllers/controller";
-import { RequiredFieldError, ServerError } from "../../../src/presentation/errors";
+import {
+  RequiredFieldError,
+  ServerError,
+} from "../../../src/presentation/errors";
 import { ok } from "../../../src/presentation/helpers";
 import { makeUserDto, throwError } from "../../../tests/test-helpers";
 
@@ -16,16 +19,11 @@ class ValidatorStub implements ValidatorInterface {
   }
 }
 
-class ValidatorCompositeStub implements ValidatorCompositeInterface {
-  public setValidators(validators: ValidatorInterface[]): void {}
-  public validate(request: any): Error | undefined {
-    return;
-  }
-}
+class ValidatorCompositeStub extends ValidatorComposite {}
 
 class ControllerStub extends Controller implements ControllerInterface {
-  public constructor(validatorComposite: ValidatorCompositeInterface) {
-    super(validatorComposite);
+  public constructor() {
+    super();
   }
 
   public async perform(
@@ -45,8 +43,9 @@ type SutTypes = {
 };
 
 const makeSut = (): SutTypes => {
-  const validatorCompositeStub = new ValidatorCompositeStub();
-  const sut = new ControllerStub(validatorCompositeStub);
+  const validatorCompositeStub = new ValidatorCompositeStub([]);
+  const sut = new ControllerStub();
+  (sut as any).validatorComposite = validatorCompositeStub;
   return { sut, validatorCompositeStub };
 };
 
@@ -58,15 +57,6 @@ describe("Controller", () => {
 
     expect(compositeSpy).toHaveBeenCalledTimes(1);
     expect(compositeSpy).toHaveBeenCalledWith(makeUserDto());
-  });
-
-  it("Should call validatorComposite setValidators with correct values", async () => {
-    const { sut, validatorCompositeStub } = makeSut();
-    const compositeSpy = jest.spyOn(validatorCompositeStub, "setValidators");
-    sut.execute(makeUserDto());
-
-    expect(compositeSpy).toHaveBeenCalledTimes(1);
-    expect(compositeSpy).toHaveBeenCalledWith([new ValidatorStub()]);
   });
 
   it("Should return a bad request if validator returns an error", async () => {

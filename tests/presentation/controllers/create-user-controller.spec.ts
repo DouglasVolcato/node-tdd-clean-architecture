@@ -3,10 +3,6 @@ import {
   UserDtoType,
   UserEntityType,
 } from "../../../src/domain/abstract";
-import {
-  ValidatorCompositeInterface,
-  ValidatorInterface,
-} from "../../../src/presentation/abstract";
 import { CreateUserController } from "../../../src/presentation/controllers";
 import { ServerError } from "../../../src/presentation/errors";
 import {
@@ -21,13 +17,6 @@ class CreateUserServiceStub implements CreateUserServiceInterface {
   }
 }
 
-class ValidatorCompositeStub implements ValidatorCompositeInterface {
-  public setValidators(validators: ValidatorInterface[]): void {}
-  public validate(request: any): Error | undefined {
-    return;
-  }
-}
-
 type SutTypes = {
   sut: CreateUserController;
   createUserServiceStub: CreateUserServiceInterface;
@@ -35,10 +24,7 @@ type SutTypes = {
 
 const makeSut = (): SutTypes => {
   const createUserServiceStub = new CreateUserServiceStub();
-  const sut = new CreateUserController(
-    createUserServiceStub,
-    new ValidatorCompositeStub()
-  );
+  const sut = new CreateUserController(createUserServiceStub);
 
   return { createUserServiceStub, sut };
 };

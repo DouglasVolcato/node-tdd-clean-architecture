@@ -2,7 +2,6 @@ import {
   ControllerInputType,
   ControllerInterface,
   ControllerOutputType,
-  ValidatorCompositeInterface,
   ValidatorInterface,
 } from "../abstract";
 import {
@@ -22,9 +21,8 @@ export class CreateUserController
 
   public constructor(
     createUserService: CreateUserServiceInterface,
-    validatorComposite: ValidatorCompositeInterface
   ) {
-    super(validatorComposite);
+    super();
     this.createUserService = createUserService;
   }
 

@@ -2,7 +2,6 @@ import { UserRepository } from "../../../infra/database";
 import { CreateUserService } from "../../../domain/services";
 import { HasherAdapter, IdGeneratorAdapter } from "../../../infra/adapters";
 import { CreateUserController } from "../../../presentation/controllers";
-import { ValidatorComposite } from "../../../presentation/validators";
 
 export function makeCreateUserControllerFactory(): CreateUserController {
   const idGenerator = new IdGeneratorAdapter();
@@ -13,6 +12,5 @@ export function makeCreateUserControllerFactory(): CreateUserController {
     idGenerator,
     hasher
   );
-  const validatorComposite = new ValidatorComposite();
-  return new CreateUserController(createUserService, validatorComposite);
+  return new CreateUserController(createUserService);
 }

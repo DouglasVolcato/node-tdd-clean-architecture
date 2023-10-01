@@ -3,10 +3,12 @@ import {
   LoginServiceInterface,
 } from "../../../src/domain/abstract";
 import { LoginController } from "../../../src/presentation/controllers";
-import { ValidatorComposite } from "../../../src/presentation/validators";
 import { makeLoginDto } from "../../test-helpers/login-dto-helper";
 import { throwError } from "../../test-helpers";
-import { InvalidFieldError, ServerError } from "../../../src/presentation/errors";
+import {
+  InvalidFieldError,
+  ServerError,
+} from "../../../src/presentation/errors";
 
 class LoginServiceStub implements LoginServiceInterface {
   public async execute(login: LoginDtoType): Promise<string | Error> {
@@ -21,7 +23,7 @@ type SutTypes = {
 
 const makeSut = (): SutTypes => {
   const loginServiceStub = new LoginServiceStub();
-  const sut = new LoginController(new ValidatorComposite(), loginServiceStub);
+  const sut = new LoginController(loginServiceStub);
   return { sut, loginServiceStub };
 };
 
@@ -50,7 +52,7 @@ describe("LoginController", () => {
     const loginDto = makeLoginDto();
     jest
       .spyOn(loginServiceStub, "execute")
-      .mockReturnValueOnce(Promise.resolve(new InvalidFieldError('email')));
+      .mockReturnValueOnce(Promise.resolve(new InvalidFieldError("email")));
     const response = await sut.execute(loginDto);
 
     expect(response.statusCode).toBe(400);
