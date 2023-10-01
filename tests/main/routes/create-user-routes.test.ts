@@ -1,9 +1,10 @@
 import { FrameWorkAdapter } from "../../../src/main/adapters";
-import { Env, userRoutes } from "../../../src/main/config";
+import { Env } from "../../../src/main/config";
 import { UserDtoType } from "../../../src/domain/abstract";
 import { DatabaseConnector } from "../../../src/infra/database";
 import { Express } from "express";
 import request from "supertest";
+import { userRoutes } from "../../../src/main/routes";
 
 const route = "/user/create";
 const databaseConnector = new DatabaseConnector();
@@ -19,7 +20,7 @@ const makeValidUserDto = (): UserDtoType => ({
 describe("Create user routes", () => {
   beforeAll(async () => {
     const vars = new Env().getVariables();
-    frameworkAdapter = new FrameWorkAdapter(userRoutes, vars.PORT);
+    frameworkAdapter = new FrameWorkAdapter(userRoutes, 2);
     app = (frameworkAdapter as any).app;
     await databaseConnector.connect(process.env.MONGO_URL);
     await frameworkAdapter.start();
@@ -32,10 +33,13 @@ describe("Create user routes", () => {
   describe(`POST ${route}`, () => {
     test("Should return 200 with the created user", async () => {
       const requestBody = makeValidUserDto();
-
       const response = await request(app).post(route).send(requestBody);
 
       expect(response.statusCode).toBe(200);
+      expect(response.body.id).toBeDefined();
+      expect(response.body.password).toBeDefined();
+      expect(response.body.name).toBe(requestBody.name);
+      expect(response.body.email).toBe(requestBody.email);
     });
 
     test("Should return 400 if does not receive name", async () => {
