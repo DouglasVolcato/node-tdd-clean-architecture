@@ -3,12 +3,12 @@ import {
   UserEntityType,
   TokenGeneratorInterface,
   HashValidatorInterface,
-  LoginDtoType,
 } from "../../../src/domain/abstract";
 import { makeUserEntity, throwError } from "../../test-helpers";
 import { Env } from "../../../src/main/config";
 import { InvalidFieldError } from "../../../src/presentation/errors";
 import { LoginService } from "../../../src/domain/services/login-service";
+import { makeLoginDto } from "../../test-helpers/login-dto-helper";
 
 class GetUserByEmailRepositoryStub
   implements GetUserByEmailRepositoryInterface
@@ -31,13 +31,6 @@ class TokenGeneratorStub implements TokenGeneratorInterface {
 }
 
 const vars = new Env().getVariables();
-
-const makeLoginDto = (): LoginDtoType => {
-  return {
-    email: "login_email",
-    password: "login_password",
-  };
-};
 
 type SutTypes = {
   sut: LoginService;
