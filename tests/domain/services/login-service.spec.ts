@@ -71,6 +71,19 @@ describe("LoginService", () => {
   });
 
   it("Should call HashValidator with correct values", async () => {
+    const { sut, hashValidatorStub } = makeSut();
+    const loginDto = makeLoginDto();
+    const hashValidatorSpy = jest.spyOn(hashValidatorStub, "validate");
+    await sut.execute(loginDto);
+
+    expect(hashValidatorSpy).toHaveBeenCalledTimes(1);
+    expect(hashValidatorSpy).toHaveBeenCalledWith(
+      loginDto.password,
+      makeUserEntity().password
+    );
+  });
+
+  it("Should call TokenGenerator with correct values", async () => {
     const { sut, tokenGeneratorStub } = makeSut();
     const loginDto = makeLoginDto();
     const tokenGeneratorSpy = jest.spyOn(tokenGeneratorStub, "generateToken");
@@ -78,7 +91,7 @@ describe("LoginService", () => {
 
     expect(tokenGeneratorSpy).toHaveBeenCalledTimes(1);
     expect(tokenGeneratorSpy).toHaveBeenCalledWith(
-      makeUserEntity().id,
+      { id: makeUserEntity().id },
       vars.SECRET
     );
   });

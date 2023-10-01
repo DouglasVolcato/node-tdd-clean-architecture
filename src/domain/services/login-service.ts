@@ -34,7 +34,10 @@ export class LoginService implements LoginServiceInterface {
       foundUser.password
     );
     if (!passwordValid) return new InvalidFieldError("password");
-    const token = this.tokenGenerator.generateToken(foundUser.id, vars.SECRET);
+    const token = this.tokenGenerator.generateToken(
+      { id: foundUser.id },
+      vars.SECRET
+    );
     return token;
   }
 }
