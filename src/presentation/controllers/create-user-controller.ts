@@ -11,6 +11,10 @@ import {
 } from "../../domain/abstract";
 import { badRequest, ok } from "../helpers";
 import { Controller } from "./controller";
+import {
+  ValidatorBuilder,
+  ValidatorComposite,
+} from "../../presentation/validators";
 
 export class CreateUserController
   extends Controller
@@ -18,11 +22,8 @@ export class CreateUserController
 {
   private readonly createUserService: CreateUserServiceInterface;
 
-  public constructor(
-    validator: ValidatorInterface,
-    createUserService: CreateUserServiceInterface
-  ) {
-    super(validator);
+  public constructor(createUserService: CreateUserServiceInterface) {
+    super();
     this.createUserService = createUserService;
   }
 
@@ -32,5 +33,15 @@ export class CreateUserController
     const user = await this.createUserService.execute(request);
     if (user instanceof Error) return badRequest(user);
     return ok(user);
+  }
+
+  protected getValidation(): ValidatorInterface {
+    const validator = new ValidatorComposite([
+      new ValidatorBuilder().of("name").isRequired(),
+      new ValidatorBuilder().of("email").isRequired(),
+      new ValidatorBuilder().of("email").isEmail(),
+      new ValidatorBuilder().of("password").isRequired(),
+    ]);
+    return validator;
   }
 }

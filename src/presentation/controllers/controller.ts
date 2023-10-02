@@ -9,13 +9,15 @@ import { badRequest, serverError } from "../helpers";
 export abstract class Controller implements ControllerInterface {
   private readonly validator: ValidatorInterface;
 
-  public constructor(validator: ValidatorInterface) {
-    this.validator = validator;
+  public constructor() {
+    this.validator = this.getValidation();
   }
 
   protected abstract perform(
     request: ControllerInputType<any>
   ): Promise<ControllerOutputType<any | Error>>;
+
+  protected abstract getValidation(): ValidatorInterface;
 
   public async execute(
     request: ControllerInputType<any>

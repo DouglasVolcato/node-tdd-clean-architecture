@@ -20,13 +20,17 @@ class ValidatorStub implements ValidatorInterface {
 
 class ControllerStub extends Controller implements ControllerInterface {
   public constructor() {
-    super(new ValidatorStub());
+    super();
   }
 
   public async perform(
     request: ControllerInputType<any>
   ): Promise<ControllerOutputType<any | Error>> {
     return ok("any_data");
+  }
+
+  protected getValidation(): ValidatorInterface {
+    return new ValidatorStub();
   }
 }
 

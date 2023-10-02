@@ -30,7 +30,8 @@ type SutTypes = {
 
 const makeSut = (): SutTypes => {
   const loginServiceStub = new LoginServiceStub();
-  const sut = new LoginController(new ValidatorStub(), loginServiceStub);
+  const sut = new LoginController(loginServiceStub);
+  (sut as any).validator = new ValidatorStub();
   return { sut, loginServiceStub };
 };
 
