@@ -1,9 +1,10 @@
-import { sign } from "jsonwebtoken";
+import { sign, verify } from "jsonwebtoken";
 import { makeUserEntity, throwError } from "../../test-helpers";
 import { TokenHandlerAdapter } from "../../../src/infra/adapters/token-handler-adapter";
 
 jest.mock("jsonwebtoken", () => ({
   sign: jest.fn(),
+  verify: jest.fn(),
 }));
 
 type SutTypes = {
@@ -16,27 +17,60 @@ const makeSut = (): SutTypes => {
 };
 
 describe("TokenHandlerAdapter", () => {
-  it("Should call jwt library", () => {
-    const { sut } = makeSut();
-    sut.generateToken(makeUserEntity().id, "any_secret");
-
-    expect(sign).toHaveBeenCalledTimes(1);
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
-  it("Should return generated token", () => {
-    const { sut } = makeSut();
-    (sign as jest.Mock).mockReturnValueOnce("generated_token");
-    const generatedToken = sut.generateToken(makeUserEntity().id, "any_secret");
+  describe("GenerateToken", () => {
+    it("Should call jwt library", () => {
+      const { sut } = makeSut();
+      sut.generateToken(makeUserEntity().id, "any_secret");
 
-    expect(generatedToken).toBe("generated_token");
+      expect(sign).toHaveBeenCalledTimes(1);
+    });
+
+    it("Should return generated token", () => {
+      const { sut } = makeSut();
+      (sign as jest.Mock).mockReturnValueOnce("generated_token");
+      const generatedToken = sut.generateToken(
+        makeUserEntity().id,
+        "any_secret"
+      );
+
+      expect(generatedToken).toBe("generated_token");
+    });
+
+    it("Should throw if jwt throws", () => {
+      const { sut } = makeSut();
+      (sign as jest.Mock).mockImplementationOnce(() => throwError());
+
+      expect(() =>
+        sut.generateToken(makeUserEntity().id, "any_secret")
+      ).toThrow();
+    });
   });
+  describe("ValidateToken", () => {
+    it("Should call jwt library", () => {
+      const { sut } = makeSut();
+      (verify as jest.Mock).mockReturnValueOnce({ id: "valid_id" });
+      sut.validateToken("any_token", "any_secret");
 
-  it("Should throw if jwt throws", () => {
-    const { sut } = makeSut();
-    (sign as jest.Mock).mockImplementationOnce(() => throwError());
+      expect(verify).toHaveBeenCalledTimes(1);
+    });
 
-    expect(() =>
-      sut.generateToken(makeUserEntity().id, "any_secret")
-    ).toThrow();
+    it("Should return generated token", () => {
+      const { sut } = makeSut();
+      (verify as jest.Mock).mockReturnValueOnce({ id: "valid_id" });
+      const generatedToken = sut.validateToken("any_token", "any_secret");
+
+      expect(generatedToken).toBe("valid_id");
+    });
+
+    it("Should throw if jwt throws", () => {
+      const { sut } = makeSut();
+      (verify as jest.Mock).mockImplementationOnce(() => throwError());
+
+      expect(() => sut.validateToken("any_token", "any_secret")).toThrow();
+    });
   });
 });
