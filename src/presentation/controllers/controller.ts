@@ -23,15 +23,11 @@ export abstract class Controller implements ControllerInterface {
     request: ControllerInputType<any>
   ): Promise<ControllerOutputType<any | Error>> {
     try {
-      const error = this.validate(request);
+      const error = this.validator.validate(request);
       if (error !== undefined) return badRequest(error);
       return await this.perform(request);
     } catch (error) {
       return serverError();
     }
-  }
-
-  private validate(request: ControllerInputType<any>): Error | undefined {
-    return this.validator.validate(request);
   }
 }
