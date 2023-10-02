@@ -9,4 +9,6 @@ export * from "./helpers/hasher-interface";
 export * from "./helpers/hash-validator-interface";
 export * from "./helpers/token-generator-interface";
 export * from "./repositories/create-user-repository-interface";
-export * from "./repositories/get-user-repository-interface";
+export * from "./repositories/get-user-by-email-repository-interface";
+export * from "./repositories/get-user-by-id-repository-interface";
+export * from "./repositories/delete-user-repository-interface";
