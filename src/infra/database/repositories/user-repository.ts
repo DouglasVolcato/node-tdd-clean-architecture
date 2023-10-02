@@ -1,6 +1,6 @@
 import {
   CreateUserRepositoryInterface,
-  DeleteUserRepository,
+  DeleteUserRepositoryInterface,
   GetUserByEmailRepositoryInterface,
   GetUserByIdRepositoryInterface,
   UserEntityType,
@@ -12,7 +12,7 @@ export class UserRepository
     CreateUserRepositoryInterface,
     GetUserByEmailRepositoryInterface,
     GetUserByIdRepositoryInterface,
-    DeleteUserRepository
+    DeleteUserRepositoryInterface
 {
   public async create(userEntity: UserEntityType): Promise<UserEntityType> {
     const newUser = new UserModel(userEntity);
