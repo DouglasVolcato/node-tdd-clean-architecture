@@ -9,6 +9,7 @@ export * from "./helpers/id-generator-interface";
 export * from "./helpers/hasher-interface";
 export * from "./helpers/hash-validator-interface";
 export * from "./helpers/token-generator-interface";
+export * from "./helpers/token-validator-interface";
 export * from "./repositories/create-user-repository-interface";
 export * from "./repositories/get-user-by-email-repository-interface";
 export * from "./repositories/get-user-by-id-repository-interface";
