@@ -1,6 +1,5 @@
 import {
   ControllerInputType,
-  ControllerOutputType,
   MiddlewareInterface,
   ValidatorInterface,
 } from "../../presentation/abstract";
@@ -15,7 +14,7 @@ export abstract class Middleware implements MiddlewareInterface {
 
   protected abstract perform(
     request: ControllerInputType<any>
-  ): Promise<ControllerOutputType<any | Error>>;
+  ): Promise<any | Error>;
 
   protected abstract getValidation(): ValidatorInterface;
 

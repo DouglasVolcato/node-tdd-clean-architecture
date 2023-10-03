@@ -35,10 +35,9 @@ export class DeleteUserController
   }
 
   protected getValidation(): ValidatorInterface {
-    const validator = new ValidatorComposite([
+    return new ValidatorComposite([
       new ValidatorBuilder().of("user").isRequired(),
       new ValidatorBuilder().of("id").isRequired(),
     ]);
-    return validator;
   }
 }

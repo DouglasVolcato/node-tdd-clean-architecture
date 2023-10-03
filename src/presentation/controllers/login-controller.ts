@@ -32,10 +32,9 @@ export class LoginController extends Controller implements ControllerInterface {
   }
 
   protected getValidation(): ValidatorInterface {
-    const validator = new ValidatorComposite([
+    return new ValidatorComposite([
       new ValidatorBuilder().of("email").isEmail(),
       new ValidatorBuilder().of("password").isRequired(),
     ]);
-    return validator;
   }
 }
