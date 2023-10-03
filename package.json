@@ -2,7 +2,7 @@
   "name": "clean-architecture-example",
   "version": "1.0.0",
   "scripts": {
-    "start": "tsc && node dist/main/index.js",
+    "start": "tsc && node dist/src/main/index.js",
     "test-unit": "jest -c jest-unit-config.json",
     "test-integration": "jest --runInBand --force-exit -c jest-integration-config.json",
     "test-watch": "jest --passWithNoTests --watch -c jest-unit-config.json",
