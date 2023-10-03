@@ -1,7 +1,14 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express, NextFunction, Request, Response } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import { RouteDtoType, RouteEnumType } from "../abstract";
+import { RouteDtoType } from "../abstract";
+import { MiddlewareInterface } from "../../presentation/abstract";
+import {
+  InvalidFieldError,
+  RequiredFieldError,
+  ServerError,
+  UnauthorizedError,
+} from "../../presentation/errors";
 
 export class FrameWorkAdapter {
   private readonly routes: RouteDtoType[];
@@ -44,12 +51,63 @@ export class FrameWorkAdapter {
 
   private setupRoutes(): void {
     for (const route of this.routes) {
-      this.app[route.type](route.url, async (req: Request, res: Response) => {
-        const response = await route.controller.execute(req.body);
-        const isError = response.data instanceof Error;
-        const body = isError ? { error: response.data.message } : response.data;
-        res.status(response.statusCode).json(body);
-      });
+      this.app[route.type](
+        route.url,
+        this.setUpMiddleware(route.middleware),
+        async (req: Request, res: Response) => {
+          const response = await route.controller.execute({
+            ...req.body,
+            ...req.params,
+            ...req.headers,
+          });
+          const isError = response.data instanceof Error;
+          const body = isError
+            ? { error: response.data.message }
+            : response.data;
+          res.status(response.statusCode).json(body);
+        }
+      );
+    }
+  }
+
+  private setUpMiddleware(middleware: MiddlewareInterface | undefined): any {
+    if (!middleware) {
+      return async function setUpMiddleware(
+        req: Request,
+        res: Response,
+        next: NextFunction
+      ) {
+        next();
+      };
+    } else {
+      return async function setUpMiddleware(
+        req: Request,
+        res: Response,
+        next: NextFunction
+      ) {
+        const output = await middleware.execute({
+          ...req.body,
+          ...req.params,
+          ...req.headers,
+        });
+        if (output instanceof ServerError) {
+          res.status(500).json(output.message);
+          return;
+        }
+        if (output instanceof UnauthorizedError) {
+          res.status(401).json(output.message);
+          return;
+        }
+        if (
+          output instanceof InvalidFieldError ||
+          output instanceof RequiredFieldError
+        ) {
+          res.status(400).json(output.message);
+          return;
+        }
+        res = { ...res, ...output };
+        next();
+      };
     }
   }
 }

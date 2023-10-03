@@ -1,4 +1,7 @@
-import { Controller } from "../../../presentation/controllers";
+import {
+  ControllerInterface,
+  MiddlewareInterface,
+} from "../../../presentation/abstract";
 
 export enum RouteEnumType {
   GET = "get",
@@ -11,5 +14,6 @@ export enum RouteEnumType {
 export type RouteDtoType = {
   type: RouteEnumType;
   url: string;
-  controller: Controller;
+  controller: ControllerInterface;
+  middleware?: MiddlewareInterface;
 };
