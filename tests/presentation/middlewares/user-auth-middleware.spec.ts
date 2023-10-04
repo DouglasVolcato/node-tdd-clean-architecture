@@ -53,7 +53,7 @@ describe("UserAuthMiddleware", () => {
       .mockReturnValueOnce(Promise.resolve(userData));
     const output = await sut.execute(makeAuthenticatedRequest());
 
-    expect(output).toEqual(userData);
+    expect(output).toEqual({user: userData});
   });
 
   it("Should return an error if GetUserByTokenService returns undefined", async () => {

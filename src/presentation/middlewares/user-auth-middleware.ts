@@ -35,7 +35,7 @@ export class UserAuthMiddleware
     if (!foundUser) {
       return new UnauthorizedError();
     }
-    return foundUser;
+    return {user: foundUser};
   }
 
   protected getValidation(): ValidatorInterface {
