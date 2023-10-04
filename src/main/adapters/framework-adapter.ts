@@ -94,18 +94,11 @@ export class FrameWorkAdapter {
           res.status(500).json(output.message);
           return;
         }
-        if (output instanceof UnauthorizedError) {
+        if (output instanceof Error) {
           res.status(401).json(output.message);
           return;
         }
-        if (
-          output instanceof InvalidFieldError ||
-          output instanceof RequiredFieldError
-        ) {
-          res.status(400).json(output.message);
-          return;
-        }
-        res = { ...res, ...output };
+        req.body = { ...req.body, ...output };
         next();
       };
     }
