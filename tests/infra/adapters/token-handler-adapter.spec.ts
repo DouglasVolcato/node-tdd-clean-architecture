@@ -66,11 +66,12 @@ describe("TokenHandlerAdapter", () => {
       expect(generatedToken).toBe("valid_id");
     });
 
-    it("Should throw if jwt throws", () => {
+    it("Should return undefined if jwt throws", () => {
       const { sut } = makeSut();
       (verify as jest.Mock).mockImplementationOnce(() => throwError());
+      const result = sut.validateToken("any_token", "any_secret");
 
-      expect(() => sut.validateToken("any_token", "any_secret")).toThrow();
+      expect(result).toBeUndefined();
     });
   });
 });

@@ -56,6 +56,16 @@ describe("GetUserByTokenService", () => {
     expect(async () => await sut.execute("any_token")).rejects.toThrow();
   });
 
+  it("Should return an error if TokenValidator returns undefined", async () => {
+    const { sut, tokenValidatorStub } = makeSut();
+    jest
+      .spyOn(tokenValidatorStub, "validateToken")
+      .mockReturnValueOnce(undefined);
+    const error = await sut.execute("any_token");
+
+    expect(error).toEqual(new InvalidFieldError("token"));
+  });
+
   it("Should call GetUserByIdRepository with correct user id", async () => {
     const { sut, tokenValidatorStub, getUserByIdRepositoryStub } = makeSut();
     const getUserByIdRepositorySpy = jest.spyOn(
