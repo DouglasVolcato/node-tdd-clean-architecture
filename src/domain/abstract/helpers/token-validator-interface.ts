@@ -1,3 +1,3 @@
 export interface TokenValidatorInterface {
-  validateToken(token: string, secret: string): string;
+  validateToken(token: string, secret: string): string | undefined;
 }

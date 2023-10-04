@@ -12,8 +12,13 @@ export class TokenHandlerAdapter
       expiresIn: 86400,
     });
   }
-  public validateToken(token: string, secret: string): string {
-    const payload = verify(token, secret) as JwtPayload;
-    return payload.id;
+
+  public validateToken(token: string, secret: string): string | undefined {
+    try {
+      const payload = verify(token, secret) as JwtPayload;
+      return payload.id;
+    } catch (error) {
+      return undefined;
+    }
   }
 }

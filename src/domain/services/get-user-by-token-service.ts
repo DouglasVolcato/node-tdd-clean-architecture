@@ -22,6 +22,7 @@ export class GetUserByTokenService implements GetUserByTokenServiceInterface {
   public async execute(token: string): Promise<UserEntityType | Error> {
     const vars = new Env().getVariables();
     const userId = this.tokenValidator.validateToken(token, vars.SECRET);
+    if (!userId) return new InvalidFieldError("token");
     const foundUser = await this.getUserByIdRepository.getById(userId);
     if (!foundUser) return new InvalidFieldError("token");
     return foundUser;
