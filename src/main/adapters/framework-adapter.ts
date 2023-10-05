@@ -3,12 +3,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import { RouteDtoType } from "../abstract";
 import { MiddlewareInterface } from "../../presentation/abstract";
-import {
-  InvalidFieldError,
-  RequiredFieldError,
-  ServerError,
-  UnauthorizedError,
-} from "../../presentation/errors";
+import { ServerError } from "../../presentation/errors";
 
 export class FrameWorkAdapter {
   private readonly routes: RouteDtoType[];
