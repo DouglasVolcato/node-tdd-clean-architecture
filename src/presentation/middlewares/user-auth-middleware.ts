@@ -22,9 +22,6 @@ export class UserAuthMiddleware
   }
 
   protected async perform(request: any): Promise<any | Error> {
-    if (!request.authorization) {
-      return new UnauthorizedError();
-    }
     const authorizationSplit = request.authorization.split(" ");
     if (!authorizationSplit || authorizationSplit[0] !== "Bearer") {
       return new UnauthorizedError();
@@ -35,7 +32,7 @@ export class UserAuthMiddleware
     if (!foundUser) {
       return new UnauthorizedError();
     }
-    return {user: foundUser};
+    return { user: foundUser };
   }
 
   protected getValidation(): ValidatorInterface {
