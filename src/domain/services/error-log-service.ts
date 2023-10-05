@@ -1,0 +1,20 @@
+import {
+  ErrorLogServiceInterface,
+  FileWritterInterface,
+} from "../../domain/abstract";
+
+export class ErrorLogService implements ErrorLogServiceInterface {
+  private readonly fileWritter: FileWritterInterface;
+
+  public constructor(fileWritter: FileWritterInterface) {
+    this.fileWritter = fileWritter;
+  }
+
+  public async execute(error: Error): Promise<void> {
+    const errorFilePath = "src/main/logs/error.log";
+    const errorText = `\n${new Date().toLocaleString()} - ${error.message} - ${
+      error.stack
+    }`;
+    return await this.fileWritter.writeInFile(errorFilePath, errorText);
+  }
+}

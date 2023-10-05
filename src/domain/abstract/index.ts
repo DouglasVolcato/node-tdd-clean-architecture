@@ -6,6 +6,7 @@ export * from "./services/create-user-service-interface";
 export * from "./services/login-service-interface";
 export * from "./services/delete-user-service-interface";
 export * from "./services/get-user-by-token-service-interface";
+export * from "./services/error-log-service-interface";
 export * from "./helpers/id-generator-interface";
 export * from "./helpers/hasher-interface";
 export * from "./helpers/hash-validator-interface";
