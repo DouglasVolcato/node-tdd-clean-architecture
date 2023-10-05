@@ -82,6 +82,6 @@ describe("CreateUserController", () => {
     const response = await sut.execute(makeUserDto());
 
     expect(response.statusCode).toBe(500);
-    expect(response.data).toBeInstanceOf(ServerError);
+    expect(response.data).toBeInstanceOf(Error);
   });
 });

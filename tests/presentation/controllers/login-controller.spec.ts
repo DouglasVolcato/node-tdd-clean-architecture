@@ -76,6 +76,6 @@ describe("LoginController", () => {
     const response = await sut.execute(loginDto);
 
     expect(response.statusCode).toBe(500);
-    expect(response.data).toBeInstanceOf(ServerError);
+    expect(response.data).toBeInstanceOf(Error);
   });
 });

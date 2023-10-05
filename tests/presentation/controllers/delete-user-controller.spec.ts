@@ -83,8 +83,9 @@ describe("DeleteUserController", () => {
       .spyOn(deleteUserServiceStub, "execute")
       .mockImplementationOnce(() => throwError());
 
-    const error = await sut.execute(deleteRequest);
+    const response = await sut.execute(deleteRequest);
 
-    expect(error).toEqual(serverError());
+    expect(response.statusCode).toBe(500);
+    expect(response.data).toBeInstanceOf(Error);
   });
 });

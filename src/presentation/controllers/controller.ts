@@ -26,8 +26,8 @@ export abstract class Controller implements ControllerInterface {
       const error = this.validator.validate(request);
       if (error !== undefined) return badRequest(error);
       return await this.perform(request);
-    } catch (error) {
-      return serverError();
+    } catch (error: any) {
+      return serverError(error);
     }
   }
 }
