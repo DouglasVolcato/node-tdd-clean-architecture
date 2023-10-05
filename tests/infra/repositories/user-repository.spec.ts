@@ -9,14 +9,6 @@ import {
 mongoose.Promise = global.Promise;
 const databaseConnector = new DatabaseConnector();
 
-beforeAll(async () => {
-  await databaseConnector.connect(process.env.MONGO_URL);
-});
-
-afterAll(async () => {
-  await databaseConnector.disconnect();
-});
-
 type SutTypes = {
   sut: UserRepository;
 };
@@ -28,6 +20,14 @@ const makeSut = (): SutTypes => {
 };
 
 describe("UserRepository", () => {
+  beforeAll(async () => {
+    await databaseConnector.connect(process.env.MONGO_URL);
+  });
+
+  afterAll(async () => {
+    await databaseConnector.disconnect();
+  });
+
   afterEach(async () => {
     await UserModel.deleteMany({});
   });
@@ -115,6 +115,38 @@ describe("UserRepository", () => {
       await expect(
         async () => await sut.getById(makeUserEntity().id)
       ).rejects.toThrow();
+    });
+  });
+
+  describe("Delete", () => {
+    it("Should return undefined if user was not found", async () => {
+      const { sut } = makeSut();
+      const foundUser = await sut.delete(makeUserEntity().id);
+
+      expect(foundUser).toBeUndefined();
+    });
+
+    it("Should throw if mongoose findOne throws", async () => {
+      const { sut } = makeSut();
+      jest
+        .spyOn(UserModel, "findOne")
+        .mockImplementationOnce(() => throwError());
+
+      await expect(
+        async () => await sut.getById(makeUserEntity().id)
+      ).rejects.toThrow();
+    });
+
+    it("Should return the deleted user", async () => {
+      const { sut } = makeSut();
+      const userEntity = makeUserEntity();
+      await sut.create(userEntity);
+      const deletedUser = await sut.delete(userEntity.id);
+
+      expect(deletedUser.id).toBeDefined();
+      expect(deletedUser.name).toBe(userEntity.name);
+      expect(deletedUser.email).toBe(userEntity.email);
+      expect(deletedUser.password).toBe(userEntity.password);
     });
   });
 });
