@@ -2,8 +2,10 @@ import { UserRepository } from "../../../infra/database";
 import { CreateUserService } from "../../../domain/services";
 import { HasherAdapter, IdGeneratorAdapter } from "../../../infra/adapters";
 import { CreateUserController } from "../../../presentation/controllers";
+import { makeErrorLogControllerDecoratorFactory } from "../decorators/error-log-decorator-factory";
+import { ControllerInterface } from "../../../presentation/abstract";
 
-export function makeCreateUserControllerFactory(): CreateUserController {
+export function makeCreateUserControllerFactory(): ControllerInterface {
   const idGenerator = new IdGeneratorAdapter();
   const userRepository = new UserRepository();
   const hasher = new HasherAdapter(10);
@@ -13,5 +15,6 @@ export function makeCreateUserControllerFactory(): CreateUserController {
     idGenerator,
     hasher
   );
-  return new CreateUserController(createUserService);
+  const controller = new CreateUserController(createUserService);
+  return makeErrorLogControllerDecoratorFactory(controller);
 }
