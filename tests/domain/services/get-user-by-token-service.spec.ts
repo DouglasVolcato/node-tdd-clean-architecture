@@ -1,6 +1,6 @@
 import {
   GetUserByIdRepositoryInterface,
-  TokenValidatorInterface,
+  TokenDecrypterInterface,
   UserEntityType,
 } from "../../../src/domain/abstract";
 import { makeUserEntity, throwError } from "../../test-helpers";
@@ -10,8 +10,8 @@ import { GetUserByTokenService } from "../../../src/domain/services";
 
 const vars = new Env().getVariables();
 
-class TokenValidatorStub implements TokenValidatorInterface {
-  public validateToken(token: string, secret: string): string {
+class TokenDecrypterStub implements TokenDecrypterInterface {
+  public decryptToken(token: string, secret: string): string {
     return "any_key";
   }
 }
@@ -24,12 +24,12 @@ class GetUserByIdRepositoryStub implements GetUserByIdRepositoryInterface {
 
 type SutTypes = {
   sut: GetUserByTokenService;
-  tokenValidatorStub: TokenValidatorInterface;
+  tokenValidatorStub: TokenDecrypterInterface;
   getUserByIdRepositoryStub: GetUserByIdRepositoryInterface;
 };
 
 const makeSut = (): SutTypes => {
-  const tokenValidatorStub = new TokenValidatorStub();
+  const tokenValidatorStub = new TokenDecrypterStub();
   const getUserByIdRepositoryStub = new GetUserByIdRepositoryStub();
   const sut = new GetUserByTokenService(
     tokenValidatorStub,
@@ -39,27 +39,27 @@ const makeSut = (): SutTypes => {
 };
 
 describe("GetUserByTokenService", () => {
-  it("Should call TokenValidator with correct token", async () => {
+  it("Should call TokenDecrypter with correct token", async () => {
     const { sut, tokenValidatorStub } = makeSut();
-    const tokenValidatorSpy = jest.spyOn(tokenValidatorStub, "validateToken");
+    const tokenValidatorSpy = jest.spyOn(tokenValidatorStub, "decryptToken");
     await sut.execute("any_token");
 
     expect(tokenValidatorSpy).toBeCalledTimes(1);
     expect(tokenValidatorSpy).toBeCalledWith("any_token", vars.SECRET);
   });
 
-  it("Should throw if TokenValidator throws", async () => {
+  it("Should throw if TokenDecrypter throws", async () => {
     const { sut, tokenValidatorStub } = makeSut();
     jest
-      .spyOn(tokenValidatorStub, "validateToken")
+      .spyOn(tokenValidatorStub, "decryptToken")
       .mockImplementationOnce(() => throwError());
     expect(async () => await sut.execute("any_token")).rejects.toThrow();
   });
 
-  it("Should return an error if TokenValidator returns undefined", async () => {
+  it("Should return an error if TokenDecrypter returns undefined", async () => {
     const { sut, tokenValidatorStub } = makeSut();
     jest
-      .spyOn(tokenValidatorStub, "validateToken")
+      .spyOn(tokenValidatorStub, "decryptToken")
       .mockReturnValueOnce(undefined);
     const error = await sut.execute("any_token");
 
@@ -73,7 +73,7 @@ describe("GetUserByTokenService", () => {
       "getById"
     );
     jest
-      .spyOn(tokenValidatorStub, "validateToken")
+      .spyOn(tokenValidatorStub, "decryptToken")
       .mockReturnValueOnce("valid_user_id");
     await sut.execute("any_token");
 
@@ -111,10 +111,10 @@ describe("GetUserByTokenService", () => {
     expect(async () => await sut.execute("any_token")).rejects.toThrow();
   });
 
-  it("Should throw if TokenValidator throws", async () => {
+  it("Should throw if TokenDecrypter throws", async () => {
     const { sut, tokenValidatorStub } = makeSut();
     jest
-      .spyOn(tokenValidatorStub, "validateToken")
+      .spyOn(tokenValidatorStub, "decryptToken")
       .mockImplementationOnce(() => throwError());
 
     expect(async () => await sut.execute("any_token")).rejects.toThrow();

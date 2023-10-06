@@ -1,11 +1,11 @@
 import {
   TokenGeneratorInterface,
-  TokenValidatorInterface,
+  TokenDecrypterInterface,
 } from "../../domain/abstract";
 import { JwtPayload, sign, verify } from "jsonwebtoken";
 
 export class TokenHandlerAdapter
-  implements TokenGeneratorInterface, TokenValidatorInterface
+  implements TokenGeneratorInterface, TokenDecrypterInterface
 {
   public generateToken(content: any, secret: string): string {
     return sign(content, secret, {
@@ -13,7 +13,7 @@ export class TokenHandlerAdapter
     });
   }
 
-  public validateToken(token: string, secret: string): string | undefined {
+  public decryptToken(token: string, secret: string): string | undefined {
     try {
       const payload = verify(token, secret) as JwtPayload;
       return payload.id;

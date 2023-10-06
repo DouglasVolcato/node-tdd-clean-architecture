@@ -53,7 +53,7 @@ describe("TokenHandlerAdapter", () => {
     it("Should call jwt library", () => {
       const { sut } = makeSut();
       (verify as jest.Mock).mockReturnValueOnce({ id: "valid_id" });
-      sut.validateToken("any_token", "any_secret");
+      sut.decryptToken("any_token", "any_secret");
 
       expect(verify).toHaveBeenCalledTimes(1);
     });
@@ -61,7 +61,7 @@ describe("TokenHandlerAdapter", () => {
     it("Should return generated token", () => {
       const { sut } = makeSut();
       (verify as jest.Mock).mockReturnValueOnce({ id: "valid_id" });
-      const generatedToken = sut.validateToken("any_token", "any_secret");
+      const generatedToken = sut.decryptToken("any_token", "any_secret");
 
       expect(generatedToken).toBe("valid_id");
     });
@@ -69,7 +69,7 @@ describe("TokenHandlerAdapter", () => {
     it("Should return undefined if jwt throws", () => {
       const { sut } = makeSut();
       (verify as jest.Mock).mockImplementationOnce(() => throwError());
-      const result = sut.validateToken("any_token", "any_secret");
+      const result = sut.decryptToken("any_token", "any_secret");
 
       expect(result).toBeUndefined();
     });
