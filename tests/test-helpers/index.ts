@@ -11,3 +11,8 @@ export * from "./stubs/adapters/file-writter-stub";
 export * from "./stubs/adapters/token-decrypter-stub";
 export * from "./stubs/adapters/hash-validator-stub";
 export * from "./stubs/adapters//token-generator-stub";
+export * from "./stubs/validators/validator-stub";
+export * from "./stubs/controllers/controller-stub";
+export * from "./stubs/services/create-user-service-stub";
+export * from "./stubs/services/delete-user-service-stub";
+export * from "./stubs/services/login-service-stub";

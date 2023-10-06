@@ -1,42 +1,15 @@
+import { ValidatorInterface } from "../../../src/presentation/abstract";
+import { RequiredFieldError } from "../../../src/presentation/errors";
 import {
-  ControllerInputType,
-  ControllerInterface,
-  ControllerOutputType,
-  ValidatorInterface,
-} from "../../../src/presentation/abstract";
-import { Controller } from "../../../src/presentation/controllers/controller";
-import {
-  RequiredFieldError,
-  ServerError,
-} from "../../../src/presentation/errors";
-import { ok } from "../../../src/presentation/helpers";
-import { makeUserDto, throwError } from "../../../tests/test-helpers";
-
-class ValidatorStub implements ValidatorInterface {
-  public validate(request: any): Error | undefined {
-    return;
-  }
-}
-
-class ControllerStub extends Controller implements ControllerInterface {
-  public constructor() {
-    super();
-  }
-
-  public async perform(
-    request: ControllerInputType<any>
-  ): Promise<ControllerOutputType<any | Error>> {
-    return ok("any_data");
-  }
-
-  protected getValidation(): ValidatorInterface {
-    return new ValidatorStub();
-  }
-}
+  ControllerStub,
+  ValidatorStub,
+  makeUserDto,
+  throwError,
+} from "../../../tests/test-helpers";
 
 type SutTypes = {
   sut: ControllerStub;
-  validatorStub: ValidatorStub;
+  validatorStub: ValidatorInterface;
 };
 
 const makeSut = (): SutTypes => {

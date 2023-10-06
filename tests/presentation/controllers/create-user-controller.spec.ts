@@ -1,31 +1,13 @@
-import { ValidatorInterface } from "../../../src/presentation/abstract";
-import {
-  CreateUserServiceInterface,
-  UserDtoType,
-  UserEntityType,
-} from "../../../src/domain/abstract";
 import { CreateUserController } from "../../../src/presentation/controllers";
+import { CreateUserServiceInterface } from "../../../src/domain/abstract";
+import { InvalidFieldError } from "../../../src/presentation/errors";
 import {
-  InvalidFieldError,
-  ServerError,
-} from "../../../src/presentation/errors";
-import {
+  CreateUserServiceStub,
+  ValidatorStub,
   makeUserDto,
   makeUserEntity,
   throwError,
 } from "../../../tests/test-helpers";
-
-class ValidatorStub implements ValidatorInterface {
-  public validate(request: any): Error | undefined {
-    return;
-  }
-}
-
-class CreateUserServiceStub implements CreateUserServiceInterface {
-  public async execute(userDto: UserDtoType): Promise<UserEntityType> {
-    return makeUserEntity();
-  }
-}
 
 type SutTypes = {
   sut: CreateUserController;

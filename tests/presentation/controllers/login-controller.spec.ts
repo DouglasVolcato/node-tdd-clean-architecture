@@ -1,30 +1,15 @@
-import {
-  LoginDtoType,
-  LoginServiceInterface,
-} from "../../../src/domain/abstract";
 import { LoginController } from "../../../src/presentation/controllers";
 import { makeLoginDto } from "../../test-helpers/dtos/login-dto-helper";
-import { throwError } from "../../test-helpers";
+import { LoginServiceInterface } from "../../../src/domain/abstract";
+import { InvalidFieldError } from "../../../src/presentation/errors";
 import {
-  InvalidFieldError,
-  ServerError,
-} from "../../../src/presentation/errors";
-import { ValidatorInterface } from "../../../src/presentation/abstract";
-
-class ValidatorStub implements ValidatorInterface {
-  public validate(request: any): Error | undefined {
-    return;
-  }
-}
-
-class LoginServiceStub implements LoginServiceInterface {
-  public async execute(login: LoginDtoType): Promise<string | Error> {
-    return Promise.resolve("valid_token");
-  }
-}
+  LoginServiceStub,
+  ValidatorStub,
+  throwError,
+} from "../../test-helpers";
 
 type SutTypes = {
-  loginServiceStub: LoginServiceStub;
+  loginServiceStub: LoginServiceInterface;
   sut: LoginController;
 };
 

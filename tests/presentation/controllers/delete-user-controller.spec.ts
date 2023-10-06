@@ -1,27 +1,21 @@
-import {
-  DeleteUserServiceInterface,
-  UserEntityType,
-} from "../../../src/domain/abstract";
+import { DeleteUserController } from "../../../src/presentation/controllers";
+import { DeleteUserServiceInterface } from "../../../src/domain/abstract";
+import { InvalidFieldError } from "../../../src/presentation/errors";
 import {
   badRequest,
   ok,
-  serverError,
   unauthorized,
 } from "../../../src/presentation/helpers";
-import { makeUserEntity, throwError } from "../../test-helpers";
-import { InvalidFieldError } from "../../../src/presentation/errors";
-import { DeleteUserController } from "../../../src/presentation/controllers";
+import {
+  DeleteUserServiceStub,
+  makeUserEntity,
+  throwError,
+} from "../../test-helpers";
 
 const makeDeleteUserRequest = () => ({
   user: makeUserEntity(),
   id: makeUserEntity().id,
 });
-
-class DeleteUserServiceStub implements DeleteUserServiceInterface {
-  public execute(id: string): Promise<Error | UserEntityType> {
-    return Promise.resolve(makeUserEntity());
-  }
-}
 
 type SutTypes = {
   sut: DeleteUserController;
