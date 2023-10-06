@@ -1,20 +1,15 @@
-import {
-  GetUserByTokenServiceInterface,
-  UserEntityType,
-} from "../../../src/domain/abstract";
+import { GetUserByTokenServiceInterface } from "../../../src/domain/abstract";
 import { UserAuthMiddleware } from "../../../src/presentation/middlewares";
-import { makeUserEntity, throwError } from "../../test-helpers";
+import {
+  GetUserByTokenServiceStub,
+  makeUserEntity,
+  throwError,
+} from "../../test-helpers";
 import {
   RequiredFieldError,
   ServerError,
   UnauthorizedError,
 } from "../../../src/presentation/errors";
-
-class GetUserByTokenServiceStub implements GetUserByTokenServiceInterface {
-  public async execute(token: string): Promise<UserEntityType | Error> {
-    return Promise.resolve(makeUserEntity());
-  }
-}
 
 const makeAuthenticatedRequest = () => {
   return { authorization: "Bearer any_token" };
@@ -53,7 +48,7 @@ describe("UserAuthMiddleware", () => {
       .mockReturnValueOnce(Promise.resolve(userData));
     const output = await sut.execute(makeAuthenticatedRequest());
 
-    expect(output).toEqual({user: userData});
+    expect(output).toEqual({ user: userData });
   });
 
   it("Should return an error if GetUserByTokenService returns undefined", async () => {

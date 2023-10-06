@@ -1,37 +1,18 @@
-import { Middleware } from "../../../src/presentation/middlewares";
-import {
-  MiddlewareInterface,
-  ValidatorInterface,
-} from "../../../src/presentation/abstract";
+import { ValidatorInterface } from "../../../src/presentation/abstract";
 import {
   RequiredFieldError,
   ServerError,
 } from "../../../src/presentation/errors";
-import { makeUserDto, throwError } from "../../test-helpers";
-
-class ValidatorStub implements ValidatorInterface {
-  public validate(request: any): Error | undefined {
-    return;
-  }
-}
-
-class MiddlewareStub extends Middleware implements MiddlewareInterface {
-  public constructor() {
-    super();
-  }
-
-  protected async perform(request: any): Promise<any> {
-    return Promise.resolve({});
-  }
-
-  protected getValidation(): ValidatorInterface {
-    return new ValidatorStub();
-  }
-}
+import {
+  MiddlewareStub,
+  ValidatorStub,
+  makeUserDto,
+  throwError,
+} from "../../test-helpers";
 
 type SutTypes = {
   sut: MiddlewareStub;
-  validatorStub: ValidatorStub;
+  validatorStub: ValidatorInterface;
 };
 
 const makeSut = (): SutTypes => {

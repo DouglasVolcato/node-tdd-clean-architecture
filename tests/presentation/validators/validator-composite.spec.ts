@@ -1,34 +1,21 @@
-import { ValidatorInterface } from "../../../src/presentation/abstract";
 import { ValidatorComposite } from "../../../src/presentation/validators/validator-composite";
-import { makeUserDto } from "../../../tests/test-helpers";
-
-const makeRequest = () => makeUserDto();
-
-class ValidatorStub1 implements ValidatorInterface {
-  public validate(request: any): Error | undefined {
-    return;
-  }
-}
-
-class ValidatorStub2 implements ValidatorInterface {
-  public validate(request: any): Error | undefined {
-    return;
-  }
-}
+import { ValidatorStub, makeUserDto } from "../../../tests/test-helpers";
+import { ValidatorInterface } from "../../../src/presentation/abstract";
 
 type SutTypes = {
   sut: ValidatorComposite;
-  validatorStub1: ValidatorStub1;
-  validatorStub2: ValidatorStub2;
+  validatorStub1: ValidatorInterface;
+  validatorStub2: ValidatorInterface;
 };
 
 const makeSut = (): SutTypes => {
-  const validatorStub1 = new ValidatorStub1();
-  const validatorStub2 = new ValidatorStub2();
+  const validatorStub1 = new ValidatorStub();
+  const validatorStub2 = new ValidatorStub();
   const validatorStubs = [validatorStub1, validatorStub2];
   const sut = new ValidatorComposite(validatorStubs);
   return { validatorStub1, validatorStub2, sut };
 };
+const makeRequest = () => makeUserDto();
 
 describe("ValidatorComposite", () => {
   it("Validate should call validators with correct values", () => {

@@ -1,3 +1,5 @@
+import { EmailValidatorStub, throwError } from "../../../tests/test-helpers";
+import { ValidatorBuilder } from "../../../src/presentation/validators";
 import {
   EmailValidatorInterface,
   ValidatorBuilderInterface,
@@ -6,14 +8,6 @@ import {
   InvalidFieldError,
   RequiredFieldError,
 } from "../../../src/presentation/errors";
-import { ValidatorBuilder } from "../../../src/presentation/validators";
-import { throwError } from "../../../tests/test-helpers";
-
-class EmailValidatorStub implements EmailValidatorInterface {
-  public isEmail(value: string): boolean {
-    return true;
-  }
-}
 
 type SutTypes = {
   sut: ValidatorBuilderInterface;
