@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "tsc && node dist/src/main/index.js",
+    "test": "npm run test-unit && npm run test-integration",
     "test-unit": "jest -c jest-unit-config.json",
     "test-integration": "jest --runInBand --force-exit -c jest-integration-config.json",
     "test-watch": "jest --passWithNoTests --watch -c jest-unit-config.json",
