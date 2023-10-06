@@ -1,9 +1,9 @@
 import express, { Express, NextFunction, Request, Response } from "express";
-import bodyParser from "body-parser";
-import cors from "cors";
-import { RouteDtoType } from "../abstract";
 import { MiddlewareInterface } from "../../presentation/abstract";
 import { ServerError } from "../../presentation/errors";
+import { RouteDtoType } from "../abstract";
+import bodyParser from "body-parser";
+import cors from "cors";
 
 export class FrameWorkAdapter {
   private readonly routes: RouteDtoType[];
@@ -21,20 +21,12 @@ export class FrameWorkAdapter {
   }
 
   public async start(): Promise<void> {
-    Promise.resolve(
-      (this.server = this.app.listen(this.port, () => {
-        console.log(`Server is running on port ${this.port}`);
-      }))
-    );
+    Promise.resolve((this.server = this.app.listen(this.port)));
   }
 
   public async stop(): Promise<void> {
     if (this.server) {
-      Promise.resolve(
-        this.server.close(() => {
-          console.log(`Server stopped`);
-        })
-      );
+      Promise.resolve(this.server.close());
       this.server = null;
     }
   }
