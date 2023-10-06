@@ -1,5 +1,5 @@
 import { LoginService } from "../../../src/domain/services/login-service";
-import { makeLoginDto } from "../../test-helpers/dtos/login-dto-helper";
+import { makeLoginDto } from "../../test-helpers/dtos/login-dto";
 import { InvalidFieldError } from "../../../src/presentation/errors";
 import { Env } from "../../../src/main/config";
 import {

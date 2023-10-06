@@ -1,28 +1,15 @@
-import { FrameWorkAdapter } from "../../../src/main/adapters";
-import { Env } from "../../../src/main/config";
-import { LoginDtoType, UserEntityType } from "../../../src/domain/abstract";
+import { makeValidLoginDto, makeValidUserEntity } from "../../test-helpers";
 import { DatabaseConnector, UserModel } from "../../../src/infra/database";
+import { FrameWorkAdapter } from "../../../src/main/adapters";
+import { loginRoutes } from "../../../src/main/routes";
+import { Env } from "../../../src/main/config";
 import { Express } from "express";
 import request from "supertest";
-import { loginRoutes } from "../../../src/main/routes";
-import { HasherAdapter } from "../../../src/infra/adapters";
 
 const route = "/login";
 const databaseConnector = new DatabaseConnector();
 let frameworkAdapter: FrameWorkAdapter;
 let app: Express;
-
-const makeValidLoginDto = (): LoginDtoType => ({
-  password: "Test123",
-  email: "douglasvolcato@gmail.com",
-});
-
-const makeValidUserEntity = (): UserEntityType => ({
-  id: "23h9f82hf892h8",
-  name: "Douglas",
-  password: new HasherAdapter(10).hash("Test123"),
-  email: "douglasvolcato@gmail.com",
-});
 
 describe("Login routes", () => {
   beforeAll(async () => {

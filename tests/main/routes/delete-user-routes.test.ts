@@ -1,25 +1,17 @@
-import { FrameWorkAdapter } from "../../../src/main/adapters";
-import { Env } from "../../../src/main/config";
-import { UserEntityType } from "../../../src/domain/abstract";
 import { DatabaseConnector, UserModel } from "../../../src/infra/database";
+import { FrameWorkAdapter } from "../../../src/main/adapters";
+import { makeValidUserEntity } from "../../test-helpers";
+import { userRoutes } from "../../../src/main/routes";
+import { Env } from "../../../src/main/config";
+import { sign } from "jsonwebtoken";
 import { Express } from "express";
 import request from "supertest";
-import { userRoutes } from "../../../src/main/routes";
-import { HasherAdapter } from "../../../src/infra/adapters";
-import { sign } from "jsonwebtoken";
 
 const vars = new Env().getVariables();
 const route = `/user/delete/`;
 const databaseConnector = new DatabaseConnector();
 let frameworkAdapter: FrameWorkAdapter;
 let app: Express;
-
-const makeValidUserEntity = (): UserEntityType => ({
-  id: "23h9f82hf892h8",
-  name: "Douglas",
-  password: new HasherAdapter(10).hash("Test123"),
-  email: "douglasvolcato@gmail.com",
-});
 
 const makeValidToken = () =>
   sign({ id: makeValidUserEntity().id }, new Env().getVariables().SECRET, {

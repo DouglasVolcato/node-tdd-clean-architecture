@@ -1,5 +1,5 @@
 import { LoginController } from "../../../src/presentation/controllers";
-import { makeLoginDto } from "../../test-helpers/dtos/login-dto-helper";
+import { makeLoginDto } from "../../test-helpers/dtos/login-dto";
 import { LoginServiceInterface } from "../../../src/domain/abstract";
 import { InvalidFieldError } from "../../../src/presentation/errors";
 import {

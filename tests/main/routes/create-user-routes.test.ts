@@ -1,29 +1,15 @@
-import { FrameWorkAdapter } from "../../../src/main/adapters";
-import { Env } from "../../../src/main/config";
-import { UserDtoType, UserEntityType } from "../../../src/domain/abstract";
 import { DatabaseConnector, UserModel } from "../../../src/infra/database";
+import { makeValidUserDto, makeValidUserEntity } from "../../test-helpers";
+import { FrameWorkAdapter } from "../../../src/main/adapters";
+import { userRoutes } from "../../../src/main/routes";
+import { Env } from "../../../src/main/config";
 import { Express } from "express";
 import request from "supertest";
-import { userRoutes } from "../../../src/main/routes";
-import { HasherAdapter } from "../../../src/infra/adapters";
 
 const route = "/user/create";
 const databaseConnector = new DatabaseConnector();
 let frameworkAdapter: FrameWorkAdapter;
 let app: Express;
-
-const makeValidUserDto = (): UserDtoType => ({
-  name: "Douglas",
-  password: "Test123",
-  email: "douglasvolcato@gmail.com",
-});
-
-const makeValidUserEntity = (): UserEntityType => ({
-  id: "23h9f82hf892h8",
-  name: "Douglas",
-  password: new HasherAdapter(10).hash("Test123"),
-  email: "douglasvolcato@gmail.com",
-});
 
 describe("Create user routes", () => {
   beforeAll(async () => {
@@ -37,9 +23,9 @@ describe("Create user routes", () => {
   afterAll(async () => {
     await frameworkAdapter.stop();
     await databaseConnector.disconnect();
-    jest.setTimeout(30000)
+    jest.setTimeout(30000);
   });
-  
+
   beforeEach(async () => {
     await UserModel.deleteMany({});
   });
