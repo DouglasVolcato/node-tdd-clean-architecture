@@ -3,7 +3,7 @@ import {
   LoginServiceInterface,
 } from "../../../src/domain/abstract";
 import { LoginController } from "../../../src/presentation/controllers";
-import { makeLoginDto } from "../../test-helpers/login-dto-helper";
+import { makeLoginDto } from "../../test-helpers/dtos/login-dto-helper";
 import { throwError } from "../../test-helpers";
 import {
   InvalidFieldError,

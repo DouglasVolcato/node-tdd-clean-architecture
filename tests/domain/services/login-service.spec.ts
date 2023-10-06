@@ -8,7 +8,7 @@ import { makeUserEntity, throwError } from "../../test-helpers";
 import { Env } from "../../../src/main/config";
 import { InvalidFieldError } from "../../../src/presentation/errors";
 import { LoginService } from "../../../src/domain/services/login-service";
-import { makeLoginDto } from "../../test-helpers/login-dto-helper";
+import { makeLoginDto } from "../../test-helpers/dtos/login-dto-helper";
 
 class GetUserByEmailRepositoryStub
   implements GetUserByEmailRepositoryInterface

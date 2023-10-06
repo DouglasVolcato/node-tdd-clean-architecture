@@ -1,4 +1,4 @@
-import { LoginDtoType } from "../../src/domain/abstract";
+import { LoginDtoType } from "../../../src/domain/abstract";
 
 export const makeLoginDto = (): LoginDtoType => {
   return {
