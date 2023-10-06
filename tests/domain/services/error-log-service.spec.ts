@@ -1,21 +1,15 @@
+import { ErrorLogService } from "../../../src/domain/services";
+import { FileWritterStub, throwError } from "../../test-helpers";
 import {
   ErrorLogServiceInterface,
   FileWritterInterface,
 } from "../../../src/domain/abstract";
-import { ErrorLogService } from "../../../src/domain/services";
-import { throwError } from "../../test-helpers";
 
 const error = new Error("any_error");
 const errorFilePath = "src/main/logs/error.log";
 const errorText = `\n${new Date().toLocaleString()} - ${error.message} - ${
   error.stack
 }`;
-
-class FileWritterStub implements FileWritterInterface {
-  public async writeInFile(filePath: string, content: string): Promise<void> {
-    return;
-  }
-}
 
 type SutTypes = {
   sut: ErrorLogServiceInterface;

@@ -1,42 +1,26 @@
+import { LoginService } from "../../../src/domain/services/login-service";
+import { makeLoginDto } from "../../test-helpers/dtos/login-dto-helper";
+import { InvalidFieldError } from "../../../src/presentation/errors";
+import { Env } from "../../../src/main/config";
 import {
-  GetUserByEmailRepositoryInterface,
-  UserEntityType,
   TokenGeneratorInterface,
   HashValidatorInterface,
 } from "../../../src/domain/abstract";
-import { makeUserEntity, throwError } from "../../test-helpers";
-import { Env } from "../../../src/main/config";
-import { InvalidFieldError } from "../../../src/presentation/errors";
-import { LoginService } from "../../../src/domain/services/login-service";
-import { makeLoginDto } from "../../test-helpers/dtos/login-dto-helper";
-
-class GetUserByEmailRepositoryStub
-  implements GetUserByEmailRepositoryInterface
-{
-  public async getByEmail(email: string): Promise<UserEntityType> {
-    return Promise.resolve(makeUserEntity());
-  }
-}
-
-class HashValidatorStub implements HashValidatorInterface {
-  public validate(value: string, hashedValue: string): boolean {
-    return true;
-  }
-}
-
-class TokenGeneratorStub implements TokenGeneratorInterface {
-  public generateToken(content: any, secret: string): string {
-    return "generated_token";
-  }
-}
+import {
+  GetUserByEmailRepositoryStub,
+  HashValidatorStub,
+  TokenGeneratorStub,
+  makeUserEntity,
+  throwError,
+} from "../../test-helpers";
 
 const vars = new Env().getVariables();
 
 type SutTypes = {
   sut: LoginService;
   getUserByEmailRepositoryStub: GetUserByEmailRepositoryStub;
-  hashValidatorStub: HashValidatorStub;
-  tokenGeneratorStub: TokenGeneratorStub;
+  hashValidatorStub: HashValidatorInterface;
+  tokenGeneratorStub: TokenGeneratorInterface;
 };
 
 const makeSut = (): SutTypes => {

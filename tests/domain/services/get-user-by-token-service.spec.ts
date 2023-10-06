@@ -1,26 +1,18 @@
+import { GetUserByIdRepositoryStub } from "../../test-helpers/stubs/repositories/get-user-by-id-repository-stub";
+import { InvalidFieldError } from "../../../src/presentation/errors";
+import { GetUserByTokenService } from "../../../src/domain/services";
+import { Env } from "../../../src/main/config";
+import {
+  TokenDecrypterStub,
+  makeUserEntity,
+  throwError,
+} from "../../test-helpers";
 import {
   GetUserByIdRepositoryInterface,
   TokenDecrypterInterface,
-  UserEntityType,
 } from "../../../src/domain/abstract";
-import { makeUserEntity, throwError } from "../../test-helpers";
-import { Env } from "../../../src/main/config";
-import { InvalidFieldError } from "../../../src/presentation/errors";
-import { GetUserByTokenService } from "../../../src/domain/services";
 
 const vars = new Env().getVariables();
-
-class TokenDecrypterStub implements TokenDecrypterInterface {
-  public decryptToken(token: string, secret: string): string {
-    return "any_key";
-  }
-}
-
-class GetUserByIdRepositoryStub implements GetUserByIdRepositoryInterface {
-  public async getById(id: string): Promise<UserEntityType | undefined> {
-    return Promise.resolve(makeUserEntity());
-  }
-}
 
 type SutTypes = {
   sut: GetUserByTokenService;

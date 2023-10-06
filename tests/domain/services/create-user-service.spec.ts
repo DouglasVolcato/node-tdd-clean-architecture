@@ -1,47 +1,22 @@
 import { InvalidFieldError } from "../../../src/presentation/errors";
+import { CreateUserService } from "../../../src/domain/services";
 import {
   CreateUserServiceInterface,
   GetUserByEmailRepositoryInterface,
   UserDtoType,
-  UserEntityType,
-} from "../../../src/domain/abstract";
-import {
   HasherInterface,
   IdGeneratorInterface,
   CreateUserRepositoryInterface,
 } from "../../../src/domain/abstract";
-import { CreateUserService } from "../../../src/domain/services";
 import {
+  CreateUserRepositoryStub,
+  GetUserByEmailRepositoryStub,
+  HasherStub,
+  IdGeneratorStub,
   makeUserDto,
   makeUserEntity,
   throwError,
 } from "../../../tests/test-helpers";
-
-class CreateUserRepositoryStub implements CreateUserRepositoryInterface {
-  public async create(userDto: UserDtoType): Promise<UserEntityType> {
-    return Promise.resolve(makeUserEntity());
-  }
-}
-
-class GetUserByEmailRepositoryStub
-  implements GetUserByEmailRepositoryInterface
-{
-  public getByEmail(email: string): Promise<UserEntityType | undefined> {
-    return
-  }
-}
-
-class IdGeneratorStub implements IdGeneratorInterface {
-  public generateId(): string {
-    return "any_id";
-  }
-}
-
-class HasherStub implements HasherInterface {
-  public hash(value: string): string {
-    return "hashed_value";
-  }
-}
 
 type SutTypes = {
   sut: CreateUserServiceInterface;
@@ -96,7 +71,10 @@ describe("CreateUserService", () => {
   });
 
   it("Should call idGenerator", async () => {
-    const { sut, idGeneratorStub } = makeSut();
+    const { sut, idGeneratorStub, getUserByEmailRepositoryStub } = makeSut();
+    jest
+      .spyOn(getUserByEmailRepositoryStub, "getByEmail")
+      .mockReturnValueOnce(undefined);
     const idGeneratorSpy = jest.spyOn(idGeneratorStub, "generateId");
     await sut.execute(makeUserDto());
 
@@ -104,7 +82,10 @@ describe("CreateUserService", () => {
   });
 
   it("Should call hasher with correct value", async () => {
-    const { sut, hasherStub } = makeSut();
+    const { sut, hasherStub, getUserByEmailRepositoryStub } = makeSut();
+    jest
+      .spyOn(getUserByEmailRepositoryStub, "getByEmail")
+      .mockReturnValueOnce(undefined);
     const hasherSpy = jest.spyOn(hasherStub, "hash");
     const userData = makeUserDto();
     await sut.execute(userData);
@@ -114,8 +95,16 @@ describe("CreateUserService", () => {
   });
 
   it("Should call CreateUserRepository with correct values", async () => {
-    const { sut, createUserRepositoryStub, hasherStub, idGeneratorStub } =
-      makeSut();
+    const {
+      sut,
+      createUserRepositoryStub,
+      hasherStub,
+      idGeneratorStub,
+      getUserByEmailRepositoryStub,
+    } = makeSut();
+    jest
+      .spyOn(getUserByEmailRepositoryStub, "getByEmail")
+      .mockReturnValueOnce(undefined);
     const repositorySpy = jest.spyOn(createUserRepositoryStub, "create");
     const userEntity = makeUserEntity();
     const userDto: UserDtoType = {
@@ -134,7 +123,11 @@ describe("CreateUserService", () => {
   });
 
   it("Should return the same user entity CreateUserRepository returns", async () => {
-    const { sut, createUserRepositoryStub } = makeSut();
+    const { sut, createUserRepositoryStub, getUserByEmailRepositoryStub } =
+      makeSut();
+    jest
+      .spyOn(getUserByEmailRepositoryStub, "getByEmail")
+      .mockReturnValueOnce(undefined);
     const userData = {
       id: "generated_id",
       email: "valid_email",
@@ -149,7 +142,10 @@ describe("CreateUserService", () => {
   });
 
   it("Should throw if idGenerator throws", async () => {
-    const { sut, idGeneratorStub } = makeSut();
+    const { sut, idGeneratorStub, getUserByEmailRepositoryStub } = makeSut();
+    jest
+      .spyOn(getUserByEmailRepositoryStub, "getByEmail")
+      .mockReturnValueOnce(undefined);
     jest
       .spyOn(idGeneratorStub, "generateId")
       .mockImplementationOnce(() => throwError());
@@ -160,7 +156,10 @@ describe("CreateUserService", () => {
   });
 
   it("Should throw if hasher throws", async () => {
-    const { sut, hasherStub } = makeSut();
+    const { sut, hasherStub, getUserByEmailRepositoryStub } = makeSut();
+    jest
+      .spyOn(getUserByEmailRepositoryStub, "getByEmail")
+      .mockReturnValueOnce(undefined);
     jest.spyOn(hasherStub, "hash").mockImplementationOnce(() => throwError());
 
     await expect(
@@ -180,7 +179,11 @@ describe("CreateUserService", () => {
   });
 
   it("Should throw if CreateUserRepository throws", async () => {
-    const { sut, createUserRepositoryStub } = makeSut();
+    const { sut, createUserRepositoryStub, getUserByEmailRepositoryStub } =
+      makeSut();
+    jest
+      .spyOn(getUserByEmailRepositoryStub, "getByEmail")
+      .mockReturnValueOnce(undefined);
     jest
       .spyOn(createUserRepositoryStub, "create")
       .mockImplementationOnce(() => throwError());

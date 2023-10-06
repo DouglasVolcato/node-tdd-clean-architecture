@@ -1,16 +1,11 @@
 import {
-  DeleteUserRepositoryInterface,
-  UserEntityType,
-} from "../../../src/domain/abstract";
-import { makeUserEntity, throwError } from "../../test-helpers";
+  DeleteUserRepositoryStub,
+  makeUserEntity,
+  throwError,
+} from "../../test-helpers";
+import { DeleteUserRepositoryInterface } from "../../../src/domain/abstract";
 import { InvalidFieldError } from "../../../src/presentation/errors";
 import { DeleteUserService } from "../../../src/domain/services";
-
-class DeleteUserRepositoryStub implements DeleteUserRepositoryInterface {
-  public async delete(id: string): Promise<UserEntityType> {
-    return Promise.resolve(makeUserEntity());
-  }
-}
 
 type SutTypes = {
   sut: DeleteUserService;
