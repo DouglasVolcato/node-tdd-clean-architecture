@@ -16,3 +16,4 @@ export * from "./stubs/controllers/controller-stub";
 export * from "./stubs/services/create-user-service-stub";
 export * from "./stubs/services/delete-user-service-stub";
 export * from "./stubs/services/login-service-stub";
+export * from "./stubs/services/error-log-service-stub";

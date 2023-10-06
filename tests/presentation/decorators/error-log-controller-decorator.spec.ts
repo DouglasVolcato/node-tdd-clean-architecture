@@ -1,24 +1,7 @@
 import { ErrorLogControllerDecorator } from "../../../src/presentation/decorators";
 import { ErrorLogServiceInterface } from "../../../src/domain/abstract";
-import {
-  ControllerInterface,
-  ControllerOutputType,
-} from "../../../src/presentation/abstract";
-
-class ControllerStub implements ControllerInterface {
-  public async execute(request: any): Promise<ControllerOutputType<any>> {
-    return Promise.resolve({
-      statusCode: 200,
-      data: {},
-    });
-  }
-}
-
-class ErrorLogServiceStub implements ErrorLogServiceInterface {
-  public async execute(error: Error): Promise<void> {
-    return;
-  }
-}
+import { ControllerInterface } from "../../../src/presentation/abstract";
+import { ControllerStub, ErrorLogServiceStub } from "../../test-helpers";
 
 const makeRequest = (): any => ({
   property1: "any_value",
