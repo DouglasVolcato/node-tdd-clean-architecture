@@ -14,6 +14,6 @@ export class DeleteUserService implements DeleteUserServiceInterface {
 
   public async execute(id: string): Promise<UserEntityType | Error> {
     const deletedUser = await this.deleteUserRepository.delete(id);
-    return deletedUser ? deletedUser : new InvalidFieldError("id");
+    return deletedUser ?? new InvalidFieldError("id");
   }
 }

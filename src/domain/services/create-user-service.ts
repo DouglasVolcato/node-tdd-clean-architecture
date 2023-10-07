@@ -3,12 +3,10 @@ import {
   CreateUserServiceInterface,
   GetUserByEmailRepositoryInterface,
   UserDtoType,
-  UserEntityType,
-} from "../abstract";
-import {
   HasherInterface,
   IdGeneratorInterface,
   CreateUserRepositoryInterface,
+  UserEntityType,
 } from "../abstract";
 
 export class CreateUserService implements CreateUserServiceInterface {
@@ -36,12 +34,10 @@ export class CreateUserService implements CreateUserServiceInterface {
     if (foundUser) return new InvalidFieldError("email already registered");
     const id = this.idGenerator.generateId();
     const hashedPassword = this.hasher.hash(userDto.password);
-    const newUser = await this.createUserRepository.create({
+    return await this.createUserRepository.create({
       ...userDto,
       id: id,
       password: hashedPassword,
     });
-
-    return newUser;
   }
 }

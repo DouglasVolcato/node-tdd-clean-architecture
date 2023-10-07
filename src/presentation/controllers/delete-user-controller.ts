@@ -1,3 +1,5 @@
+import { badRequest, ok, unauthorized } from "../../presentation/helpers";
+import { Controller } from "./controller";
 import {
   ControllerInterface,
   ControllerOutputType,
@@ -7,12 +9,10 @@ import {
   DeleteUserServiceInterface,
   UserEntityType,
 } from "../../domain/abstract";
-import { badRequest, ok, unauthorized } from "../../presentation/helpers";
 import {
   ValidatorBuilder,
   ValidatorComposite,
 } from "../../presentation/validators";
-import { Controller } from "./controller";
 
 export class DeleteUserController
   extends Controller

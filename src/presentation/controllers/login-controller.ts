@@ -1,3 +1,4 @@
+import { badRequest, ok } from "../../presentation/helpers";
 import {
   LoginDtoType,
   LoginServiceInterface,
@@ -9,7 +10,6 @@ import {
   ControllerOutputType,
   ValidatorInterface,
 } from "../../presentation/abstract";
-import { badRequest, ok } from "../../presentation/helpers";
 import {
   ValidatorBuilder,
   ValidatorComposite,
