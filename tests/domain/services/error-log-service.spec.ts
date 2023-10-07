@@ -5,6 +5,10 @@ import {
   FileWritterInterface,
 } from "../../../src/domain/abstract";
 
+Date.prototype.toLocaleString = jest
+  .fn()
+  .mockReturnValue("06/10/2023 23:00:00");
+
 const error = new Error("any_error");
 const errorFilePath = "src/main/logs/error.log";
 const errorText = `\n${new Date().toLocaleString()} - ${error.message} - ${
