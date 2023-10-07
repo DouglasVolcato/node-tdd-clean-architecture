@@ -1,3 +1,4 @@
+import { UserModel } from "../models/user-model";
 import {
   CreateUserRepositoryInterface,
   DeleteUserRepositoryInterface,
@@ -5,7 +6,6 @@ import {
   GetUserByIdRepositoryInterface,
   UserEntityType,
 } from "../../../domain/abstract";
-import { UserModel } from "../models/user-model";
 
 export class UserRepository
   implements

@@ -15,7 +15,6 @@ type SutTypes = {
 
 const makeSut = (): SutTypes => {
   const sut = new UserRepository();
-
   return { sut };
 };
 
@@ -106,7 +105,7 @@ describe("UserRepository", () => {
       expect(foundUser).toBeUndefined();
     });
 
-    it("Should throw if mongoose throws", async () => {
+    it("Should throw if findOne throws", async () => {
       const { sut } = makeSut();
       jest
         .spyOn(UserModel, "findOne")
@@ -126,14 +125,26 @@ describe("UserRepository", () => {
       expect(foundUser).toBeUndefined();
     });
 
-    it("Should throw if mongoose findOne throws", async () => {
+    it("Should throw if findOne throws", async () => {
       const { sut } = makeSut();
       jest
         .spyOn(UserModel, "findOne")
         .mockImplementationOnce(() => throwError());
 
       await expect(
-        async () => await sut.getById(makeUserEntity().id)
+        async () => await sut.delete(makeUserEntity().id)
+      ).rejects.toThrow();
+    });
+
+    it("Should throw if deleteOne throws", async () => {
+      const { sut } = makeSut();
+      await sut.create(makeUserEntity());
+      jest
+        .spyOn(UserModel, "deleteOne")
+        .mockImplementationOnce(() => throwError());
+
+      await expect(
+        async () => await sut.delete(makeUserEntity().id)
       ).rejects.toThrow();
     });
 
