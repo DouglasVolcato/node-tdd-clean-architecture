@@ -23,7 +23,6 @@ describe("Login routes", () => {
   afterAll(async () => {
     await frameworkAdapter.stop();
     await databaseConnector.disconnect();
-    jest.setTimeout(30000);
   });
 
   beforeEach(async () => {
