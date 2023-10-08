@@ -1,3 +1,3 @@
 export interface ErrorLogServiceInterface {
-  execute(error: Error): Promise<void>;
+  execute(error: Error, content?: string): Promise<void>;
 }

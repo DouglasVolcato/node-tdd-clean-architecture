@@ -19,7 +19,7 @@ export class ErrorLogControllerDecorator implements ControllerInterface {
   public async execute(request: any): Promise<ControllerOutputType<any>> {
     const response = await this.controller.execute(request);
     if (response.statusCode === 500 && response.data instanceof Error) {
-      this.errorLogService.execute(response.data);
+      this.errorLogService.execute(response.data, JSON.stringify(request));
     }
     return response;
   }

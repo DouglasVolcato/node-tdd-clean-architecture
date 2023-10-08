@@ -8,11 +8,11 @@ export class ErrorLogService implements ErrorLogServiceInterface {
     this.fileWritter = fileWritter;
   }
 
-  public async execute(error: Error): Promise<void> {
+  public async execute(error: Error, content = ""): Promise<void> {
     const errorFilePath = "src/main/logs/error.log";
     const errorText = `\n${new Date().toLocaleString()} - ${error.message} - ${
       error.stack
-    }`;
+    }\n${content}`;
     return await this.fileWritter.writeInFile(errorFilePath, errorText);
   }
 }
