@@ -1,4 +1,4 @@
-import { HashValidatorInterface, HasherInterface } from "../../domain/abstract";
+import { HashValidatorInterface, HasherInterface } from "../../data/protocols";
 import { hashSync, compareSync } from "bcrypt";
 
 export class HasherAdapter implements HasherInterface, HashValidatorInterface {

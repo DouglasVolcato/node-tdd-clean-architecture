@@ -1,15 +1,12 @@
+import { LoginServiceInterface } from "../../domain/protocols";
 import { badRequest, ok } from "../../presentation/helpers";
-import {
-  LoginDtoType,
-  LoginServiceInterface,
-  TokenDtoType,
-} from "../../domain/abstract";
+import { LoginDtoType, TokenDtoType } from "../../data/protocols";
 import { Controller } from "./controller";
 import {
   ControllerInterface,
   ControllerOutputType,
   ValidatorInterface,
-} from "../../presentation/abstract";
+} from "../../presentation/protocols";
 import {
   ValidatorBuilder,
   ValidatorComposite,

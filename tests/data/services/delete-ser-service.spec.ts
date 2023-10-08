@@ -3,9 +3,9 @@ import {
   makeUserEntity,
   throwError,
 } from "../../test-helpers";
-import { DeleteUserRepositoryInterface } from "../../../src/domain/abstract";
+import { DeleteUserRepositoryInterface } from "../../../src/data/protocols";
 import { InvalidFieldError } from "../../../src/presentation/errors";
-import { DeleteUserService } from "../../../src/domain/services";
+import { DeleteUserService } from "../../../src/data/services";
 
 type SutTypes = {
   sut: DeleteUserService;

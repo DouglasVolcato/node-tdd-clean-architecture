@@ -3,7 +3,7 @@ import {
   ControllerInputType,
   ControllerOutputType,
   ValidatorInterface,
-} from "../../../../src/presentation/abstract";
+} from "../../../../src/presentation/protocols";
 import { Controller } from "../../../../src/presentation/controllers";
 import { ok } from "../../../../src/presentation/helpers";
 import { ValidatorStub } from "../validators/validator-stub";

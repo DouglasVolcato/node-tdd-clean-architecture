@@ -1,4 +1,4 @@
-import { UserDtoType } from "../../../src/domain/abstract";
+import { UserDtoType } from "../../../src/data/protocols";
 
 export const makeValidUserDto = (): UserDtoType => ({
   name: "Douglas",

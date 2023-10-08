@@ -2,7 +2,7 @@ import {
   ControllerInputType,
   MiddlewareInterface,
   ValidatorInterface,
-} from "../../presentation/abstract";
+} from "../../presentation/protocols";
 import { ServerError } from "../../presentation/errors";
 
 export abstract class Middleware implements MiddlewareInterface {

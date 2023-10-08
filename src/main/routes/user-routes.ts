@@ -1,5 +1,5 @@
 import { makeDeleteUserControllerFactory } from "../../main/factories/controllers/delete-user-controller-factory";
-import { RouteDtoType, RouteEnumType } from "../abstract";
+import { RouteDtoType, RouteEnumType } from "../protocols";
 import { makeCreateUserControllerFactory } from "../factories";
 import { makeUserAuthMiddlewareFactory } from "../../main/factories/middlewares/user-auth-middleware-factory";
 

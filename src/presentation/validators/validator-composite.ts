@@ -1,4 +1,4 @@
-import { ValidatorInterface } from "../../presentation/abstract";
+import { ValidatorInterface } from "../../presentation/protocols";
 
 export class ValidatorComposite implements ValidatorInterface {
   private validators!: ValidatorInterface[];

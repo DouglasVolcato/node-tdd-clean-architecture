@@ -1,7 +1,5 @@
-import {
-  DeleteUserRepositoryInterface,
-  UserEntityType,
-} from "../../../../src/domain/abstract";
+import { DeleteUserRepositoryInterface } from "../../../../src/data/protocols";
+import { UserEntityType } from "../../../../src/domain/protocols";
 import { makeUserEntity } from "../../entities/user-entity-helper";
 
 export class DeleteUserRepositoryStub implements DeleteUserRepositoryInterface {

@@ -1,7 +1,7 @@
 import { ErrorLogControllerDecorator } from "../../../src/presentation/decorators";
-import { ErrorLogServiceInterface } from "../../../src/domain/abstract";
-import { ControllerInterface } from "../../../src/presentation/abstract";
+import { ControllerInterface } from "../../../src/presentation/protocols";
 import { ControllerStub, ErrorLogServiceStub } from "../../test-helpers";
+import { ErrorLogServiceInterface } from "../../../src/domain/protocols";
 
 const makeRequest = (): any => ({
   property1: "any_value",

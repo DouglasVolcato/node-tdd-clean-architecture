@@ -1,10 +1,10 @@
-import { Middleware } from "./middleware";
-import { GetUserByTokenServiceInterface } from "../../domain/abstract";
+import { GetUserByTokenServiceInterface } from "../../domain/protocols";
 import { UnauthorizedError } from "../../presentation/errors";
+import { Middleware } from "./middleware";
 import {
   MiddlewareInterface,
   ValidatorInterface,
-} from "../../presentation/abstract";
+} from "../../presentation/protocols";
 import {
   ValidatorBuilder,
   ValidatorComposite,

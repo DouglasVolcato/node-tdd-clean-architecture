@@ -1,7 +1,7 @@
 import {
   TokenGeneratorInterface,
   TokenDecrypterInterface,
-} from "../../domain/abstract";
+} from "../../data/protocols";
 import { JwtPayload, sign, verify } from "jsonwebtoken";
 
 export class TokenHandlerAdapter

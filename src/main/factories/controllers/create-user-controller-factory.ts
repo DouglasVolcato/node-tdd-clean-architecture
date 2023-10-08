@@ -1,9 +1,9 @@
 import { UserRepository } from "../../../infra/database";
-import { CreateUserService } from "../../../domain/services";
+import { CreateUserService } from "../../../data/services";
 import { HasherAdapter, IdGeneratorAdapter } from "../../../infra/adapters";
 import { CreateUserController } from "../../../presentation/controllers";
 import { makeErrorLogControllerDecoratorFactory } from "../decorators/error-log-decorator-factory";
-import { ControllerInterface } from "../../../presentation/abstract";
+import { ControllerInterface } from "../../../presentation/protocols";
 
 export function makeCreateUserControllerFactory(): ControllerInterface {
   const idGenerator = new IdGeneratorAdapter();

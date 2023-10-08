@@ -1,12 +1,12 @@
+import { LoginServiceInterface } from "../../domain/protocols";
 import { InvalidFieldError } from "../../presentation/errors";
 import { Env } from "../../main/config";
 import {
-  LoginServiceInterface,
   GetUserByEmailRepositoryInterface,
   HashValidatorInterface,
   TokenGeneratorInterface,
   LoginDtoType,
-} from "../../domain/abstract";
+} from "../../data/protocols";
 
 export class LoginService implements LoginServiceInterface {
   private readonly getUserByEmailRepository: GetUserByEmailRepositoryInterface;

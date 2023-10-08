@@ -1,7 +1,5 @@
-import {
-  ErrorLogServiceInterface,
-  FileWritterInterface,
-} from "../../domain/abstract";
+import { ErrorLogServiceInterface } from "../../domain/protocols";
+import { FileWritterInterface } from "../../data/protocols";
 
 export class ErrorLogService implements ErrorLogServiceInterface {
   private readonly fileWritter: FileWritterInterface;

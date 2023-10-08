@@ -1,4 +1,4 @@
-import { ValidatorInterface } from "../../../src/presentation/abstract";
+import { ValidatorInterface } from "../../../src/presentation/protocols";
 import {
   RequiredFieldError,
   ServerError,

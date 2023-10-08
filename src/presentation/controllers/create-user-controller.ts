@@ -1,20 +1,20 @@
+import { UserDtoType } from "../../data/protocols";
+import { badRequest, ok } from "../helpers";
+import { Controller } from "./controller";
 import {
   ControllerInputType,
   ControllerInterface,
   ControllerOutputType,
   ValidatorInterface,
-} from "../abstract";
-import {
-  CreateUserServiceInterface,
-  UserDtoType,
-  UserEntityType,
-} from "../../domain/abstract";
-import { badRequest, ok } from "../helpers";
-import { Controller } from "./controller";
+} from "../protocols";
 import {
   ValidatorBuilder,
   ValidatorComposite,
 } from "../../presentation/validators";
+import {
+  CreateUserServiceInterface,
+  UserEntityType,
+} from "../../domain/protocols";
 
 export class CreateUserController
   extends Controller

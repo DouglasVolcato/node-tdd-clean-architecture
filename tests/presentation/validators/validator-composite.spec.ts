@@ -1,6 +1,6 @@
 import { ValidatorComposite } from "../../../src/presentation/validators/validator-composite";
 import { ValidatorStub, makeUserDto } from "../../../tests/test-helpers";
-import { ValidatorInterface } from "../../../src/presentation/abstract";
+import { ValidatorInterface } from "../../../src/presentation/protocols";
 
 type SutTypes = {
   sut: ValidatorComposite;

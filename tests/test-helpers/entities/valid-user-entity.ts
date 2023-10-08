@@ -1,5 +1,5 @@
+import { UserEntityType } from "../../../src/domain/protocols";
 import { HasherAdapter } from "../../../src/infra/adapters";
-import { UserEntityType } from "../../../src/domain/abstract";
 
 export const makeValidUserEntity = (): UserEntityType => ({
   id: "23h9f82hf892h8",

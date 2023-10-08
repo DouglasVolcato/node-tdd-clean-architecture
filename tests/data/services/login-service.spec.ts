@@ -1,11 +1,11 @@
-import { LoginService } from "../../../src/domain/services/login-service";
+import { LoginService } from "../../../src/data/services";
 import { makeLoginDto } from "../../test-helpers/dtos/login-dto";
 import { InvalidFieldError } from "../../../src/presentation/errors";
 import { Env } from "../../../src/main/config";
 import {
   TokenGeneratorInterface,
   HashValidatorInterface,
-} from "../../../src/domain/abstract";
+} from "../../../src/data/protocols";
 import {
   GetUserByEmailRepositoryStub,
   HashValidatorStub,

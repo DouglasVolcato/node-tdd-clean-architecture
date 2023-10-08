@@ -1,6 +1,6 @@
 import { GetUserByIdRepositoryStub } from "../../test-helpers/stubs/repositories/get-user-by-id-repository-stub";
 import { InvalidFieldError } from "../../../src/presentation/errors";
-import { GetUserByTokenService } from "../../../src/domain/services";
+import { GetUserByTokenService } from "../../../src/data/services";
 import { Env } from "../../../src/main/config";
 import {
   TokenDecrypterStub,
@@ -10,7 +10,7 @@ import {
 import {
   GetUserByIdRepositoryInterface,
   TokenDecrypterInterface,
-} from "../../../src/domain/abstract";
+} from "../../../src/data/protocols";
 
 const vars = new Env().getVariables();
 

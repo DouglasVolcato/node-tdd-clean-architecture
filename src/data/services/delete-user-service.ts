@@ -1,9 +1,9 @@
 import { InvalidFieldError } from "../../presentation/errors";
+import { DeleteUserRepositoryInterface } from "../../data/protocols";
 import {
-  DeleteUserRepositoryInterface,
   DeleteUserServiceInterface,
   UserEntityType,
-} from "../../domain/abstract";
+} from "../../domain/protocols";
 
 export class DeleteUserService implements DeleteUserServiceInterface {
   private readonly deleteUserRepository: DeleteUserRepositoryInterface;

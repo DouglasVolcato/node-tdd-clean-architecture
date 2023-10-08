@@ -1,8 +1,8 @@
-import { ErrorLogServiceInterface } from "../../domain/abstract";
+import { ErrorLogServiceInterface } from "../../domain/protocols";
 import {
   ControllerInterface,
   ControllerOutputType,
-} from "../../presentation/abstract";
+} from "../../presentation/protocols";
 
 export class ErrorLogControllerDecorator implements ControllerInterface {
   private readonly controller: ControllerInterface;

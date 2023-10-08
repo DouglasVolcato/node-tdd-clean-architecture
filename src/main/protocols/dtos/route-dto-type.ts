@@ -1,7 +1,7 @@
 import {
   ControllerInterface,
   MiddlewareInterface,
-} from "../../../presentation/abstract";
+} from "../../../presentation/protocols";
 
 export enum RouteEnumType {
   GET = "get",

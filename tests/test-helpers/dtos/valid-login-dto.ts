@@ -1,4 +1,4 @@
-import { LoginDtoType } from "../../../src/domain/abstract";
+import { LoginDtoType } from "../../../src/data/protocols";
 
 export const makeValidLoginDto = (): LoginDtoType => ({
   password: "Test123",

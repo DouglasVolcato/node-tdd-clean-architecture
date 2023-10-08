@@ -1,7 +1,7 @@
 import express, { Express, NextFunction, Request, Response } from "express";
-import { MiddlewareInterface } from "../../presentation/abstract";
+import { MiddlewareInterface } from "../../presentation/protocols";
 import { ServerError } from "../../presentation/errors";
-import { RouteDtoType } from "../abstract";
+import { RouteDtoType } from "../protocols";
 import bodyParser from "body-parser";
 import cors from "cors";
 

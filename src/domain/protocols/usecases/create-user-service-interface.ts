@@ -1,4 +1,4 @@
-import { UserDtoType } from "../dtos/user-dto-type";
+import { UserDtoType } from "../../../data/protocols";
 import { UserEntityType } from "../entities/user-entity-type";
 
 export interface CreateUserServiceInterface {

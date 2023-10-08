@@ -1,4 +1,4 @@
-import { FileWritterInterface } from "../../../src/domain/abstract";
+import { FileWritterInterface } from "../../../src/data/protocols";
 import { appendFile } from "fs/promises";
 
 export class FileHandlerAdapter implements FileWritterInterface {

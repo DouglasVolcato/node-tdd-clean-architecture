@@ -1,4 +1,4 @@
-import { ControllerOutputType } from "../../../presentation/abstract";
+import { ControllerOutputType } from "../../../presentation/protocols";
 import { ServerError } from "../../../presentation/errors";
 
 export const serverError = (

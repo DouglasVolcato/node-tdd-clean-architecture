@@ -1,13 +1,13 @@
+import { CreateUserServiceInterface } from "../../../src/domain/protocols";
 import { InvalidFieldError } from "../../../src/presentation/errors";
-import { CreateUserService } from "../../../src/domain/services";
+import { CreateUserService } from "../../../src/data/services";
 import {
-  CreateUserServiceInterface,
   GetUserByEmailRepositoryInterface,
   UserDtoType,
   HasherInterface,
   IdGeneratorInterface,
   CreateUserRepositoryInterface,
-} from "../../../src/domain/abstract";
+} from "../../../src/data/protocols";
 import {
   CreateUserRepositoryStub,
   GetUserByEmailRepositoryStub,
@@ -16,7 +16,7 @@ import {
   makeUserDto,
   makeUserEntity,
   throwError,
-} from "../../../tests/test-helpers";
+} from "../../test-helpers";
 
 type SutTypes = {
   sut: CreateUserServiceInterface;

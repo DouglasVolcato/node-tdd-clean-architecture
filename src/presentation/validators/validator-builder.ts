@@ -2,7 +2,7 @@ import { EmailValidatorAdapter } from "../../infra/adapters";
 import {
   EmailValidatorInterface,
   ValidatorBuilderInterface,
-} from "../abstract";
+} from "../protocols";
 import { InvalidFieldError, RequiredFieldError } from "../errors";
 
 export class ValidatorBuilder implements ValidatorBuilderInterface {

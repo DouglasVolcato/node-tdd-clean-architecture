@@ -1,11 +1,11 @@
+import { UserEntityType } from "../../../domain/protocols";
 import { UserModel } from "../models/user-model";
 import {
   CreateUserRepositoryInterface,
   DeleteUserRepositoryInterface,
   GetUserByEmailRepositoryInterface,
   GetUserByIdRepositoryInterface,
-  UserEntityType,
-} from "../../../domain/abstract";
+} from "../../../data/protocols";
 
 export class UserRepository
   implements

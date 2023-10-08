@@ -1,4 +1,4 @@
-import { IdGeneratorInterface } from "../../../../src/domain/abstract";
+import { IdGeneratorInterface } from "../../../../src/data/protocols";
 
 export class IdGeneratorStub implements IdGeneratorInterface {
   public generateId(): string {

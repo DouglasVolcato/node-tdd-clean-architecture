@@ -1,5 +1,5 @@
 import { UnauthorizedError } from "../../../presentation/errors";
-import { ControllerOutputType } from "../../../presentation/abstract";
+import { ControllerOutputType } from "../../../presentation/protocols";
 
 export const unauthorized = (): ControllerOutputType<Error> => ({
   statusCode: 401,

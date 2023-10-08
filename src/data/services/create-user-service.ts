@@ -1,13 +1,12 @@
+import { CreateUserServiceInterface, UserEntityType } from "../../domain/protocols";
 import { InvalidFieldError } from "../../presentation/errors";
 import {
-  CreateUserServiceInterface,
   GetUserByEmailRepositoryInterface,
   UserDtoType,
   HasherInterface,
   IdGeneratorInterface,
   CreateUserRepositoryInterface,
-  UserEntityType,
-} from "../abstract";
+} from "../protocols";
 
 export class CreateUserService implements CreateUserServiceInterface {
   private readonly createUserRepository: CreateUserRepositoryInterface;

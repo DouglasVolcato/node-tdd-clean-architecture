@@ -1,5 +1,5 @@
+import { CreateUserServiceInterface } from "../../../src/domain/protocols";
 import { CreateUserController } from "../../../src/presentation/controllers";
-import { CreateUserServiceInterface } from "../../../src/domain/abstract";
 import { InvalidFieldError } from "../../../src/presentation/errors";
 import {
   CreateUserServiceStub,

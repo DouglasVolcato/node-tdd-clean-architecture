@@ -3,7 +3,7 @@ import {
   ControllerInputType,
   ControllerOutputType,
   ValidatorInterface,
-} from "../abstract";
+} from "../protocols";
 import { badRequest, serverError } from "../helpers";
 
 export abstract class Controller implements ControllerInterface {

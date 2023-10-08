@@ -1,4 +1,4 @@
-import { TokenDecrypterInterface } from "../../../../src/domain/abstract";
+import { TokenDecrypterInterface } from "../../../../src/data/protocols";
 
 export class TokenDecrypterStub implements TokenDecrypterInterface {
   public decryptToken(token: string, secret: string): string {

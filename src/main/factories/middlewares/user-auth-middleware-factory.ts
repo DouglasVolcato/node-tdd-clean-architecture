@@ -1,4 +1,4 @@
-import { GetUserByTokenService } from "../../../domain/services";
+import { GetUserByTokenService } from "../../../data/services";
 import { TokenHandlerAdapter } from "../../../infra/adapters/token-handler-adapter";
 import { UserRepository } from "../../../infra/database";
 import { UserAuthMiddleware } from "../../../presentation/middlewares";

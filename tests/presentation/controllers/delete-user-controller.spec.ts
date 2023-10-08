@@ -1,5 +1,5 @@
+import { DeleteUserServiceInterface } from "../../../src/domain/protocols";
 import { DeleteUserController } from "../../../src/presentation/controllers";
-import { DeleteUserServiceInterface } from "../../../src/domain/abstract";
 import { InvalidFieldError } from "../../../src/presentation/errors";
 import {
   badRequest,

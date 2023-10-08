@@ -1,4 +1,4 @@
-import { GetUserByTokenServiceInterface } from "../../../src/domain/abstract";
+import { GetUserByTokenServiceInterface } from "../../../src/domain/protocols";
 import { UserAuthMiddleware } from "../../../src/presentation/middlewares";
 import {
   GetUserByTokenServiceStub,

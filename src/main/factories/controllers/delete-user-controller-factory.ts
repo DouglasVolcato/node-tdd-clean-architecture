@@ -1,5 +1,5 @@
-import { ControllerInterface } from "../../../presentation/abstract";
-import { DeleteUserService } from "../../../domain/services";
+import { ControllerInterface } from "../../../presentation/protocols";
+import { DeleteUserService } from "../../../data/services";
 import { UserRepository } from "../../../infra/database";
 import { DeleteUserController } from "../../../presentation/controllers";
 import { makeErrorLogControllerDecoratorFactory } from "../decorators/error-log-decorator-factory";

@@ -4,15 +4,15 @@ import {
   ControllerInterface,
   ControllerOutputType,
   ValidatorInterface,
-} from "../../presentation/abstract";
-import {
-  DeleteUserServiceInterface,
-  UserEntityType,
-} from "../../domain/abstract";
+} from "../../presentation/protocols";
 import {
   ValidatorBuilder,
   ValidatorComposite,
 } from "../../presentation/validators";
+import {
+  DeleteUserServiceInterface,
+  UserEntityType,
+} from "../../domain/protocols";
 
 export class DeleteUserController
   extends Controller

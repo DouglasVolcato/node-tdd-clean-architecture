@@ -1,6 +1,6 @@
-import { ErrorLogService } from "../../../domain/services";
+import { ErrorLogService } from "../../../data/services";
 import { FileHandlerAdapter } from "../../../infra/adapters";
-import { ControllerInterface } from "../../../presentation/abstract";
+import { ControllerInterface } from "../../../presentation/protocols";
 import { ErrorLogControllerDecorator } from "../../../presentation/decorators";
 
 export function makeErrorLogControllerDecoratorFactory(

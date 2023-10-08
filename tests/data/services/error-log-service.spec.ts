@@ -1,9 +1,7 @@
-import { ErrorLogService } from "../../../src/domain/services";
+import { ErrorLogServiceInterface } from "../../../src/domain/protocols";
+import { ErrorLogService } from "../../../src/data/services";
 import { FileWritterStub, throwError } from "../../test-helpers";
-import {
-  ErrorLogServiceInterface,
-  FileWritterInterface,
-} from "../../../src/domain/abstract";
+import { FileWritterInterface } from "../../../src/data/protocols";
 
 Date.prototype.toLocaleString = jest
   .fn()

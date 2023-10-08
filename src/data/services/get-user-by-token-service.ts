@@ -1,11 +1,13 @@
-import {
-  GetUserByIdRepositoryInterface,
-  GetUserByTokenServiceInterface,
-  TokenDecrypterInterface,
-  UserEntityType,
-} from "../../domain/abstract";
 import { Env } from "../../main/config";
 import { InvalidFieldError } from "../../presentation/errors";
+import {
+  GetUserByTokenServiceInterface,
+  UserEntityType,
+} from "../../domain/protocols";
+import {
+  TokenDecrypterInterface,
+  GetUserByIdRepositoryInterface,
+} from "../protocols";
 
 export class GetUserByTokenService implements GetUserByTokenServiceInterface {
   private readonly tokenValidator: TokenDecrypterInterface;

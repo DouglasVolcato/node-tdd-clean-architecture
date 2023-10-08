@@ -1,8 +1,8 @@
+import { makeUserEntity } from "../../entities/user-entity-helper";
 import {
   DeleteUserServiceInterface,
   UserEntityType,
-} from "../../../../src/domain/abstract";
-import { makeUserEntity } from "../../entities/user-entity-helper";
+} from "../../../../src/domain/protocols";
 
 export class DeleteUserServiceStub implements DeleteUserServiceInterface {
   public execute(id: string): Promise<Error | UserEntityType> {

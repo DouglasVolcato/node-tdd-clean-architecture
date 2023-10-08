@@ -3,7 +3,7 @@ import { ValidatorBuilder } from "../../../src/presentation/validators";
 import {
   EmailValidatorInterface,
   ValidatorBuilderInterface,
-} from "../../../src/presentation/abstract";
+} from "../../../src/presentation/protocols";
 import {
   InvalidFieldError,
   RequiredFieldError,

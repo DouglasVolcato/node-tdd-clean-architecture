@@ -1,8 +1,8 @@
+import { makeUserEntity } from "../../entities/user-entity-helper";
 import {
   GetUserByTokenServiceInterface,
   UserEntityType,
-} from "../../../../src/domain/abstract";
-import { makeUserEntity } from "../../entities/user-entity-helper";
+} from "../../../../src/domain/protocols";
 
 export class GetUserByTokenServiceStub
   implements GetUserByTokenServiceInterface

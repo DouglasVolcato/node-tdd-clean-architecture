@@ -1,4 +1,4 @@
-import { RouteDtoType, RouteEnumType } from "../abstract";
+import { RouteDtoType, RouteEnumType } from "../protocols";
 import { makeLoginControllerFactory } from "../factories";
 
 export const loginRoutes: RouteDtoType[] = [

@@ -1,4 +1,4 @@
-import { ErrorLogServiceInterface } from "../../../../src/domain/abstract";
+import { ErrorLogServiceInterface } from "../../../../src/domain/protocols";
 
 export class ErrorLogServiceStub implements ErrorLogServiceInterface {
   public async execute(error: Error): Promise<void> {

@@ -3,7 +3,7 @@ import { ValidatorStub } from "../validators/validator-stub";
 import {
   MiddlewareInterface,
   ValidatorInterface,
-} from "../../../../src/presentation/abstract";
+} from "../../../../src/presentation/protocols";
 
 export class MiddlewareStub extends Middleware implements MiddlewareInterface {
   public constructor() {
