@@ -1,6 +1,6 @@
 import { ErrorLogServiceInterface } from "../../../src/domain/protocols";
 import { ErrorLogService } from "../../../src/data/services";
-import { FileWritterStub, throwError } from "../../test-helpers";
+import { FileWritterStub, makeLoginDto, throwError } from "../../test-helpers";
 import { FileWritterInterface } from "../../../src/data/protocols";
 
 Date.prototype.toLocaleString = jest
@@ -9,9 +9,10 @@ Date.prototype.toLocaleString = jest
 
 const error = new Error("any_error");
 const errorFilePath = "src/main/logs/error.log";
+const requestContent = JSON.stringify(makeLoginDto());
 const errorText = `\n${new Date().toLocaleString()} - ${error.message} - ${
   error.stack
-}`;
+}\n${requestContent}`;
 
 type SutTypes = {
   sut: ErrorLogServiceInterface;
@@ -28,7 +29,7 @@ describe("ErrorLogService", () => {
   it("Should call FileWritter with correct values", async () => {
     const { sut, fileWritterStub } = makeSut();
     const fileWritterSpy = jest.spyOn(fileWritterStub, "writeInFile");
-    await sut.execute(error);
+    await sut.execute(error, requestContent);
 
     expect(fileWritterSpy).toHaveBeenCalledTimes(1);
     expect(fileWritterSpy).toHaveBeenCalledWith(errorFilePath, errorText);

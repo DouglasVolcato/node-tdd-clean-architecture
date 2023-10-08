@@ -63,7 +63,10 @@ describe("ErrorLogControllerDecorator", () => {
     await sut.execute(makeRequest());
 
     expect(errorLogServiceSpy).toHaveBeenCalledTimes(1);
-    expect(errorLogServiceSpy).toHaveBeenCalledWith(controllerResponse.data);
+    expect(errorLogServiceSpy).toHaveBeenCalledWith(
+      controllerResponse.data,
+      JSON.stringify(makeRequest())
+    );
   });
 
   it("Should not call ErrorLogService if status code is not 500 and data is an error", async () => {
