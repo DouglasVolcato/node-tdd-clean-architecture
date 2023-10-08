@@ -1,6 +1,8 @@
 {
-  "name": "clean-architecture-example",
+  "name": "node-tdd-clean-architecture",
   "version": "1.0.0",
+  "author": "Douglas Volcato",
+  "license": "ISC",
   "scripts": {
     "start": "tsc && node dist/src/main/index.js",
     "test": "npm run test-unit && npm run test-integration",
@@ -9,9 +11,6 @@
     "test-watch": "jest --passWithNoTests --watch -c jest-unit-config.json",
     "test-coverage": "jest --passWithNoTests --coverage -c jest-unit-config.json"
   },
-  "keywords": [],
-  "author": "Douglas Volcato",
-  "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
