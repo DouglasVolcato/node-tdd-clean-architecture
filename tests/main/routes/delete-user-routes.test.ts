@@ -18,7 +18,7 @@ const makeValidToken = () =>
     expiresIn: 86400,
   });
 
-describe("Create user routes", () => {
+describe("Delete user routes", () => {
   beforeAll(async () => {
     frameworkAdapter = new FrameWorkAdapter(userRoutes, vars.PORT);
     app = (frameworkAdapter as any).app;
