@@ -1,7 +1,10 @@
-import { makeDeleteUserControllerFactory } from "../../main/factories/controllers/delete-user-controller-factory";
+import {
+  makeDeleteUserControllerFactory,
+  makeUserAuthMiddlewareFactory,
+  makeGetUserByTokenFactoryFactory,
+} from "../../main/factories";
 import { RouteDtoType, RouteEnumType } from "../protocols";
 import { makeCreateUserControllerFactory } from "../factories";
-import { makeUserAuthMiddlewareFactory } from "../../main/factories/middlewares/user-auth-middleware-factory";
 
 export const userRoutes: RouteDtoType[] = [
   {
@@ -14,5 +17,10 @@ export const userRoutes: RouteDtoType[] = [
     url: "/user/delete/:id",
     controller: makeDeleteUserControllerFactory(),
     middleware: makeUserAuthMiddlewareFactory(),
+  },
+  {
+    type: RouteEnumType.GET,
+    url: "/user/get/token",
+    controller: makeGetUserByTokenFactoryFactory(),
   },
 ];
