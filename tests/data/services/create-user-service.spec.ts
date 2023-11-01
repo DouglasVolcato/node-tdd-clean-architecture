@@ -67,7 +67,7 @@ describe("CreateUserService", () => {
       .mockReturnValueOnce(Promise.resolve(makeUserEntity()));
     const error = await sut.execute(makeUserDto());
 
-    expect(error).toEqual(new InvalidFieldError("email already registered"));
+    expect(error).toEqual(new InvalidFieldError("email"));
   });
 
   it("Should call idGenerator", async () => {

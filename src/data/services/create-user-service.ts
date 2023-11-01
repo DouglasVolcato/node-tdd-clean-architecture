@@ -30,7 +30,7 @@ export class CreateUserService implements CreateUserServiceInterface {
     const foundUser = await this.getUserByEmailRepository.getByEmail(
       userDto.email
     );
-    if (foundUser) return new InvalidFieldError("email already registered");
+    if (foundUser) return new InvalidFieldError("email");
     const id = this.idGenerator.generateId();
     const hashedPassword = this.hasher.hash(userDto.password);
     return await this.createUserRepository.create({
