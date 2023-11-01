@@ -5,7 +5,7 @@ import { ControllerInterface } from "../../../presentation/protocols";
 import { GetUserByTokenService } from "../../../data/services";
 import { UserRepository } from "../../../infra/database";
 
-export function makeGetUserByTokenFactoryFactory(): ControllerInterface {
+export function makeGetUserByTokenFactory(): ControllerInterface {
   const getUserByIdRepository = new UserRepository();
   const tokenValidator = new TokenHandlerAdapter();
   const getUserByTokenService = new GetUserByTokenService(

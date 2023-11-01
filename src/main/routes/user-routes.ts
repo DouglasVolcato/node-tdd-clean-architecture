@@ -1,7 +1,7 @@
 import {
   makeDeleteUserControllerFactory,
   makeUserAuthMiddlewareFactory,
-  makeGetUserByTokenFactoryFactory,
+  makeGetUserByTokenFactory,
 } from "../../main/factories";
 import { RouteDtoType, RouteEnumType } from "../protocols";
 import { makeCreateUserControllerFactory } from "../factories";
@@ -21,6 +21,6 @@ export const userRoutes: RouteDtoType[] = [
   {
     type: RouteEnumType.GET,
     url: "/user/get/token",
-    controller: makeGetUserByTokenFactoryFactory(),
+    controller: makeGetUserByTokenFactory(),
   },
 ];
