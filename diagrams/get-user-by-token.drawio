@@ -1,14 +1,14 @@
 <mxfile host="65bd71144e">
     <diagram id="zK1dI7uxoi_cO0yVkpNh" name="Page-1">
-        <mxGraphModel dx="1041" dy="649" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="885" dy="552" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <mxCell id="140" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#006353;fontColor=#ffffff;strokeColor=#005700;" parent="1" vertex="1">
-                    <mxGeometry x="620" y="640" width="550" height="200" as="geometry"/>
+                    <mxGeometry x="670" y="640" width="500" height="200" as="geometry"/>
                 </mxCell>
                 <mxCell id="28" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#76608a;fontColor=#ffffff;strokeColor=#432D57;" parent="1" vertex="1">
-                    <mxGeometry x="620" y="860" width="550" height="210" as="geometry"/>
+                    <mxGeometry x="670" y="860" width="500" height="210" as="geometry"/>
                 </mxCell>
                 <mxCell id="25" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" parent="1" vertex="1">
                     <mxGeometry x="700" y="520" width="440" height="110" as="geometry"/>
@@ -56,7 +56,7 @@
                     <mxGeometry x="700" y="520" width="90" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="29" value="INFRA" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-                    <mxGeometry x="620" y="860" width="80" height="30" as="geometry"/>
+                    <mxGeometry x="670" y="860" width="80" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="62" value="Framework" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="1" vertex="1">
                     <mxGeometry x="1034.5" y="50" width="120" height="60" as="geometry"/>
@@ -150,7 +150,7 @@
                     <mxGeometry x="490" y="290" width="150" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="141" value="DATA" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-                    <mxGeometry x="620" y="640" width="69.5" height="30" as="geometry"/>
+                    <mxGeometry x="670" y="640" width="69.5" height="30" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
