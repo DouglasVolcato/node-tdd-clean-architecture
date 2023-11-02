@@ -1,4 +1,4 @@
-import { CreateUserServiceInterface } from "../../../src/domain/protocols";
+import { CreateUserUseCaseInterface } from "../../../src/domain/protocols";
 import { InvalidFieldError } from "../../../src/presentation/errors";
 import { CreateUserService } from "../../../src/data/services";
 import {
@@ -19,7 +19,7 @@ import {
 } from "../../test-helpers";
 
 type SutTypes = {
-  sut: CreateUserServiceInterface;
+  sut: CreateUserUseCaseInterface.Service;
   createUserRepositoryStub: CreateUserRepositoryInterface;
   getUserByEmailRepositoryStub: GetUserByEmailRepositoryInterface;
   idGeneratorStub: IdGeneratorInterface;

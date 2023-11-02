@@ -12,7 +12,7 @@ import {
   ValidatorComposite,
 } from "../../presentation/validators";
 import {
-  CreateUserServiceInterface,
+  CreateUserUseCaseInterface,
   UserEntityType,
 } from "../../domain/protocols";
 
@@ -20,9 +20,9 @@ export class CreateUserController
   extends Controller
   implements ControllerInterface
 {
-  private readonly createUserService: CreateUserServiceInterface;
+  private readonly createUserService: CreateUserUseCaseInterface.Service;
 
-  public constructor(createUserService: CreateUserServiceInterface) {
+  public constructor(createUserService: CreateUserUseCaseInterface.Service) {
     super();
     this.createUserService = createUserService;
   }

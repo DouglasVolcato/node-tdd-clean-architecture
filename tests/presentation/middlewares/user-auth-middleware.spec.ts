@@ -1,4 +1,4 @@
-import { GetUserByTokenServiceInterface } from "../../../src/domain/protocols";
+import { GetUserByTokenUseCaseInterface } from "../../../src/domain/protocols";
 import { UserAuthMiddleware } from "../../../src/presentation/middlewares";
 import {
   GetUserByTokenServiceStub,
@@ -17,7 +17,7 @@ const makeAuthenticatedRequest = () => {
 
 type SutTypes = {
   sut: UserAuthMiddleware;
-  getUserByTokenServiceStub: GetUserByTokenServiceInterface;
+  getUserByTokenServiceStub: GetUserByTokenUseCaseInterface.Service;
 };
 
 const makeSut = (): SutTypes => {
@@ -37,7 +37,9 @@ describe("UserAuthMiddleware", () => {
     await sut.execute(request);
 
     expect(getUserByTokenServiceSpy).toHaveBeenCalledTimes(1);
-    expect(getUserByTokenServiceSpy).toHaveBeenCalledWith("any_token");
+    expect(getUserByTokenServiceSpy).toHaveBeenCalledWith({
+      token: "any_token",
+    });
   });
 
   it("Should return the found user", async () => {

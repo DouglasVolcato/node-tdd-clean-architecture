@@ -1,15 +1,14 @@
 import { Env } from "../../main/config";
 import { InvalidFieldError } from "../../presentation/errors";
-import {
-  GetUserByTokenServiceInterface,
-  UserEntityType,
-} from "../../domain/protocols";
+import { GetUserByTokenUseCaseInterface } from "../../domain/protocols";
 import {
   TokenDecrypterInterface,
   GetUserByIdRepositoryInterface,
 } from "../protocols";
 
-export class GetUserByTokenService implements GetUserByTokenServiceInterface {
+export class GetUserByTokenService
+  implements GetUserByTokenUseCaseInterface.Service
+{
   private readonly tokenValidator: TokenDecrypterInterface;
   private readonly getUserByIdRepository: GetUserByIdRepositoryInterface;
 
@@ -21,7 +20,9 @@ export class GetUserByTokenService implements GetUserByTokenServiceInterface {
     this.getUserByIdRepository = getUserByIdRepository;
   }
 
-  public async execute(token: string): Promise<UserEntityType | Error> {
+  public async execute({
+    token,
+  }: GetUserByTokenUseCaseInterface.Input): Promise<GetUserByTokenUseCaseInterface.Output> {
     const vars = new Env().getVariables();
     const userId = this.tokenValidator.decryptToken(token, vars.SECRET);
     if (!userId) return new InvalidFieldError("token");

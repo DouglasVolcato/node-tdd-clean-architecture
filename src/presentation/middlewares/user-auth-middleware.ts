@@ -1,4 +1,4 @@
-import { GetUserByTokenServiceInterface } from "../../domain/protocols";
+import { GetUserByTokenUseCaseInterface } from "../../domain/protocols";
 import { UnauthorizedError } from "../../presentation/errors";
 import { Middleware } from "./middleware";
 import {
@@ -14,9 +14,11 @@ export class UserAuthMiddleware
   extends Middleware
   implements MiddlewareInterface
 {
-  private readonly getUserByTokenService: GetUserByTokenServiceInterface;
+  private readonly getUserByTokenService: GetUserByTokenUseCaseInterface.Service;
 
-  public constructor(getUserByTokenService: GetUserByTokenServiceInterface) {
+  public constructor(
+    getUserByTokenService: GetUserByTokenUseCaseInterface.Service
+  ) {
     super();
     this.getUserByTokenService = getUserByTokenService;
   }
@@ -26,9 +28,9 @@ export class UserAuthMiddleware
     if (!authorizationSplit || authorizationSplit[0] !== "Bearer") {
       return new UnauthorizedError();
     }
-    const foundUser = await this.getUserByTokenService.execute(
-      authorizationSplit[1]
-    );
+    const foundUser = await this.getUserByTokenService.execute({
+      token: authorizationSplit[1],
+    });
     if (!foundUser) {
       return new UnauthorizedError();
     }

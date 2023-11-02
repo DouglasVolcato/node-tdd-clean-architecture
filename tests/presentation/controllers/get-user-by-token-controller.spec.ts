@@ -1,4 +1,4 @@
-import { GetUserByTokenServiceInterface } from "../../../src/domain/protocols";
+import { GetUserByTokenUseCaseInterface } from "../../../src/domain/protocols";
 import { GetUserByTokenController } from "../../../src/presentation/controllers";
 import { badRequest, ok } from "../../../src/presentation/helpers";
 import {
@@ -17,7 +17,7 @@ const makeAuthenticatedRequest = () => {
 
 type SutTypes = {
   sut: GetUserByTokenController;
-  getUserByTokenServiceStub: GetUserByTokenServiceInterface;
+  getUserByTokenServiceStub: GetUserByTokenUseCaseInterface.Service;
 };
 
 const makeSut = (): SutTypes => {
@@ -37,7 +37,9 @@ describe("GetUserByTokenController", () => {
     await sut.execute(request);
 
     expect(getUserByTokenServiceSpy).toHaveBeenCalledTimes(1);
-    expect(getUserByTokenServiceSpy).toHaveBeenCalledWith("any_token");
+    expect(getUserByTokenServiceSpy).toHaveBeenCalledWith({
+      token: "any_token",
+    });
   });
 
   it("Should return the found user", async () => {

@@ -1,8 +1,9 @@
-import { LoginDtoType } from "../../../../src/data/protocols";
-import { LoginServiceInterface } from "../../../../src/domain/protocols";
+import { LoginUseCaseInterface } from "../../../../src/domain/protocols";
 
-export class LoginServiceStub implements LoginServiceInterface {
-  public async execute(login: LoginDtoType): Promise<string | Error> {
+export class LoginServiceStub implements LoginUseCaseInterface.Service {
+  public async execute(
+    login: LoginUseCaseInterface.Input
+  ): Promise<LoginUseCaseInterface.Output> {
     return Promise.resolve("valid_token");
   }
 }

@@ -1,4 +1,4 @@
-import { LoginServiceInterface } from "../../domain/protocols";
+import { LoginUseCaseInterface } from "../../domain/protocols";
 import { InvalidFieldError } from "../../presentation/errors";
 import { Env } from "../../main/config";
 import {
@@ -8,7 +8,7 @@ import {
   LoginDtoType,
 } from "../../data/protocols";
 
-export class LoginService implements LoginServiceInterface {
+export class LoginService implements LoginUseCaseInterface.Service {
   private readonly getUserByEmailRepository: GetUserByEmailRepositoryInterface;
   private readonly hashValidator: HashValidatorInterface;
   private readonly tokenGenerator: TokenGeneratorInterface;
@@ -23,7 +23,9 @@ export class LoginService implements LoginServiceInterface {
     this.tokenGenerator = tokenGenerator;
   }
 
-  public async execute(login: LoginDtoType): Promise<string | Error> {
+  public async execute(
+    login: LoginUseCaseInterface.Input
+  ): Promise<LoginUseCaseInterface.Output> {
     const vars = new Env().getVariables();
     const foundUser = await this.getUserByEmailRepository.getByEmail(
       login.email

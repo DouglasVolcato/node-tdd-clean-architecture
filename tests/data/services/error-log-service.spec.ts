@@ -1,4 +1,4 @@
-import { ErrorLogServiceInterface } from "../../../src/domain/protocols";
+import { ErrorLogUseCaseInterface } from "../../../src/domain/protocols";
 import { ErrorLogService } from "../../../src/data/services";
 import { FileWritterStub, makeLoginDto, throwError } from "../../test-helpers";
 import { FileWritterInterface } from "../../../src/data/protocols";
@@ -15,7 +15,7 @@ const errorText = `\n${new Date().toLocaleString()} - ${error.message} - ${
 }\n${requestContent}`;
 
 type SutTypes = {
-  sut: ErrorLogServiceInterface;
+  sut: ErrorLogUseCaseInterface.Service;
   fileWritterStub: FileWritterInterface;
 };
 
@@ -29,7 +29,7 @@ describe("ErrorLogService", () => {
   it("Should call FileWritter with correct values", async () => {
     const { sut, fileWritterStub } = makeSut();
     const fileWritterSpy = jest.spyOn(fileWritterStub, "writeInFile");
-    await sut.execute(error, requestContent);
+    await sut.execute({ error: error, content: requestContent });
 
     expect(fileWritterSpy).toHaveBeenCalledTimes(1);
     expect(fileWritterSpy).toHaveBeenCalledWith(errorFilePath, errorText);
@@ -41,6 +41,6 @@ describe("ErrorLogService", () => {
       .spyOn(fileWritterStub, "writeInFile")
       .mockImplementationOnce(() => throwError());
 
-    expect(async () => await sut.execute(error)).rejects.toThrow();
+    expect(async () => await sut.execute({ error })).rejects.toThrow();
   });
 });

@@ -1,4 +1,4 @@
-import { DeleteUserServiceInterface } from "../../../src/domain/protocols";
+import { DeleteUserUseCaseInterface } from "../../../src/domain/protocols";
 import { DeleteUserController } from "../../../src/presentation/controllers";
 import { InvalidFieldError } from "../../../src/presentation/errors";
 import {
@@ -19,7 +19,7 @@ const makeDeleteUserRequest = () => ({
 
 type SutTypes = {
   sut: DeleteUserController;
-  deleteUserServiceStub: DeleteUserServiceInterface;
+  deleteUserServiceStub: DeleteUserUseCaseInterface.Service;
 };
 
 const makeSut = (): SutTypes => {
@@ -36,7 +36,7 @@ describe("DeleteUserController", () => {
     await sut.execute(deleteRequest);
 
     expect(serviceSpy).toHaveBeenCalledTimes(1);
-    expect(serviceSpy).toHaveBeenCalledWith(deleteRequest.id);
+    expect(serviceSpy).toHaveBeenCalledWith({ id: deleteRequest.id });
   });
 
   it("Should return the deleted user", async () => {

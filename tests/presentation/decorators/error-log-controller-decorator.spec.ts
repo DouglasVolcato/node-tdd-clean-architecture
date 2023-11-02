@@ -1,7 +1,7 @@
 import { ErrorLogControllerDecorator } from "../../../src/presentation/decorators";
 import { ControllerInterface } from "../../../src/presentation/protocols";
 import { ControllerStub, ErrorLogServiceStub } from "../../test-helpers";
-import { ErrorLogServiceInterface } from "../../../src/domain/protocols";
+import { ErrorLogUseCaseInterface } from "../../../src/domain/protocols";
 
 const makeRequest = (): any => ({
   property1: "any_value",
@@ -11,7 +11,7 @@ const makeRequest = (): any => ({
 type SutTypes = {
   sut: ErrorLogControllerDecorator;
   controllerStub: ControllerInterface;
-  errorLogServiceStub: ErrorLogServiceInterface;
+  errorLogServiceStub: ErrorLogUseCaseInterface.Service;
 };
 
 const makeSut = (): SutTypes => {
@@ -63,10 +63,10 @@ describe("ErrorLogControllerDecorator", () => {
     await sut.execute(makeRequest());
 
     expect(errorLogServiceSpy).toHaveBeenCalledTimes(1);
-    expect(errorLogServiceSpy).toHaveBeenCalledWith(
-      controllerResponse.data,
-      JSON.stringify(makeRequest())
-    );
+    expect(errorLogServiceSpy).toHaveBeenCalledWith({
+      error: controllerResponse.data,
+      content: JSON.stringify(makeRequest()),
+    });
   });
 
   it("Should not call ErrorLogService if status code is not 500 and data is an error", async () => {
@@ -102,8 +102,8 @@ describe("ErrorLogControllerDecorator", () => {
     await sut.execute(makeRequest());
 
     expect(errorLogServiceSpy).not.toHaveBeenCalledTimes(1);
-    expect(errorLogServiceSpy).not.toHaveBeenCalledWith(
-      controllerResponse.data
-    );
+    expect(errorLogServiceSpy).not.toHaveBeenCalledWith({
+      error: controllerResponse.data,
+    });
   });
 });

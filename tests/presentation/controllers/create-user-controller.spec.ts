@@ -1,4 +1,4 @@
-import { CreateUserServiceInterface } from "../../../src/domain/protocols";
+import { CreateUserUseCaseInterface } from "../../../src/domain/protocols";
 import { CreateUserController } from "../../../src/presentation/controllers";
 import { InvalidFieldError } from "../../../src/presentation/errors";
 import {
@@ -11,7 +11,7 @@ import {
 
 type SutTypes = {
   sut: CreateUserController;
-  createUserServiceStub: CreateUserServiceInterface;
+  createUserServiceStub: CreateUserUseCaseInterface.Service;
 };
 
 const makeSut = (): SutTypes => {

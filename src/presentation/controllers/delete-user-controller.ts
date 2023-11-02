@@ -10,7 +10,7 @@ import {
   ValidatorComposite,
 } from "../../presentation/validators";
 import {
-  DeleteUserServiceInterface,
+  DeleteUserUseCaseInterface,
   UserEntityType,
 } from "../../domain/protocols";
 
@@ -18,9 +18,9 @@ export class DeleteUserController
   extends Controller
   implements ControllerInterface
 {
-  private readonly deleteUserService: DeleteUserServiceInterface;
+  private readonly deleteUserService: DeleteUserUseCaseInterface.Service;
 
-  public constructor(deleteUserService: DeleteUserServiceInterface) {
+  public constructor(deleteUserService: DeleteUserUseCaseInterface.Service) {
     super();
     this.deleteUserService = deleteUserService;
   }
@@ -29,7 +29,9 @@ export class DeleteUserController
     request: any
   ): Promise<ControllerOutputType<UserEntityType | Error>> {
     if (request.user.id !== request.id) return unauthorized();
-    const deletedUser = await this.deleteUserService.execute(request.id);
+    const deletedUser = await this.deleteUserService.execute({
+      id: request.id,
+    });
     if (deletedUser instanceof Error) return badRequest(deletedUser);
     return ok(deletedUser);
   }

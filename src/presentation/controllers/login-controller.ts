@@ -1,4 +1,4 @@
-import { LoginServiceInterface } from "../../domain/protocols";
+import { LoginUseCaseInterface } from "../../domain/protocols";
 import { badRequest, ok } from "../../presentation/helpers";
 import { LoginDtoType, TokenDtoType } from "../../data/protocols";
 import { Controller } from "./controller";
@@ -13,9 +13,9 @@ import {
 } from "../../presentation/validators";
 
 export class LoginController extends Controller implements ControllerInterface {
-  private readonly loginService: LoginServiceInterface;
+  private readonly loginService: LoginUseCaseInterface.Service;
 
-  public constructor(loginService: LoginServiceInterface) {
+  public constructor(loginService: LoginUseCaseInterface.Service) {
     super();
     this.loginService = loginService;
   }

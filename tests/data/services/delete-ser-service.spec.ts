@@ -1,11 +1,11 @@
+import { DeleteUserRepositoryInterface } from "../../../src/data/protocols";
+import { InvalidFieldError } from "../../../src/presentation/errors";
+import { DeleteUserService } from "../../../src/data/services";
 import {
   DeleteUserRepositoryStub,
   makeUserEntity,
   throwError,
 } from "../../test-helpers";
-import { DeleteUserRepositoryInterface } from "../../../src/data/protocols";
-import { InvalidFieldError } from "../../../src/presentation/errors";
-import { DeleteUserService } from "../../../src/data/services";
 
 type SutTypes = {
   sut: DeleteUserService;
@@ -23,7 +23,7 @@ describe("DeleteUserService", () => {
     const { sut, deleteUserRepositoryStub } = makeSut();
     const userEntity = makeUserEntity();
     const repostiorySpy = jest.spyOn(deleteUserRepositoryStub, "delete");
-    await sut.execute(userEntity.id);
+    await sut.execute({ id: userEntity.id });
 
     expect(repostiorySpy).toHaveBeenCalledTimes(1);
     expect(repostiorySpy).toHaveBeenCalledWith(userEntity.id);
@@ -35,7 +35,7 @@ describe("DeleteUserService", () => {
     jest
       .spyOn(deleteUserRepositoryStub, "delete")
       .mockReturnValueOnce(Promise.resolve(userEntity));
-    const user = await sut.execute(userEntity.id);
+    const user = await sut.execute({ id: userEntity.id });
 
     expect(user).toEqual(userEntity);
   });
@@ -46,7 +46,7 @@ describe("DeleteUserService", () => {
     jest
       .spyOn(deleteUserRepositoryStub, "delete")
       .mockReturnValueOnce(Promise.resolve(undefined));
-    const error = await sut.execute(userEntity.id);
+    const error = await sut.execute({ id: userEntity.id });
 
     expect(error).toEqual(new InvalidFieldError("id"));
   });
@@ -58,6 +58,8 @@ describe("DeleteUserService", () => {
       .spyOn(deleteUserRepositoryStub, "delete")
       .mockImplementationOnce(() => throwError());
 
-    expect(async () => await sut.execute(userEntity.id)).rejects.toThrow();
+    expect(
+      async () => await sut.execute({ id: userEntity.id })
+    ).rejects.toThrow();
   });
 });

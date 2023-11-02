@@ -3,7 +3,7 @@ import { InvalidFieldError } from "../errors";
 import { badRequest, ok } from "../helpers";
 import { Controller } from "./controller";
 import {
-  GetUserByTokenServiceInterface,
+  GetUserByTokenUseCaseInterface,
   UserEntityType,
 } from "../../domain/protocols";
 import {
@@ -16,9 +16,11 @@ export class GetUserByTokenController
   extends Controller
   implements ControllerInterface
 {
-  private readonly getUserByTokenService: GetUserByTokenServiceInterface;
+  private readonly getUserByTokenService: GetUserByTokenUseCaseInterface.Service;
 
-  public constructor(getUserByTokenService: GetUserByTokenServiceInterface) {
+  public constructor(
+    getUserByTokenService: GetUserByTokenUseCaseInterface.Service
+  ) {
     super();
     this.getUserByTokenService = getUserByTokenService;
   }
@@ -27,9 +29,9 @@ export class GetUserByTokenController
     request: any
   ): Promise<ControllerOutputType<UserEntityType | Error>> {
     const authorizationSplit = request.authorization.split(" ");
-    const foundUser = await this.getUserByTokenService.execute(
-      authorizationSplit[1]
-    );
+    const foundUser = await this.getUserByTokenService.execute({
+      token: authorizationSplit[1],
+    });
     if (!foundUser || foundUser instanceof Error) {
       return badRequest(new InvalidFieldError("authorization"));
     }

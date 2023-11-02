@@ -1,12 +1,12 @@
 import { makeUserEntity } from "../../entities/user-entity-helper";
-import { UserDtoType } from "../../../../src/data/protocols";
-import {
-  CreateUserServiceInterface,
-  UserEntityType,
-} from "../../../../src/domain/protocols";
+import { CreateUserUseCaseInterface } from "../../../../src/domain/protocols";
 
-export class CreateUserServiceStub implements CreateUserServiceInterface {
-  public async execute(userDto: UserDtoType): Promise<UserEntityType> {
+export class CreateUserServiceStub
+  implements CreateUserUseCaseInterface.Service
+{
+  public async execute(
+    userDto: CreateUserUseCaseInterface.Input
+  ): Promise<CreateUserUseCaseInterface.Output> {
     return Promise.resolve(makeUserEntity());
   }
 }

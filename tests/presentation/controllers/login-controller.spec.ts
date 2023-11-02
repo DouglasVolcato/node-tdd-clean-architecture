@@ -1,7 +1,7 @@
 import { LoginController } from "../../../src/presentation/controllers";
 import { makeLoginDto } from "../../test-helpers/dtos/login-dto";
 import { InvalidFieldError } from "../../../src/presentation/errors";
-import { LoginServiceInterface } from "../../../src/domain/protocols";
+import { LoginUseCaseInterface } from "../../../src/domain/protocols";
 import {
   LoginServiceStub,
   ValidatorStub,
@@ -9,7 +9,7 @@ import {
 } from "../../test-helpers";
 
 type SutTypes = {
-  loginServiceStub: LoginServiceInterface;
+  loginServiceStub: LoginUseCaseInterface.Service;
   sut: LoginController;
 };
 

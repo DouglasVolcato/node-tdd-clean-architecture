@@ -1,7 +1,9 @@
-import { ErrorLogServiceInterface } from "../../../../src/domain/protocols";
+import { ErrorLogUseCaseInterface } from "../../../../src/domain/protocols";
 
-export class ErrorLogServiceStub implements ErrorLogServiceInterface {
-  public async execute(error: Error): Promise<void> {
+export class ErrorLogServiceStub implements ErrorLogUseCaseInterface.Service {
+  public async execute({
+    error,
+  }: ErrorLogUseCaseInterface.Input): Promise<ErrorLogUseCaseInterface.Output> {
     return Promise.resolve();
   }
 }

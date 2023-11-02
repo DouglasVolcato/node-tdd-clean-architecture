@@ -1,14 +1,13 @@
-import { CreateUserServiceInterface, UserEntityType } from "../../domain/protocols";
+import { CreateUserUseCaseInterface } from "../../domain/protocols";
 import { InvalidFieldError } from "../../presentation/errors";
 import {
   GetUserByEmailRepositoryInterface,
-  UserDtoType,
   HasherInterface,
   IdGeneratorInterface,
   CreateUserRepositoryInterface,
 } from "../protocols";
 
-export class CreateUserService implements CreateUserServiceInterface {
+export class CreateUserService implements CreateUserUseCaseInterface.Service {
   private readonly createUserRepository: CreateUserRepositoryInterface;
   private readonly getUserByEmailRepository: GetUserByEmailRepositoryInterface;
   private readonly idGenerator: IdGeneratorInterface;
@@ -26,7 +25,9 @@ export class CreateUserService implements CreateUserServiceInterface {
     this.hasher = hasher;
   }
 
-  public async execute(userDto: UserDtoType): Promise<UserEntityType | Error> {
+  public async execute(
+    userDto: CreateUserUseCaseInterface.Input
+  ): Promise<CreateUserUseCaseInterface.Output> {
     const foundUser = await this.getUserByEmailRepository.getByEmail(
       userDto.email
     );

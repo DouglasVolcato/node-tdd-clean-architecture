@@ -1,11 +1,12 @@
 import { makeUserEntity } from "../../entities/user-entity-helper";
-import {
-  DeleteUserServiceInterface,
-  UserEntityType,
-} from "../../../../src/domain/protocols";
+import { DeleteUserUseCaseInterface } from "../../../../src/domain/protocols";
 
-export class DeleteUserServiceStub implements DeleteUserServiceInterface {
-  public execute(id: string): Promise<Error | UserEntityType> {
+export class DeleteUserServiceStub
+  implements DeleteUserUseCaseInterface.Service
+{
+  public execute({
+    id,
+  }: DeleteUserUseCaseInterface.Input): Promise<DeleteUserUseCaseInterface.Output> {
     return Promise.resolve(makeUserEntity());
   }
 }
