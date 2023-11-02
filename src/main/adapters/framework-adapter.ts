@@ -1,7 +1,9 @@
 import express, { Express, NextFunction, Request, Response } from "express";
 import { MiddlewareInterface } from "../../presentation/protocols";
 import { ServerError } from "../../presentation/errors";
+import * as swaggerUi from "swagger-ui-express";
 import { RouteDtoType } from "../protocols";
+import { swaggerDocs } from "../docs";
 import bodyParser from "body-parser";
 import cors from "cors";
 
@@ -18,6 +20,7 @@ export class FrameWorkAdapter {
     this.app = express();
     this.setupMiddlewares();
     this.setupRoutes();
+    this.setupDocumentation();
   }
 
   public async start(): Promise<void> {
@@ -57,7 +60,9 @@ export class FrameWorkAdapter {
     }
   }
 
-  private setUpMiddleware(middleware: MiddlewareInterface | undefined): any {
+  private setUpMiddleware(
+    middleware: MiddlewareInterface | undefined
+  ): (req: Request, res: Response, next: NextFunction) => Promise<any> {
     if (!middleware) {
       return async function setUpMiddleware(
         req: Request,
@@ -89,5 +94,9 @@ export class FrameWorkAdapter {
         next();
       };
     }
+  }
+
+  private setupDocumentation(): void {
+    this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
   }
 }
