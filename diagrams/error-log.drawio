@@ -82,7 +82,7 @@
                 <mxCell id="33" value="FileWritter" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;strokeWidth=3;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
                     <mxGeometry x="590" y="660" width="184.5" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="37" value="ErrorLogServiceInterface" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;strokeWidth=3;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
+                <mxCell id="37" value="ErrorLogUseCaseInterface" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;strokeWidth=3;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
                     <mxGeometry x="333.25" y="510" width="184.5" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="40" value="&lt;span style=&quot;color: rgb(240, 240, 240);&quot;&gt;ControllerInterface&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;strokeWidth=3;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
