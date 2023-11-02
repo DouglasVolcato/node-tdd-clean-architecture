@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="zK1dI7uxoi_cO0yVkpNh" name="Page-1">
-        <mxGraphModel dx="623" dy="354" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1522" dy="965" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -8,7 +8,7 @@
                     <mxGeometry x="160" y="640" width="1066" height="200" as="geometry"/>
                 </mxCell>
                 <mxCell id="28" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#76608a;fontColor=#ffffff;strokeColor=#432D57;" parent="1" vertex="1">
-                    <mxGeometry x="156.5" y="860" width="1069.5" height="210" as="geometry"/>
+                    <mxGeometry x="156.5" y="860" width="1069.5" height="130" as="geometry"/>
                 </mxCell>
                 <mxCell id="25" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" parent="1" vertex="1">
                     <mxGeometry x="156.5" y="520" width="1069.5" height="110" as="geometry"/>
@@ -17,7 +17,7 @@
                     <mxGeometry x="160.5" y="240" width="1065.5" height="270" as="geometry"/>
                 </mxCell>
                 <mxCell id="21" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="1" vertex="1">
-                    <mxGeometry x="320" y="30" width="680" height="200" as="geometry"/>
+                    <mxGeometry x="320" y="30" width="620" height="200" as="geometry"/>
                 </mxCell>
                 <mxCell id="13" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=2;" parent="1" source="9" target="10" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -83,7 +83,7 @@
                     <mxGeometry x="550" y="900" width="154.5" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="18" value="Database" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="1" vertex="1">
-                    <mxGeometry x="550" y="990" width="154.5" height="60" as="geometry"/>
+                    <mxGeometry x="550" y="1010" width="154.5" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="22" value="MAIN" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
                     <mxGeometry x="320" y="30" width="65" height="30" as="geometry"/>
@@ -107,14 +107,14 @@
                 <mxCell id="33" value="DeleteUserRepositoryInterface" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;strokeWidth=3;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
                     <mxGeometry x="349.25" y="760" width="184.5" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="37" value="DeleteUserServiceInterface" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;strokeWidth=3;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
+                <mxCell id="37" value="DeleteUserUseCaseInterface" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;strokeWidth=3;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
                     <mxGeometry x="348.25" y="550" width="184.5" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="40" value="&lt;span style=&quot;color: rgb(240, 240, 240);&quot;&gt;ControllerInterface&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;strokeWidth=3;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
                     <mxGeometry x="314" y="280" width="137" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="62" value="Framework" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="1" vertex="1">
-                    <mxGeometry x="777" y="50" width="120" height="60" as="geometry"/>
+                    <mxGeometry x="992.5" y="50" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="83" value="&lt;span style=&quot;color: rgb(240, 240, 240);&quot;&gt;MiddlewareInterface&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;strokeWidth=3;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
                     <mxGeometry x="832.5" y="280" width="160" height="60" as="geometry"/>
@@ -144,7 +144,7 @@
                 <mxCell id="97" value="&lt;span style=&quot;color: rgb(240, 240, 240);&quot;&gt;ValidatorInterface&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;strokeWidth=3;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
                     <mxGeometry x="579.5" y="440" width="137" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="103" value="GetUserByTokenServiceInterface" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;strokeWidth=3;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
+                <mxCell id="103" value="GetUserByTokenUseCaseInterface" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;strokeWidth=3;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
                     <mxGeometry x="756.63" y="550" width="203.75" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="107" style="edgeStyle=none;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;dashed=1;" parent="1" source="105" target="103" edge="1">
@@ -197,7 +197,7 @@
                     <mxGeometry x="985" y="900" width="154.5" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="122" value="TokenHandler" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="1" vertex="1">
-                    <mxGeometry x="985" y="1000" width="154.5" height="60" as="geometry"/>
+                    <mxGeometry x="985" y="1010" width="154.5" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="135" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;dashed=1;strokeWidth=2;entryX=0.676;entryY=0.02;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="132" target="97" edge="1">
                     <mxGeometry relative="1" as="geometry">
@@ -207,19 +207,22 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
+                <mxCell id="142" style="edgeStyle=none;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;" parent="1" source="132" target="133" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
                 <mxCell id="132" value="ValidatorComposite" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="650" y="290" width="150" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="134" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.307;entryY=0.03;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;strokeWidth=2;" parent="1" source="133" target="97" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
-                            <mxPoint x="565" y="390"/>
+                            <mxPoint x="555" y="390"/>
                             <mxPoint x="620" y="390"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="133" value="Validator" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="490" y="290" width="150" height="60" as="geometry"/>
+                    <mxGeometry x="490" y="290" width="130" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="141" value="DATA" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
                     <mxGeometry x="160.5" y="640" width="69.5" height="30" as="geometry"/>
