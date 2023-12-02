@@ -4,6 +4,7 @@
   "author": "Douglas Volcato",
   "license": "ISC",
   "scripts": {
+    "build": "tsc",
     "start": "tsc && node dist/src/main/index.js",
     "test": "npm run test-unit && npm run test-integration",
     "test-unit": "jest --force-exit -c jest-unit-config.json",
